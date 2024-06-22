@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class AdminController extends Controller
 
@@ -10,10 +11,13 @@ class AdminController extends Controller
 {
 //Dashboard
     public function dashboard()
+
     {
+        // $response = Http::get('https://api.thecatapi.com/v1/images/0XYvRd7oD');
+        // $response_json = $response->json();
+        // dd($response_json['id']);   
         return view('Admin.Dashboard');
     }
-
 //Laboratorium
     public function laboratorium()
     {

@@ -1,12 +1,12 @@
 <body class="bg-gray-100">
     <div class="flex min-h-screen">
         <!-- Sidebar -->
-        <div class="bg-[#628F8E] text-white w-72 space-y-2 py-2 px-4 flex flex-col border-r-2 border-white">
+        <div class="bg-[#628F8E] text-white w-72 space-y-2 py-2 px-6 flex flex-col border-r-2 border-white">
 
             <img src="{{ asset('image/silaboe-Logo2 1.png') }}" class="pl-4 mb-6 mt-4 h-14 w-52" alt="Flowbite Logo" />
             <nav class="flex flex-col space-y-2">
                 <a href="{{ Route('dashboard.admin') }}"
-                    class="flex items-center text-md font-medium py-3 text-[#CBCBCB] hover:text-white rounded transition duration-200">
+                    class="flex items-center text-md font-medium py-3 {{ Request::routeIs('dashboard.admin') ? ' text-white' : 'text-[#CBCBCB]' }} hover:text-white rounded transition duration-200">
                     <svg width="20" height="20" viewBox="0 0 32 32" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -17,7 +17,7 @@
                 </a>
 
                 <a href="{{ Route('laboratorium.admin') }}"
-                    class="flex items-center text-md font-medium py-3 text-[#CBCBCB] hover:text-white rounded transition duration-200">
+                    class="flex items-center text-md font-medium py-3 {{ Request::is('admin/laboratorium*') ? ' text-white' : 'text-[#CBCBCB]' }} hover:text-white rounded transition duration-200">
                     <svg width="20" height="20" viewBox="0 0 28 28" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -27,7 +27,7 @@
                     <span class="ml-4">Laboratorium</span>
                 </a>
                 <a href="{{ Route('jadwallab.admin') }}"
-                    class="flex items-center text-md font-medium py-3 text-[#CBCBCB] hover:text-white rounded transition duration-200">
+                    class="flex items-center text-md font-medium py-3 text-[#CBCBCB] {{ Request::is('admin/jadwallab*') ? ' text-white' : 'text-[#CBCBCB]' }} hover:text-white rounded transition duration-200">
                     <svg width="20" height="20" viewBox="0 0 33 33" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <mask id="path-1-inside-1_853_7666" fill="white">
@@ -54,7 +54,7 @@
                     <span class="ml-4">Jadwal Lab</span>
                 </a>
                 <a href="{{ route('peminjamanlabada.admin') }}"
-                    class="flex items-center text-md text-[#CBCBCB] font-medium py-3  hover:text-white rounded transition duration-200">
+                    class="flex items-center text-md text-[#CBCBCB] font-medium py-3 {{ Request::is('admin/peminjamanlab*') ? ' text-white' : 'text-[#CBCBCB]' }}  hover:text-white rounded transition duration-200">
                     <svg width="20" height="20" viewBox="0 0 37 27" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -64,7 +64,7 @@
                     <span class="ml-4">Peminjaman Lab</span>
                 </a>
                 <a href="{{ Route('inventaris.admin') }}"
-                    class="flex items-center text-md  text-[#CBCBCB] font-medium py-3  hover:text-white rounded transition duration-200">
+                    class="flex items-center text-md  text-[#CBCBCB] font-medium py-3 {{ Request::is('admin/inventaris*') ? ' text-white' : 'text-[#CBCBCB]' }}  hover:text-white rounded transition duration-200">
                     <svg width="21" height="22" viewBox="0 0 27 28" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_853_7677)">
@@ -81,7 +81,7 @@
                     <span class="ml-4">Inventaris</span>
                 </a>
                 <a href="{{ Route('peminjamaninvenatrisada.admin') }}"
-                    class="flex items-center text-md text-[#CBCBCB] font-medium py-3 hover:text-white rounded transition duration-200">
+                    class="flex items-center text-md text-[#CBCBCB] font-medium py-3 {{ Request::is('admin/peminjamaninvenatris*') ? ' text-white' : 'text-[#CBCBCB]' }} hover:text-white rounded transition duration-200">
                     <svg width="25" height="20" viewBox="0 0 33 25" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -94,7 +94,7 @@
                     <span class="ml-4">Peminjaman Inventaris</span>
                 </a>
                 <a href="{{ Route('profil.admin') }}"
-                    class="flex items-center text-md text-[#CBCBCB] font-medium py-3  hover:text-white rounded transition duration-200">
+                    class="flex items-center text-md text-[#CBCBCB] font-medium py-3 {{ Request::is('admin/profil*') ? ' text-white' : 'text-[#CBCBCB]' }}  hover:text-white rounded transition duration-200">
                     <svg width="20" height="20" viewBox="0 0 30 30" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -104,7 +104,7 @@
                     <span class="ml-4">Profil</span>
                 </a>
                 <a href="{{ Route('login') }}"
-                    class="flex items-center text-md text-[#CBCBCB] font-medium py-3  hover:text-white rounded transition duration-200">
+                    class="flex items-center text-md text-[#CBCBCB] font-medium py-3 {{ Request::is('admin/peminjamanlab*') ? ' text-white' : 'text-[#CBCBCB]' }}  hover:text-white rounded transition duration-200">
                     <svg width="23" height="20" viewBox="0 0 33 30" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path

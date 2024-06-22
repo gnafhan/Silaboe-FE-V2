@@ -24,7 +24,7 @@
                     laboratorium.</label>
                 <input type="date" id="date-picker"
                     class="block appearance-none   border border-gray-300 text-black py-2 px-8 rounded-xl leading-tight focus:outline-none bg-[rgba(98,143,142,0.2)] focus:bg-white focus:border-gray-500"
-                    value="2024-12-14">
+                    value="2024-12-14">.
             </div>
 
 

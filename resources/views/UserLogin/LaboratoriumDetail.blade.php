@@ -95,7 +95,7 @@
                     class=" bg-[#628F8E] lg:text-sm  text-sm  text-white lg:px-8 lg:py-2 py-2 px-6 rounded-md hover:scale-110   ">Rendering
                 </button>
             </div>
-            <a class="flex lg:justify-end  mb-24 hover:scale-y-125 duration-400">
+            <a href="{{ route('formlab.login') }}" class="flex lg:justify-end  mb-24 hover:scale-y-125 duration-400">
                 <button class="bg-[#F5CD51] text-white py-3 px-4 text-sm lg:text-md flex rounded-md">Reservasi
                     Laboratorium</button>
             </a>

@@ -57,8 +57,8 @@ Route::get('admin/jadwallab/edit', [AdminController::class, 'JadwalLabEdit'])->n
 //PeminjamanLab
 Route::get('admin/peminjamanlab/tidakada', [AdminController::class, 'PeminjamanLabTidakAda'])->name('peminjamanlabtidakada.admin');
 Route::get('admin/peminjamanlab/ada', [AdminController::class, 'PeminjamanLabAda'])->name('peminjamanlabada.admin');
-Route::get('admin/peminjamanLab/detail', [AdminController::class, 'PeminjamanLabDetail'])->name('peminjamanlabdetail.admin');
-Route::get('admin/peminjamanLab/archive', [AdminController::class, 'PeminjamanLabArchive'])->name('peminjamanlabarchive.admin');
+Route::get('admin/peminjamanlab/detail', [AdminController::class, 'PeminjamanLabDetail'])->name('peminjamanlabdetail.admin');
+Route::get('admin/peminjamanlab/archive', [AdminController::class, 'PeminjamanLabArchive'])->name('peminjamanlabarchive.admin');
 
 //Inventaris
 
@@ -71,7 +71,7 @@ Route::get('admin/inventaris/edit', [AdminController::class, 'InventarisEdit'])-
 Route::get('admin/peminjamaninvenatris/tidakAda', [AdminController::class, 'PeminjamanInventarisTidakAda'])->name('peminjamaninvenatristidakada.admin');
 Route::get('admin/peminjamaninvenatris/ada', [AdminController::class, 'PeminjamanInventarisAda'])->name('peminjamaninvenatrisada.admin');
 Route::get('admin/peminjamaninvenatris/detail', [AdminController::class, 'PeminjamanInventarisDetail'])->name('peminjamaninvenatrisdetail.admin ');
-Route::get('/admin/peminjamaninvenatris/archive', [AdminController::class, 'PeminjamanInventarisArchive'])->name('peminjamaninvenatrisarchive.admin ');
+Route::get('admin/peminjamaninvenatris/archive', [AdminController::class, 'PeminjamanInventarisArchive'])->name('peminjamaninvenatrisarchive.admin ');
 
 //Profile
 Route::get('admin/profil', [AdminController::class, 'Profil'])->name('profil.admin');

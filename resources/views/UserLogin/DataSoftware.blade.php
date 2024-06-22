@@ -62,7 +62,8 @@
 
             <!-- Card Container Start -->
 
-            <div class="flex flex-wrap my-12 gap-14 justify-center">
+            <div class="flex flex-wrap my-12 lg:gap-2 md:gap-6 gap-8 justify-evenly
+            ">
 
                 <div
                     class="flex flex-col bg-white rounded-lg shadow-md w-full overflow-hidden lg:w-80 lg:py-8 items-center">

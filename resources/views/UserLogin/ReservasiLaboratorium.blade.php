@@ -1,9 +1,9 @@
 @extends('layouts.homelayouts')
 @section('content')
-    <section class="lg:mx-24 mx-16 bg-white flex flex-col">
+    <section class="lg:mx-24 md:mx-6 mx-4 bg-white flex flex-col">
         <div class="flex flex-col lg:flex-row mt-10 items-start justify-start lg:space-x-2">
             <div class="flex items-center space-x-2">
-                <button class="lg:text-lg text-md">Beranda</button>
+                <a href="{{ route('homepage.login') }}" class="lg:text-lg text-sm md:text-md">Beranda</a>
                 <svg class="w-4 h-4 text-gray-800 dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     width="18" height="18" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -12,7 +12,7 @@
             </div>
 
             <div class="flex items-center space-x-2">
-                <button class="lg:text-lg text-md">Laboratorium</button>
+                <button class="lg:text-lg text-sm md:text-md">Laboratorium</button>
                 <svg class="w-4 h-4 text-gray-800 dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     width="18" height="18" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -21,7 +21,7 @@
             </div>
 
             <div class="flex items-center space-x-2">
-                <button class="lg:text-lg text-md"> Laboratorium Teknologi Rekayasa Perangkat Lunak</button>
+                <button class="lg:text-lg text-sm md:text-md"> Laboratorium Teknologi Rekayasa Perangkat Lunak</button>
                 <svg class="w-4 h-4 text-gray-800 dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     width="18" height="18" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -30,7 +30,7 @@
             </div>
 
             <div class="flex items-center space-x-2">
-                <button class="lg:text-lg text-md text-blue-400 ">Laboratorium HU 104</button>
+                <button class="lg:text-lg text-sm md:text-md text-blue-400 ">Laboratorium HU 104</button>
                 <svg class="w-4 h-4 text-gray-800 dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     width="18" height="18" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -47,9 +47,9 @@
             </div>
 
         </div>
-        <div class="border-b-2 border-yellow-500 w-[100%] mb-2 mt-4"></div>
+        <div class="border-b-2 border-yellow-500 w-[100%] lg:mb-2 mt-4"></div>
         <div class="py-4">
-            <div class=" lg:text-4xl text-2xl font-bold text-[#628F8E] lg:mb-4 mb-4">Reservasi Laboratorium HU104</div>
+            <div class=" lg:text-4xl text-2xl font-bold text-[#628F8E] lg:mb-4 lg:mb-4">Reservasi Laboratorium HU104</div>
         </div>
         <div class="flex flex-row items-center gap-4">
             <svg class="" width="16" height="16" viewBox="0 0 15 15" fill="none"
@@ -140,7 +140,7 @@
             </div>
             <div class="flex flex-row gap-4 mb-16 justify-start ">
                 <button type="submit"
-                    class="text-white bg-[#499DBC] hover:bg-[#88cee7] focus:ring-4 focus:outline-none focus:ring-blue-300 font-reguler rounded-md lg:text-md md:text-md text-sm w-max-xl lg:w-max-auto md:w-max-auto lg:px-6 lg:py-4 px-4 py-4 text-center dark:bg-[#499DBC] ">Ajukan
+                    class="text-white bg-[#499DBC] hover:scale-105 font-reguler rounded-md lg:text-md md:text-md text-sm w-max-xl lg:w-max-auto md:w-max-auto lg:px-6 lg:py-4 px-4 py-3 text-center dark:bg-[#499DBC] ">Ajukan
                     Reservasi</button>
             </div>
         </div>
@@ -155,4 +155,63 @@
             <a href="#" class="font-bold text-hitam hover:underline">Meja PC Server</a>
         </td> --}}
     </section>
+
+
+    <script>
+     const daysTag = document.querySelector(".days"),
+    currentDate = document.querySelector(".current-date"),
+    prevNextIcon = document.querySelectorAll(".icons span");
+    
+    // getting new date, current year and month
+    let date = new Date(),
+    currYear = date.getFullYear(),
+    currMonth = date.getMonth();
+    
+    // storing full name of all months in array
+    const months = ["January", "February", "March", "April", "May", "June", "July",
+                  "August", "September", "October", "November", "December"];
+    
+    const renderCalendar = () => {
+        let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), // getting first day of month
+        lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(), // getting last date of month
+        lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(), // getting last day of month
+        lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
+        let liTag = "";
+    
+        for (let i = firstDayofMonth; i > 0; i--) { // creating li of previous month last days
+            liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;
+        }
+    
+        for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
+            // adding active class to li if the current day, month, and year matched
+            let isToday = i === date.getDate() && currMonth === new Date().getMonth() 
+                         && currYear === new Date().getFullYear() ? "active" : "";
+            liTag += `<li class="${isToday}">${i}</li>`;
+        }
+    
+        for (let i = lastDayofMonth; i < 6; i++) { // creating li of next month first days
+            liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`
+        }
+        currentDate.innerText = `${months[currMonth]} ${currYear}`; // passing current mon and yr as currentDate text
+        daysTag.innerHTML = liTag;
+    }
+    renderCalendar();
+    
+    prevNextIcon.forEach(icon => { // getting prev and next icons
+        icon.addEventListener("click", () => { // adding click event on both icons
+            // if clicked icon is previous icon then decrement current month by 1 else increment it by 1
+            currMonth = icon.id === "prev" ? currMonth - 1 : currMonth + 1;
+    
+            if(currMonth < 0 || currMonth > 11) { // if current month is less than 0 or greater than 11
+                // creating a new date of current year & month and pass it as date value
+                date = new Date(currYear, currMonth, new Date().getDate());
+                currYear = date.getFullYear(); // updating current year with new date year
+                currMonth = date.getMonth(); // updating current month with new date month
+            } else {
+                date = new Date(); // pass the current date as date value
+            }
+            renderCalendar(); // calling renderCalendar function
+        });
+    });
+    </script>
 @endsection
