@@ -28,7 +28,7 @@
     </script>
 </head>
 
-<body class="antialiased">
+<body class="antialiased relative w-full ">
 
     @include('components.sidebar')
 

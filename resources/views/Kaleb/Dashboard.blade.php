@@ -1,5 +1,19 @@
 @extends('layouts.AdminLayouts')
 @section('content')
+<header class="bg-[#628F8E] text-white flex items-center justify-between px-8 py-6 sticky w-full top-0">
+    <h2 class="text-2xl font-semibold">Dashboard</h2>
+    <div class="flex items-center space-x-4">
+        <button class="text-white hover:text-gray-300 focus:outline-none">
+            <img src="{{ asset('image/Notification.png') }}" class="  h-10 w-10" alt="Flowbite Logo" />
+        </button>
+        <div class="relative">
+            <button
+                class="flex items-center text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
+                <img src="{{ asset('image/Profile.png') }}" class=" h-10 w-10 " alt="Flowbite Logo" />
+            </button>
+        </div>
+    </div>
+</header>
     <!-- Main Dashboard Content -->
     <main class="lg:mx-20 mx-12 py-6 bg-white flex-1">
         <div class="flex flex-col">

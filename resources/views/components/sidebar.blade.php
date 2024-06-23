@@ -1,7 +1,8 @@
 <body class="bg-gray-100">
     <div class="flex min-h-screen">
         <!-- Sidebar -->
-        <div class="bg-[#628F8E] text-white w-72 space-y-2 py-2 px-6 flex flex-col border-r-2 border-white">
+        <div
+            class="h-screen sticky top-0 left-0 bg-[#628F8E] text-white w-72 space-y-2 py-2 px-6 flex flex-col border-r-2 border-white">
 
             <img src="{{ asset('image/silaboe-Logo2 1.png') }}" class="pl-4 mb-6 mt-4 h-14 w-52" alt="Flowbite Logo" />
             <nav class="flex flex-col space-y-2">

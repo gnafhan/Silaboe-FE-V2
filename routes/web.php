@@ -82,35 +82,35 @@ Route::get('admin/profil/edit', [AdminController::class, 'ProfilEdit'])->name('p
 
 //POV KALEB
 //Dashboard
-Route::get('/KalebDashboard', [KalebController::class, 'Dashboard'])->name('dashboard');
+Route::get('/kaleb', [KalebController::class, 'Dashboard'])->name('dashboard.kaleb');
 
 //Laboratoium 
-Route::get('/KalebLaboratorium', [KalebController::class, 'Laboratorium'])->name('laboratorium');
-Route::get('/KalebLaboratoriumDetail', [KalebController::class, 'LaboratoriumDetail'])->name('laboratoriumdetail');
+Route::get('/kaleb/laboratorium', [KalebController::class, 'Laboratorium'])->name('laboratorium.kaleb');
+Route::get('/kaleb/laboratorium/detail', [KalebController::class, 'LaboratoriumDetail'])->name('laboratoriumdetail.kaleb');
 
 
 
 //JadwalLab
-Route::get('/KalebJadwalLab', [KalebController::class, 'JadwalLab'])->name('jadwallab');
-Route::get('/KalebJadwalLabDetail', [KalebController::class, 'JadwalLabDetail'])->name('jadwallabdetail');
+Route::get('/kaleb/jadwalLab', [KalebController::class, 'JadwalLab'])->name('jadwallab.kaleb');
+Route::get('/Kaleb/jadwalLab/detail', [KalebController::class, 'JadwalLabDetail'])->name('jadwallabdetail.kaleb');
 
 
 //PeminjamanLab
-Route::get('/KalebPeminjamanLabTidakAda', [KalebController::class, 'PeminjamanLabTidakAda'])->name('peminjamanlabtidakada');
-Route::get('/KalebPeminjamanLabAda', [KalebController::class, 'PeminjamanLabAda'])->name('peminjamanlabada');
-Route::get('/KalebPeminjamanLabDetail', [KalebController::class, 'PeminjamanLabDetail'])->name('peminjamanlabdetail');
-Route::get('/KalebPeminjamanLabArchive', [KalebController::class, 'PeminjamanLabArchive'])->name('peminjamanlabarchive');
+Route::get('/kaleb/peminjamanlab/tidakada', [KalebController::class, 'PeminjamanLabTidakAda'])->name('peminjamanlabtidakada.kaleb');
+Route::get('/kaleb/peminjamanlab/ada', [KalebController::class, 'PeminjamanLabAda'])->name('peminjamanlabada.kaleb');
+Route::get('/kaleb/peminjamanlab/detail', [KalebController::class, 'PeminjamanLabDetail'])->name('peminjamanlabdetail.kaleb');
+Route::get('/kaleb/peminjamanlab/archive', [KalebController::class, 'PeminjamanLabArchive'])->name('peminjamanlabarchive.kaleb');
 
 
 //Inventaris
-Route::get('/KalebInventaris', [KalebController::class, 'Inventaris'])->name('inventaris');
+Route::get('/kaleb/inventaris', [KalebController::class, 'Inventaris'])->name('inventaris.kaleb');
 
 //Pemijaman Inventaris
-Route::get('/KalebPeminjamanInventarisTidakAda', [KalebController::class, 'PeminjamanInventarisTidakAda'])->name('peminjamaninvenatristidakada ');
-Route::get('/KalebPeminjamanInventarisAda', [KalebController::class, 'PeminjamanInventarisAda'])->name('peminjamaninvenatrisada');
-Route::get('/KalebPeminjamanInventarisDetail', [KalebController::class, 'PeminjamanInventarisDetail'])->name('peminjamaninvenatrisdetail ');
-Route::get('/KalebPeminjamanInventarisArchive', [KalebController::class, 'PeminjamanInventarisArchive'])->name('peminjamaninvenatrisarchive ');
+Route::get('/kaleb/peminjamaninventaris/tidakada', [KalebController::class, 'PeminjamanInventarisTidakAda'])->name('peminjamaninvenatristidakada.kaleb');
+Route::get('/kaleb/peminjamaninventaris/ada', [KalebController::class, 'PeminjamanInventarisAda'])->name('peminjamaninvenatrisada.kaleb');
+Route::get('/kaleb/peminjamaninventaris/detail', [KalebController::class, 'PeminjamanInventarisDetail'])->name('peminjamaninvenatrisdetail.kaleb ');
+Route::get('/kaleb/peminjamaninventaris/archive', [KalebController::class, 'PeminjamanInventarisArchive'])->name('peminjamaninvenatrisarchive.kaleb');
 
 //Profile
-Route::get('/KalebProfil', [KalebController::class, 'Profil'])->name('profil');
-Route::get('/KalebProfilEdit', [KalebController::class, 'ProfilEdit'])->name('profiledit');
+Route::get('/kaleb/profil', [KalebController::class, 'Profil'])->name('profil.kaleb');
+Route::get('/kaleb/profil/edit', [KalebController::class, 'ProfilEdit'])->name('profiledit.edit');

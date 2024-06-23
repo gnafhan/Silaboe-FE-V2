@@ -1,6 +1,6 @@
 @extends('layouts.AdminLayouts')
 @section('content')
-    <header class="bg-[#628F8E] text-white flex items-center justify-between px-8 py-6">
+    <header class="bg-[#628F8E] text-white flex items-center justify-between px-8 py-6 sticky w-full top-0">
         <h2 class="text-2xl font-semibold">Dashboard</h2>
         <div class="flex items-center space-x-4">
             <button class="text-white hover:text-gray-300 focus:outline-none">
@@ -22,7 +22,7 @@
                 <!-- Overview Section -->
                 <section class="grid lg:grid-cols-3 grid-cols-1 lg:gap-16 gap-12 md:gap-12 mb-6 ">
 
-                    <div class="bg-[rgba(98,143,142,0.1)] rounded-3xl p-8 ">
+                    <div class="bg-[rgba(98,143,142,0.1)] rounded-3xl p-8  shadow-lg">
                         <div class="flex flex-col  gap-2">
                             <img src="{{ asset('image/overviewimage1.png') }}" class="  text-center h-16 w-16  "
                                 alt="Flowbite Logo" />
@@ -31,7 +31,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-[rgba(98,143,142,0.1)]  rounded-3xl p-8 ">
+                    <div class="bg-[rgba(98,143,142,0.1)]  rounded-3xl p-8 shadow-lg ">
                         <div class="flex flex-col  gap-2">
                             <img src="{{ asset('image/overviewimage2.png') }}" class="  text-center h-16 w-16  "
                                 alt="Flowbite Logo" />
@@ -39,7 +39,7 @@
                             <p class="text-4xl font-bold">320</p>
                         </div>
                     </div>
-                    <div class="bg-[rgba(98,143,142,0.1)]  rounded-3xl p-8 ">
+                    <div class="bg-[rgba(98,143,142,0.1)]  rounded-3xl p-8 shadow-lg">
                         <div class="flex flex-col  gap-2">
                             <img src="{{ asset('image/overviewimage3.png') }}" class="  text-center h-16 w-16  "
                                 alt="Flowbite Logo" />
@@ -80,23 +80,23 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
-                            <tr class="bg-[rgba(98,143,142,0.1)] ">
-                                <tdw
+                            <tr class="bg-[rgba(98,143,142,0.1)]">
+                                <td
                                     class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
                                     Laboratorium 106
-                                    </td>
-                                    <td
-                                        class="p-4 text-sm md:text-base lg:text-base text-black whitespace-nowrap border-r border-gray-200">
-                                        5
-                                    </td>
-                                    <td
-                                        class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
-                                        20.00
-                                    </td>
-                                    <td
-                                        class="p-4 text-sm md:text-base lg:text-base text-black whitespace-nowrap border-r border-gray-200">
-                                        16.00
-                                    </td>
+                                </td>
+                                <td
+                                    class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
+                                    5
+                                </td>
+                                <td
+                                    class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
+                                    20.00
+                                </td>
+                                <td
+                                    class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
+                                    16.00
+                                </td>
                             </tr>
                             <tr class="bg-[rgba(98,143,142,0.1)]">
                                 <td
@@ -145,7 +145,7 @@
             <section class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 lg:gap-20 gap-8">
                 <div>
                     <h2 class="text-2xl py-4 font-bold">Peminjaman Laboratorium</h2>
-                    <div class="bg-[rgba(98,143,142,0.1)] rounded-xl px-6 md:px-12 shadow-lg">
+                    <div class="bg-[rgba(98,143,142,0.1)] rounded-xl px-6 md:px-12 shadow-lg py-6">
                         <h1 class="text-xl font-bold py-4 px-2 border-b-2">Semua </h1>
                         <ul>
                             <li class="flex justify-between items-center mb-2 p-2 text-md">
@@ -166,7 +166,7 @@
                 </div>
                 <div>
                     <h2 class="text-2xl py-4 font-bold">Peminjaman Inventaris</h2>
-                    <div class="bg-[rgba(98,143,142,0.1)] rounded-xl px-6 md:px-12 shadow-lg  ">
+                    <div class="bg-[rgba(98,143,142,0.1)] rounded-xl px-6 md:px-12 shadow-lg py-6 ">
                         <h1 class="text-xl font-bold py-4 px-2 border-b-2">Semua </h1>
                         <ul>
                             <ul>

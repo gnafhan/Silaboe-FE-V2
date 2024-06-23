@@ -1,6 +1,6 @@
 @extends('layouts.AdminLayouts')
 @section('content')
-    <header class="bg-[#628F8E] text-white flex items-center justify-between px-8 py-6">
+    <header class="bg-[#628F8E] text-white flex items-center justify-between px-8 py-6 sticky w-full top-0">
         <h2 class="text-2xl font-semibold">Laboratorium</h2>
         <div class="flex items-center space-x-4">
             <button class="text-white hover:text-gray-300 focus:outline-none">

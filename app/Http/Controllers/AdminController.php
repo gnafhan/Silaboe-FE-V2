@@ -15,7 +15,7 @@ class AdminController extends Controller
     {
         // $response = Http::get('https://api.thecatapi.com/v1/images/0XYvRd7oD');
         // $response_json = $response->json();
-        // dd($response_json['id']);   
+        // dd($response_json['id']);    
         return view('Admin.Dashboard');
     }
 //Laboratorium
