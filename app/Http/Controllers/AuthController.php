@@ -17,12 +17,18 @@ class AuthController extends Controller
     public function doLogin(Request $request)
     {
         try {
-            $response = Http::post(env('API_URL') . '/api/login', [
-                'username' => $request->email,
+
+
+            $response = Http::post(env('API_URL') . '/login', [
+                'email' => $request->email,
                 'password' => $request->password,
             ]);
+            
+
 
             if ($response->successful()) {
+                
+
                 $content = $response->json();
                 $token = $content['token'] ?? null; // Adjust the key according to the actual response structure
                 $user = $content['user'] ?? null;
@@ -46,7 +52,6 @@ class AuthController extends Controller
             }
         } catch (\Exception $e) {
             // Log the exception message
-            \log()::error('Login error: ' . $e->getMessage());
             return back()->withErrors(['message' => 'An error occurred while attempting to log in.']);
         }
     }

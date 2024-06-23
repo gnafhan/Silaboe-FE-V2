@@ -43,7 +43,8 @@
                 </span>
             </div>
 
-            <form action="" class="flex flex-col gap-4">
+            <form method="POST" action="{{ route('do-login') }}" class="flex flex-col gap-4">
+                @csrf
                 <div class="text-[#4C8F8B] text-xl font-semibold ">Email</div>
                 <input class="p-2  mb-4 rounded-xl border" type="email" name="email" placeholder="Email">
                 <div class="text-[#4C8F8B] text-xl font-semibold ">Password</div>
@@ -58,22 +59,23 @@
                     </svg>
                 </div>
 
-            </form>
-            <div class="flex justify-between w-full py-4">
-                <div class="mr-24">
-                    <input type="checkbox" name="ch" id="ch" class="mr-2" />
-                    <span class="text-md text-gray-400 ">Remember Me </span>
-                </div>
-                <button class="text-md text-gray-400 ">Lupa password ?</button>
-            </div>
-            <button
-                class="bg-[#628F8E] mt-8 rounded-md font-semibold text-white py-2 mx-24 hover:scale-105 duration-300">Masuk</button>
 
-            <div class="text-center text-gray-400 mt-4">
-                Belum Punya Akun ?
-                <a href="/register" class="font-bold text-[#F5CD51]">Daftar </a>
-            </div>
+                <div class="flex justify-between w-full py-4">
+                    <div class="mr-24">
+                        <input type="checkbox" name="ch" id="ch" class="mr-2" />
+                        <span class="text-md text-gray-400 ">Remember Me </span>
+                    </div>
+                    <button class="text-md text-gray-400 ">Lupa password ?</button>
+                </div>
+                <button type="submit"
+                    class="bg-[#628F8E] mt-8 rounded-md font-semibold text-white py-2 mx-24 hover:scale-105 duration-300">Masuk</button>
+
+                <div class="text-center text-gray-400 mt-4">
+                    Belum Punya Akun ?
+                    <a href="/register" class="font-bold text-[#F5CD51]">Daftar </a>
+                </div>
         </div>
+        </form>
         <!-- {/* right side */} -->
     </div>
     </div>
