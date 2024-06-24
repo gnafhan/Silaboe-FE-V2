@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingpageController;
+use App\Http\Controllers\LandingpageumumController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KalebController;
@@ -13,14 +14,24 @@ Route::post('/do-login', [AuthController::class, 'doLogin'])->name('do-login');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 
 
+
 //Landing Page 
+//
+//POV User Non Login
+Route::get('landingpage', [LandingpageumumController::class, 'index'])->name('homepage.nonlogin');
+Route::get('landingpage/about', [LandingpageumumController::class, 'about'])->name('about.nonlogin');
+Route::get('landingpage/datasoftware', [LandingpageumumController::class, 'datasoftware'])->name('datasoftware.nonlogin');
+Route::get('landingpage/laboratorium', [LandingpageumumController::class, 'laboratorium'])->name('laboratorium.nonlogin');
+Route::get('landingpage/laboratorium/detail', [LandingpageumumController::class, 'laboratoriumdetail'])->name('laboratoriumdetail.nonlogin');
+Route::get('landingpage/inventaris', [LandingpageumumController::class, 'Inventarisumum'])->name('inventaris.nonlogin');
 
 //POV User Login 
-Route::get('/', [LandingpageController::class, 'index'])->name('homepage.login');
+Route::get('landingpage/login', [LandingpageController::class, 'index'])->name('homepage.login');
 Route::get('login/landingpage/about', [LandingpageController::class, 'about'])->name('about.login');
 Route::get('login/landingpage/datasoftware', [LandingpageController::class, 'datasoftware'])->name('datasoftware.login');
 
-//
+
+//Laboretorium 
     Route::get('login/landingpage/laboratorium', [LandingpageController::class, 'laboratorium'])->name('laboratorium.login');
     Route::get('login/landingpage/laboratorium/detail', [LandingpageController::class, 'laboratoriumdetail'])->name('laboratoriumdetail.login');
     Route::get('login/landingpage/laboratorium/reservasi', [LandingpageController::class, 'reservasilaboratorium'])->name('reservasilab.login');

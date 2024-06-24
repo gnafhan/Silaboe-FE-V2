@@ -80,61 +80,26 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
-                            <tr class="bg-[rgba(98,143,142,0.1)]">
-                                <td
-                                    class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
-                                    Laboratorium 106
-                                </td>
-                                <td
-                                    class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
-                                    5
-                                </td>
-                                <td
-                                    class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
-                                    20.00
-                                </td>
-                                <td
-                                    class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
-                                    16.00
-                                </td>
-                            </tr>
-                            <tr class="bg-[rgba(98,143,142,0.1)]">
-                                <td
-                                    class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
-                                    Laboratorium 106
-                                </td>
-                                <td
-                                    class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
-                                    5
-                                </td>
-                                <td
-                                    class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
-                                    20.00
-                                </td>
-                                <td
-                                    class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
-                                    16.00
-                                </td>
-                            </tr>
-                            <tr class="bg-[rgba(98,143,142,0.1)]">
-                                <td
-                                    class="p-4 text-sm md:text-base lg:text-base text-black whitespace-nowrap border-r border-gray-200">
-                                    Laboratorium 106
-                                </td>
-                                <td
-                                    class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
-                                    5
-                                </td>
-                                <td
-                                    class="p-4 text-sm md:text-base lg:text-base text-black whitespace-nowrap border-r border-gray-200">
-                                    20.00
-                                </td>
-                                <td
-                                    class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
-                                    16.00
-                                </td>
-                            </tr>
-
+                            @foreach ($jadwals as $jadwal)
+                                <tr class="bg-[rgba(98,143,142,0.1)]">
+                                    <td
+                                        class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
+                                        {{ $jadwal['room']['name'] }}
+                                    </td>
+                                    <td
+                                        class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
+                                        5
+                                    </td>
+                                    <td
+                                        class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
+                                        {{ $jadwal['start_time'] }}
+                                    </td>
+                                    <td
+                                        class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
+                                        {{ $jadwal['end_time'] }}
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

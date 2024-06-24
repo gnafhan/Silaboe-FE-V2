@@ -18,12 +18,14 @@ class AuthController extends Controller
     {
         try {
 
+            
+
 
             $response = Http::post(env('API_URL') . '/login', [
                 'email' => $request->email,
                 'password' => $request->password,
             ]);
-            
+           
 
 
             if ($response->successful()) {
@@ -31,16 +33,17 @@ class AuthController extends Controller
 
                 $content = $response->json();
                 $token = $content['token'] ?? null; // Adjust the key according to the actual response structure
-                $user = $content['user'] ?? null;
 
-                if ($token && $user) {
+                // dd($content);
+
+                if ($token) {
                     // Save the token and user data in the session
                     session(['api_token' => $token]);
-                    session(['user' => $user]);
 
-                    // Update user login status (assuming you have 'loginstatus' field in User model)
-                    $currentUser = User::find($user['id']);
-                    $currentUser->update(['loginstatus' => 'on']);
+
+                    // // Update user login status (assuming you have 'loginstatus' field in User model)
+                    // $currentUser = User::find($user['id']);
+                    // $currentUser->update(['loginstatus' => 'on']);
 
                     return redirect()->route('dashboard.admin');
                 } else {

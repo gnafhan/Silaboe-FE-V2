@@ -11,12 +11,22 @@ class AdminController extends Controller
 {
 //Dashboard
     public function dashboard()
-
     {
+        $token = session('api_token');
+        $jadwal = Http::withToken($token)->get(env('API_URL') . '/dashboard/labReserve');
+        
+        if($jadwal->successful()){
+            $jadwals = $jadwal->json();
+            $jadwals = $jadwals['data'];
+        }
+
+
+
+ 
         // $response = Http::get('https://api.thecatapi.com/v1/images/0XYvRd7oD');
         // $response_json = $response->json();
         // dd($response_json['id']);    
-        return view('Admin.Dashboard');
+        return view('Admin.Dashboard', compact('jadwals'));
     }
 //Laboratorium
     public function laboratorium()

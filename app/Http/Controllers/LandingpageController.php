@@ -59,6 +59,10 @@ class LandingpageController extends Controller
     {
         return view('UserLogin.InventarisRiwayatReservasiDetail');
     }
+    public function inventarisformreservasicek()
+    {
+        return view('UserLogin.InventarisFormReservasiCek');
+    }
 
     //Laboratorium
     public function laboratorium()
@@ -77,6 +81,10 @@ class LandingpageController extends Controller
     {
         return view('UserLogin.ReservasiLaboratoriumStatus');
     }
+    public function laboratoriumformlab()
+    {
+        return view('UserLogin.LaboratoriumFormlab');
+    }
 
 
 
@@ -89,14 +97,7 @@ class LandingpageController extends Controller
 
 
 
-    public function inventarisformreservasicek()
-    {
-        return view('UserLogin.InventarisFormReservasiCek');
-    }
-    public function laboratoriumformlab()
-    {
-        return view('UserLogin.LaboratoriumFormlab');
-    }
+
 
 
 
