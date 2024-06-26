@@ -2,7 +2,7 @@
     use Illuminate\Support\Facades\Request;
 @endphp
 
-<nav class="bg-white border-gray-200 dark:bg-[#4C8F8B]">
+<nav class="bg-[#4C8F8B] border-gray-200 dark:bg-[#4C8F8B]">
     <div class="max-w-screen-2.5xl flex flex-wrap items-center justify-between mx-auto p-4 px-8">
         <a href="{{ route('homepage.login') }}" class="flex items-center space-x-2 rtl:space-x-reverse flex-row">
             <img src="{{ asset('image/logo.png') }}" class="h-10 lg:h-24" alt="Flowbite Logo" />
@@ -18,7 +18,7 @@
         <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <div class="flex flex-row gap-4">
                 <a href={{ route('login') }} type="button"
-                    class=" bg-white px-6  py-1.5 rounded-md items-center justify-center">
+                    class=" bg-[#4C8F8B] text-white px-6 py-1.5 rounded-md items-center justify-center">
                     Login
                 </a>
 
