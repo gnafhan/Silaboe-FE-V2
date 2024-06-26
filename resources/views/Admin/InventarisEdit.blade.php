@@ -65,7 +65,7 @@
 
                 <div class="flex justify-start gap-4 mt-12">
                     <a href="{{ Route('inventaris.admin') }}" type="button"
-                        class=" hover:scale-105 bg-[#D46857] text-white py-2 px-4 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">Cancel</a>
+                        class=" hover:scale-105 bg-[#D46857] text-white py-2 px-6 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">Delete</a>
                     <button type="submit"
                         class="hover:scale-105 bg-[#4C8F8B] text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">Submit</button>
                 </div>
