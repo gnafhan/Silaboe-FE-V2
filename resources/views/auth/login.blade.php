@@ -85,14 +85,16 @@
                         button: "Ok",
                     }).then((value) => {
                         if ("{{ Session::get('alert-type') }}" == 'success') {
-                            if("{{ Session::get('user')['role'] == 'admin' }}"){
-                                window.location.href = "{{ route('dashboard.admin') }}";
-                            }
-                            else if("{{ Session::get('user')['role'] == 'umum' }}"){
+                            if("{{ Session::get('user') }}"){
+                                if("Session::get('user')['role'] == 'admin'"){
+                                    window.location.href = "{{ route('dashboard.admin') }}";
+                                }
+                                else if("{{ Session::get('user')['role'] == 'umum' }}"){
                                 window.location.href = "{{ route('homepage.login') }}";
-                            }
-                            else if("{{ Session::get('user')['role'] == 'kaleb' }}"){
-                                window.location.href = "{{ route('dashboard.kaleb') }}";
+                                }
+                                else if("{{ Session::get('user')['role'] == 'kaleb' }}"){
+                                    window.location.href = "{{ route('dashboard.kaleb') }}";
+                                }
                             }
                         }
                     });

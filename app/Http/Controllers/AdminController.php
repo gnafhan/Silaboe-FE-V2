@@ -49,9 +49,6 @@ class AdminController extends Controller
     {
         $token = session('api_token');
         $laboratorium = Http::withToken($token)->get(env('API_URL') . '/laboratorium');
-
-
-
         
         if($laboratorium ->successful()){
             $laboratoriums = $laboratorium->json();
@@ -70,9 +67,7 @@ class AdminController extends Controller
         if($laboratorium ->successful()){
             $laboratoriums = $laboratorium->json();
             // dd($laboratoriums);
-            $laboratoriums = $laboratoriums['data'];
-
-           
+            $laboratoriums = $laboratoriums['data'];           
         }
         return view('Admin.LaboratoriumDetail',compact('laboratoriums'));
     }

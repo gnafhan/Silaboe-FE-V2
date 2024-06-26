@@ -24,7 +24,7 @@
                     class="shadow-md px-6 py-3 rounded-xl bg-[rgba(98,143,142,0.2)] text-black border w-full md:w-auto lg:w-auto lg:text-xl">
                 <div
                     class=" hover:scale-105 shadow-md flex flex-row gap-2 items-center w-full bg-[#628F8E] lg:px-8 lg:py-3 p-2 lg:rounded-xl  hover:bg-[#608B8A] md:w-auto lg:w-auto justify-center rounded-md">
-                    <a href="{{ Route('laboratoriumtambah,admin') }}"
+                    <a href="{{ Route('laboratoriumtambah.admin') }}"
                         class=" font-medium lg:text-xl  text-md text-white  flex items-center">
                         Tambah Lab
                         <svg width="14" height="14" viewBox="0 0 18 18" fill="none"
