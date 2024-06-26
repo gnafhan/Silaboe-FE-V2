@@ -57,7 +57,8 @@ Route::get('/admin', [AdminController::class, 'Dashboard'])->name('dashboard.adm
 //laboratorium
 Route::get('admin/laboratorium', [AdminController::class, 'Laboratorium'])->name('laboratorium.admin');
 Route::get('admin/laboratorium/detail', [AdminController::class, 'LaboratoriumDetail'])->name('laboratoriumdetail.admin');
-Route::get('admin/laboratorium/tambah', [AdminController::class, 'LaboratoriumTambah'])->name('laboratoriumtambah,admin');
+Route::get('admin/laboratorium/tambah', [AdminController::class, 'LaboratoriumTambah'])->name('laboratoriumtambah.admin');
+Route::post('admin/laboratorium/tambah', [AdminController::class, 'laboratoriumtambahPost'])->name('laboratoriumtambah.admin.post');
 Route::get('admin/laboratorium/Edit', [AdminController::class, 'LaboratoriumEdit'])->name('laboratoriumedit.admin');
 
 //JadwalLab
