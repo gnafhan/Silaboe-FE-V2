@@ -78,75 +78,7 @@
             </div>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js"></script>
             <script src="https://apis.google.com/js/api.js"></script>
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    var calendarEl = document.getElementById('calendar');
-                    var calendar = new FullCalendar.Calendar(calendarEl, {
-                        initialView: 'dayGridMonth',
-                        headerToolbar: {
-                            left: 'prev,next today',
-                            center: 'title',
-                            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                        },
-                        events: [],
-                        eventTimeFormat: { // like '14:30'
-                            hour: '2-digit',
-                            minute: '2-digit',
-                            meridiem: false
-                        }
-                    });
-                    calendar.render();
 
-                    function loadCalendar() {
-                        gapi.load('client:auth2', initClient);
-                    }
-
-                    function initClient() {
-                        gapi.client.init({
-                            apiKey: 'YOUR_API_KEY',
-                            clientId: 'YOUR_CLIENT_ID',
-                            discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
-                            scope: 'https://www.googleapis.com/auth/calendar.readonly'
-                        }).then(() => {
-                            gapi.auth2.getAuthInstance().signIn().then(listUpcomingEvents);
-                        }).catch(error => {
-                            console.error('Error during initialization', error);
-                        });
-                    }
-
-                    function listUpcomingEvents() {
-                        gapi.client.calendar.events.list({
-                            'calendarId': 'primary',
-                            'timeMin': (new Date()).toISOString(),
-                            'showDeleted': false,
-                            'singleEvents': true,
-                            'maxResults': 10,
-                            'orderBy': 'startTime'
-                        }).then(response => {
-                            const events = response.result.items;
-                            const eventListDiv = document.getElementById('event-list');
-                            if (events.length > 0) {
-                                events.forEach(event => {
-                                    const startTime = event.start.dateTime || event.start.date;
-                                    const endTime = event.end.dateTime || event.end.date;
-                                    calendar.addEvent({
-                                        title: event.summary,
-                                        start: startTime,
-                                        end: endTime,
-                                        description: event.description
-                                    });
-                                });
-                            } else {
-                                eventListDiv.innerText = 'No upcoming events found.';
-                            }
-                        }).catch(error => {
-                            console.error('Error loading events', error);
-                        });
-                    }
-
-                    loadCalendar();
-                });
-            </script>
         </body>
 
 
@@ -162,25 +94,8 @@
 
 
 
+  
 
-
-
-
-
-
-
-        <div class="bg-[#F8E0E0] mt-8 relative">
-            <div class="absolute top-0 left-0 border-l-8 border-[#D46857] h-full"></div>
-
-            <div class="flex flex-col">
-                <div class=" flex lg:px-20 lg:text-2xl text-xl lg:pt-8 p-6 font-semibold text-[#D46857]">Informasi</div>
-                <div class="flex text-justify  lg:px-20 lg:pt-4 lg:pb-8 px-6 pb-6 text-sm lg:text-xl"> Pemesanan
-                    laboratorium tidak
-                    dapat dilakukan
-                    pada waktu periode berjalan
-                </div>
-            </div>
-        </div>
         <div class="bg-[#e9f8f7]  border-[#4C8F8B] border-2 rounded-lg  min-h-24   px-8 py-4 my-12">
             <div class="flex flex-col text-justify ">
                 <div class="lg:text-2xl text-md pb-4 font-semibold flex justify-start">Aturan /Syarat Pemesanan oleh

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class AdminController extends Controller
 
+
 //POV ADMIN
 {
 //Dashboard
@@ -14,19 +15,28 @@ class AdminController extends Controller
     {
         $token = session('api_token');
         $jadwal = Http::withToken($token)->get(env('API_URL') . '/dashboard/labReserve');
+        $jumlahlab = Http::withToken($token)->get(env('API_URL') . '/dashboard/countLab');
+        $jumlahinventaris = Http::withToken($token)->get(env('API_URL') . '/dashboard/countInventory');
         
         if($jadwal->successful()){
             $jadwals = $jadwal->json();
             $jadwals = $jadwals['data'];
-        }
 
+            $jumlahlabs = $jumlahlab->json();
+            $jumlahlabs = $jumlahlabs['data'];
+
+            $jumlahinventariss = $jumlahinventaris->json();
+            // dd($jumlahinventaris);
+            $jumlahinventariss = $jumlahinventariss['data'];
+        }
 
 
  
         // $response = Http::get('https://api.thecatapi.com/v1/images/0XYvRd7oD');
         // $response_json = $response->json();
         // dd($response_json['id']);    
-        return view('Admin.Dashboard', compact('jadwals'));
+        return view('Admin.Dashboard', compact('jadwals','jumlahlabs','jumlahinventariss'));
+    //   'jumlahinventariss'
     }
 //Laboratorium
     public function laboratorium()

@@ -1189,6 +1189,8 @@
     </script>
     <!-- jQuery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4.0.24/dark.min.css">
 
     <!--Datatables -->
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
@@ -1217,6 +1219,7 @@
     @yield('content')
 
     @include('components.footer')
+
 </body>
 
 </html>

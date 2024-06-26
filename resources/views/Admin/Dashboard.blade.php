@@ -20,6 +20,7 @@
             <div class="flex flex-col">
                 <h1 class="text-2xl font-bold py-4">Overview</h1>
                 <!-- Overview Section -->
+
                 <section class="grid lg:grid-cols-3 grid-cols-1 lg:gap-16 gap-12 md:gap-12 mb-6 ">
 
                     <div class="bg-[rgba(98,143,142,0.1)] rounded-3xl p-8  shadow-lg">
@@ -27,7 +28,8 @@
                             <img src="{{ asset('image/overviewimage1.png') }}" class="  text-center h-16 w-16  "
                                 alt="Flowbite Logo" />
                             <h2 class="text-xl text-semibold">Total Laboratorium</h2>
-                            <p class="text-4xl font-bold">10</p>
+
+                            <p class="text-4xl font-bold">{{ $jumlahlabs }}</p>
                         </div>
                     </div>
 
@@ -36,7 +38,7 @@
                             <img src="{{ asset('image/overviewimage2.png') }}" class="  text-center h-16 w-16  "
                                 alt="Flowbite Logo" />
                             <h2 class="text-xl text-semibold flex-wrap">Total Inventaris</h2>
-                            <p class="text-4xl font-bold">320</p>
+                            <p class="text-4xl font-bold">{{ $jumlahinventariss  }}</p>
                         </div>
                     </div>
                     <div class="bg-[rgba(98,143,142,0.1)]  rounded-3xl p-8 shadow-lg">
@@ -52,6 +54,7 @@
                         </div>
                     </div>
                 </section>
+
             </div>
 
             <!-- Jadwal Laboratorium Section -->

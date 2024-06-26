@@ -17,45 +17,27 @@ class AuthController extends Controller
     public function doLogin(Request $request)
     {
         try {
-
-            
-
-
             $response = Http::post(env('API_URL') . '/login', [
                 'email' => $request->email,
                 'password' => $request->password,
             ]);
-           
-
 
             if ($response->successful()) {
-                
-
                 $content = $response->json();
-                $token = $content['token'] ?? null; // Adjust the key according to the actual response structure
-
-                // dd($content);
+                $token = $content['token'] ?? null;
 
                 if ($token) {
-                    // Save the token and user data in the session
                     session(['api_token' => $token]);
-
-
-                    // // Update user login status (assuming you have 'loginstatus' field in User model)
-                    // $currentUser = User::find($user['id']);
-                    // $currentUser->update(['loginstatus' => 'on']);
-
-                    return redirect()->route('dashboard.admin');
+                    return redirect()->route('login')->with('message', 'Sukses masuk')->with('alert-type', 'success');
                 } else {
-                    return back()->withErrors(['message' => 'Token or user data not found in the response']);
+                    return back()->with('message', 'Token atau data pengguna tidak ditemukan dalam respons')->with('alert-type', 'error');
                 }
             } else {
-                $errorMessage = $response->json('message') ?? 'Unknown error';
-                return back()->withErrors(['message' => 'Error fetching data: ' . $errorMessage]);
+                $errorMessage = $response->json('message') ?? 'Kesalahan tidak diketahui';
+                return back()->with('message', 'Kesalahan dalam mengambil data: ' . $errorMessage)->with('alert-type', 'error');
             }
         } catch (\Exception $e) {
-            // Log the exception message
-            return back()->withErrors(['message' => 'An error occurred while attempting to log in.']);
+            return back()->with('message', 'Email atau passowrd yang Anda masukkan salah')->with('alert-type', 'error');
         }
     }
 
