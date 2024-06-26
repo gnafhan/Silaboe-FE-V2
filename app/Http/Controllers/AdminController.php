@@ -54,8 +54,6 @@ class AdminController extends Controller
             $laboratoriums = $laboratorium->json();
             // dd($laboratoriums);
             $laboratoriums = $laboratoriums['data'];
-
-           
         }
         return view('Admin.Laboratorium',compact('laboratoriums'));
     }
@@ -135,7 +133,8 @@ class AdminController extends Controller
         } else {
             $errorBody = $response->body();
             return redirect()->back()->with('error', 'Gagal: ' . $errorBody)->with('alert-type', 'error');
-        }    }
+        }
+    }
 
     public function laboratoriumhapus($id)
     {
@@ -196,15 +195,101 @@ class AdminController extends Controller
 //Inventaris
     public function inventaris()
     {
-        return view('Admin.Inventaris');
+        $token = session('api_token');
+        $response = Http::withToken($token)->get(env('API_URL') . '/inventories');
+        
+        if($response->successful()){
+            $response = $response->json();
+            $response = $response['data'];
+        }
+
+        return view('Admin.Inventaris', [
+            'inventaris' => $response
+        ]);
     }
     public function inventaristambah()
     {
         return view('Admin.InventarisTambah');
     }
-    public function inventarisedit()
+
+    public function inventaristambahPost(Request $request)
     {
-        return view('Admin.InventarisEdit');
+        $token = session('api_token');
+        // dd($request);
+        $request = [
+            'item_name' => $request->item_name,
+            'no_item' => $request->no_item,
+            'condition' => $request->condition,  
+            'information' => $request->information,  
+        ];
+        // dd($request);
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '. $token
+        ])->post(env('API_URL').'/inventories', $request);
+
+        // dd($response);
+
+        if ($response->successful()) {
+            return redirect()->route('inventaris.admin')->with('message', 'Berhasil menambahkan data')->with('alert-type', 'success');
+        } else {
+            $errorBody = $response->body();
+            return redirect()->back()->with('error', 'Gagal: ' . $errorBody)->with('alert-type', 'error');
+        }
+    }
+    
+    public function inventarisedit($id)
+    {
+        $token = session('api_token');
+        $inventaris = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '. $token
+        ])->get(env('API_URL').'/inventories/'.$id);
+        // dd($inventaris);
+        return view('Admin.InventarisEdit', [
+            'inventaris' => $inventaris->json()['data']
+        ]);
+    }
+
+    public function inventarisupdate(Request $request, $id)
+    {
+        $token = session('api_token');
+        $request = [
+            'item_name' => $request->item_name,
+            'no_item' => $request->no_item,
+            'condition' => $request->condition,  
+            'information' => $request->information,  
+        ];
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '. $token
+        ])->put(env('API_URL').'/inventories/'.$id, $request);
+        
+        if ($response->successful()) {
+            return redirect()->route('inventaris.admin')->with('message', 'Berhasil mengedit data')->with('alert-type', 'success');
+        } else {
+            $errorBody = $response->body();
+            return redirect()->back()->with('error', 'Gagal: ' . $errorBody)->with('alert-type', 'error');
+        }
+    }
+
+    public function inventarishapus($id)
+    {
+        $token = session('api_token');
+        $inventaris = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '. $token
+        ])->delete(env('API_URL').'/inventories/'.$id);
+        if ($inventaris->successful()) {
+            return redirect()->route('inventaris.admin')->with('message', 'Berhasil menghapus data')->with('alert-type', 'success');
+        } else {
+            $errorBody = $inventaris->body();
+            return redirect()->back()->with('error', 'Gagal: ' . $errorBody)->with('alert-type', 'error');
+        }
     }
 
 

@@ -78,10 +78,12 @@ Route::get('admin/peminjamanlab/archive', [AdminController::class, 'PeminjamanLa
 //Inventaris
 Route::get('admin/inventaris', [AdminController::class, 'Inventaris'])->name('inventaris.admin');
 Route::get('admin/inventaris/tambah', [AdminController::class, 'InventarisTambah'])->name('inventaristambah.admin');
-Route::get('admin/inventaris/edit', [AdminController::class, 'InventarisEdit'])->name('inventarisedit.admin');
+Route::post('admin/inventaris/tambah', [AdminController::class, 'InventarisTambahPost'])->name('inventaristambah.admin.post');
+Route::get('admin/inventaris/{id}/edit', [AdminController::class, 'InventarisEdit'])->name('inventarisedit.admin');
+Route::put('admin/inventaris/{id}/update', [AdminController::class, 'Inventarisupdate'])->name('inventarisupdate.admin');
+Route::delete('admin/inventaris/{id}', [AdminController::class, 'Inventarishapus'])->name('inventarishapus.admin');
 
 //Peminjaman Inventaris
-
 Route::get('admin/peminjamaninvenatris/tidakAda', [AdminController::class, 'PeminjamanInventarisTidakAda'])->name('peminjamaninvenatristidakada.admin');
 Route::get('admin/peminjamaninvenatris/ada', [AdminController::class, 'PeminjamanInventarisAda'])->name('peminjamaninvenatrisada.admin');
 Route::get('admin/peminjamaninvenatris/detail', [AdminController::class, 'PeminjamanInventarisDetail'])->name('peminjamaninvenatrisdetail.admin ');
