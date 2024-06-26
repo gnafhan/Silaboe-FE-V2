@@ -59,11 +59,8 @@
                 </div>
                 <small id="passwordError" class="text-red-500 hidden mt-0 ">Wajib diisi</small>
 
-                <div class="flex justify-between w-full py-4">
-                    <div class="mr-24">
-                        <input type="checkbox" name="ch" id="ch" class="mr-2" />
-                        <span class="text-md text-gray-400">Remember Me</span>
-                    </div>
+                <div class="flex justify-end w-full py-4">
+
                     <button type="button" class="text-md text-gray-400">Lupa password?</button>
                 </div>
                 <button type="button" id="loginButton"
@@ -85,17 +82,18 @@
                         button: "Ok",
                     }).then((value) => {
                         if ("{{ Session::get('alert-type') }}" == 'success') {
-                            if("{{ Session::get('user') }}"){
-                                if("Session::get('user')['role'] == 'admin'"){
+                            @if (Session::has('user'))
+                                @php
+                                    $user = Session::get('user');
+                                @endphp
+                                if ("{{ $user['role'] }}" == 'admin') {
                                     window.location.href = "{{ route('dashboard.admin') }}";
-                                }
-                                else if("{{ Session::get('user')['role'] == 'umum' }}"){
-                                window.location.href = "{{ route('homepage.login') }}";
-                                }
-                                else if("{{ Session::get('user')['role'] == 'kaleb' }}"){
+                                } else if ("{{ $user['role'] }}" == 'umum') {
+                                    window.location.href = "{{ route('homepage.login') }}";
+                                } else if ("{{ $user['role'] }}" == 'kaleb') {
                                     window.location.href = "{{ route('dashboard.kaleb') }}";
                                 }
-                            }
+                            @endif
                         }
                     });
                 </script>

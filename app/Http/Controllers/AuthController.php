@@ -17,7 +17,10 @@ class AuthController extends Controller
     public function doLogin(Request $request)
     {
         try {
-            $response = Http::post(env('API_URL') . '/login', [
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
+            ])->post(env('API_URL') . '/login', [
                 'email' => $request->email,
                 'password' => $request->password,
             ]);

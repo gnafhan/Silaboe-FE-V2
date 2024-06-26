@@ -58,22 +58,22 @@
                 class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-[#4C8F8B] ">
                 <li>
                     <a href="{{ route('about.login') }}"
-                        class=" block py-2 px-3 rounded md:p-0 {{ Request::routeIs('about.login') ? 'text-yellow-500 ' : 'text-gray-900 text-sm md:text-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-yellow-500 dark:text-white md:dark:hover:text-yellow-500 dark:hover:text-yellow-500  md:dark:hover:bg-transparent ' }}"
+                        class=" block py-2 px-3 rounded md:p-0 {{ Request::routeIs('about.login') ? 'text-yellow-500 ' : 'text-gray-900 text-lg md:text-md  md:hover:bg-transparent md:hover:text-yellow-500 dark:text-white md:dark:hover:text-yellow-500 dark:hover:text-yellow-500  md:dark:hover:bg-transparent ' }}"
                         aria-current="page">ABOUT US</a>
                 </li>
                 <li>
                     <a href="{{ route('datasoftware.login') }}"
-                        class="block py-2 px-3 rounded md:p-0 {{ Request::routeIs('datasoftware.login') ? 'text-yellow-500 ' : 'text-gray-900 hover:bg-gray-100 text-sm md:text-md md:hover:bg-transparent md:hover:text-yellow-500 dark:text-white md:dark:hover:text-yellow-500 dark:hover:bg-white dark:hover:text-gray-500 md:dark:hover:bg-transparent ' }}">DATA
+                        class="block py-2 px-3 rounded md:p-0 {{ Request::routeIs('datasoftware.login') ? 'text-yellow-500 ' : 'text-gray-900  text-lg md:text-md md:hover:bg-transparent md:hover:text-yellow-500 dark:text-white md:dark:hover:text-yellow-500 dark:hover:bg-white dark:hover:text-gray-500 md:dark:hover:bg-transparent ' }}">DATA
                         SOFTWARE</a>
                 </li>
                 <li>
                     <a href="{{ route('inventaris.login') }}"
-                        class="block py-2 px-3 rounded md:p-0 {{ Request::routeIs('inventaris.login') ? 'text-yellow-500 ' : 'text-gray-900 hover:bg-gray-100 text-sm md:text-md md:hover:bg-transparent md:hover:text-yellow-500 dark:text-white md:dark:hover:text-yellow-500 dark:hover:bg-white dark:hover:text-gray-500 md:dark:hover:bg-transparent dark:border-gray-700' }}">INVENTARIS</a>
+                        class="block py-2 px-3 rounded md:p-0 {{ Request::routeIs('inventaris.login') ? 'text-yellow-500 ' : 'text-gray-900  text-lg md:text-md md:hover:bg-transparent md:hover:text-yellow-500 dark:text-white md:dark:hover:text-yellow-500 dark:hover:bg-white dark:hover:text-gray-500 md:dark:hover:bg-transparent dark:border-gray-700' }}">INVENTARIS</a>
                 </li>
                 <li>
                     <a href="{{ route('laboratorium.login') }}"
                         class="block py-2 px-3 rounded md:p-0 
-                              {{ Request::routeIs('login/landingpage/laboratorium*') ? 'text-yellow-500' : 'text-gray-900 hover:bg-gray-100 text-sm md:text-md md:hover:bg-transparent md:hover:text-yellow-500 dark:text-white md:dark:hover:text-yellow-500 dark:hover:bg-white dark:hover:text-gray-500 md:dark:hover:bg-transparent dark:border-gray-700' }}">
+                              {{ Request::routeIs('login/landingpage/laboratorium*') ? 'text-yellow-500' : 'text-gray-900 hover:bg-gray-100 text-lg md:text-md md:hover:bg-transparent md:hover:text-yellow-500 dark:text-white md:dark:hover:text-yellow-500 dark:hover:bg-white dark:hover:text-gray-500 md:dark:hover:bg-transparent dark:border-gray-700' }}">
                         LABORATORIUM
                     </a>
                 </li>
