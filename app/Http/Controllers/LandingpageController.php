@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class LandingpageController extends Controller
 
@@ -67,23 +69,72 @@ class LandingpageController extends Controller
     //Laboratorium
     public function laboratorium()
     {
-        return view('UserLogin.Laboratorium');
+        $response = Http::get(env('API_URL').'/laboratorium');
+        return view('UserLogin.Laboratorium', [
+            'labs' => $response->json()['data']
+        ]);
     }
-    public function laboratoriumdetail()
+    public function laboratoriumdetail($id)
     {
-        return view('UserLogin.LaboratoriumDetail');
+        $response = Http::get(env('API_URL').'/laboratorium/'. $id);
+        return view('UserLogin.LaboratoriumDetail', [
+            'lab' => $response->json()['data'],
+            'id' => $id
+        ]);
     }
     public function reservasilaboratorium()
     {
-        return view('UserLogin.ReservasiLaboratorium');
+        return view('UserLogin.ReservasiLaboratorium', [
+        ]);
     }
-    public function reservasilaboratoriumstatus()
+    public function reservasilaboratoriumstatus($id)
     {
-        return view('UserLogin.ReservasiLaboratoriumStatus');
+        $lab = Http::get(env('API_URL').'/laboratorium/'. $id);
+        // dd($lab);
+        return view('UserLogin.ReservasiLaboratoriumStatus', [
+            'lab' => $lab->json()['data']
+        ]);
     }
-    public function laboratoriumformlab()
+    public function laboratoriumformlab($id)
     {
-        return view('UserLogin.LaboratoriumFormlab');
+        $lab = Http::get(env('API_URL').'/laboratorium/'. $id);
+        $syarat = Http::get(env('API_URL').'/rules');
+        return view('UserLogin.LaboratoriumFormlab', [
+            'id' => $id,   
+            'syarat' => $syarat->json()['data'],
+            'lab' => $lab->json()['data'],
+        ]);
+    }
+
+    public function postFormLab(Request $request, $id){
+        // dd($request);
+        $start_datetime = Carbon::parse($request->start . $request->start_time)->format('Y-m-d H:i');
+        $end_datetime = Carbon::parse($request->end . $request->end_time)->format('Y-m-d H:i');
+
+        $token = session('api_token');
+
+        $request = [
+            'room_id' => $id,
+            'identity' => 'test',
+            'email' => $request->email,
+            'no_wa' => $request->wa,
+            'needs' => $request->keterangan,        
+            'start_time' => $start_datetime,
+            'end_time' => $end_datetime,
+        ];
+
+        $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer '. $token
+            ])->post(env('API_URL').'/laboratorium/reserve', $request);
+
+        if ($response->successful()) {
+            return redirect()->route('statusreservasilab.login', $id);
+        } else {
+            $errorBody = $response->body();
+            return redirect()->back()->with('error', 'Reservation failed: ' . $errorBody);
+        }
     }
 
 

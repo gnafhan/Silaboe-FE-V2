@@ -30,7 +30,7 @@
             </div>
 
             <div class="flex items-center space-x-2">
-                <button class="lg:text-lg text-md text-blue-400 ">Laboratorium HU 104</button>
+                <button class="lg:text-lg text-md text-blue-400 ">{{ $lab['name'] }}</button>
                 <svg class="w-4 h-4 text-gray-800 dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     width="18" height="18" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -40,7 +40,7 @@
 
             </div>
             <div class="flex items-center space-x-2">
-                <button class="lg:text-lg text-md text-blue-400 "> Reservasi Laboratorium HU 104</button>
+                <button class="lg:text-lg text-md text-blue-400 "> Reservasi {{ $lab['name'] }}</button>
 
 
 
@@ -49,7 +49,7 @@
         </div>
         <div class="border-b-2 border-yellow-500 w-[100%] mb-2 mt-4"></div>
         <div class="py-4">
-            <div class=" lg:text-4xl text-2xl font-bold text-[#628F8E] lg:mb-4 mb-4">Reservasi Laboratorium HU104</div>
+            <div class=" lg:text-4xl text-2xl font-bold text-[#628F8E] lg:mb-4 mb-4">Reservasi {{ $lab['name'] }}</div>
         </div>
         <div class="flex flex-row items-center gap-4">
             <svg class="" width="16" height="16" viewBox="0 0 15 15" fill="none"

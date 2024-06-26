@@ -74,6 +74,8 @@
                 </div>
             </form>
 
+            {{-- {{ dd(Session::get('user')) }} --}}
+
             @if (Session::has('message'))
                 <script>
                     swal({
@@ -83,9 +85,15 @@
                         button: "Ok",
                     }).then((value) => {
                         if ("{{ Session::get('alert-type') }}" == 'success') {
-                            setTimeout(() => {
+                            if("{{ Session::get('user')['role'] == 'admin' }}"){
                                 window.location.href = "{{ route('dashboard.admin') }}";
-                            }, 1000); // Delay 1 second before redirecting
+                            }
+                            else if("{{ Session::get('user')['role'] == 'umum' }}"){
+                                window.location.href = "{{ route('homepage.login') }}";
+                            }
+                            else if("{{ Session::get('user')['role'] == 'kaleb' }}"){
+                                window.location.href = "{{ route('dashboard.kaleb') }}";
+                            }
                         }
                     });
                 </script>

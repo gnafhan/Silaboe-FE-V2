@@ -14,7 +14,6 @@ Route::post('/do-login', [AuthController::class, 'doLogin'])->name('do-login');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 
 
-
 //Landing Page 
 //
 //POV User Non Login
@@ -32,11 +31,12 @@ Route::get('login/landingpage/datasoftware', [LandingpageController::class, 'dat
 
 
 //Laboretorium 
-    Route::get('login/landingpage/laboratorium', [LandingpageController::class, 'laboratorium'])->name('laboratorium.login');
-    Route::get('login/landingpage/laboratorium/detail', [LandingpageController::class, 'laboratoriumdetail'])->name('laboratoriumdetail.login');
-    Route::get('login/landingpage/laboratorium/reservasi', [LandingpageController::class, 'reservasilaboratorium'])->name('reservasilab.login');
-    Route::get('login/landingpage/laboratorium/reservasi/status', [LandingpageController::class, 'reservasilaboratoriumstatus'])->name('statusreservasilab.login');
-    Route::get('login/landingpage/laboratorium/formlab', [LandingpageController::class, 'laboratoriumformlab'])->name('formlab.login');
+Route::get('login/landingpage/laboratorium', [LandingpageController::class, 'laboratorium'])->name('laboratorium.login');
+Route::get('login/landingpage/laboratorium/{id}/detail', [LandingpageController::class, 'laboratoriumdetail'])->name('laboratoriumdetail.login');
+// Route::get('login/landingpage/laboratorium/reservasi', [LandingpageController::class, 'reservasilaboratorium'])->name('reservasilab.login');
+Route::get('login/landingpage/laboratorium/reservasi/{id}/status', [LandingpageController::class, 'reservasilaboratoriumstatus'])->name('statusreservasilab.login');
+Route::get('login/landingpage/laboratorium/{id}/formlab', [LandingpageController::class, 'laboratoriumformlab'])->name('formlab.login');
+Route::post('login/landingpage/laboratorium/{id}/formlab', [LandingpageController::class, 'postFormLab'])->name('formlab.login.post');
 
 
 //Reservasi Login 

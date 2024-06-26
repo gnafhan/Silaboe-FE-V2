@@ -25,9 +25,11 @@ class AuthController extends Controller
             if ($response->successful()) {
                 $content = $response->json();
                 $token = $content['token'] ?? null;
+                $user = $content['data'];
 
                 if ($token) {
                     session(['api_token' => $token]);
+                    session(['user' => $user]);
                     return redirect()->route('login')->with('message', 'Sukses masuk')->with('alert-type', 'success');
                 } else {
                     return back()->with('message', 'Token atau data pengguna tidak ditemukan dalam respons')->with('alert-type', 'error');
