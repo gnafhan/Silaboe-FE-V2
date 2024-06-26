@@ -16,7 +16,7 @@
     </header>
     <div class="bg-[rgba(237,245,245,1)] ">
         <!-- Main Dashboard Content -->
-        <main class="lg:mx-20 mx-12 py-6 flex-1">
+        <main class="lg:mx-12 mx-12 py-6 flex-1">
             <div class="flex flex-col">
                 <h1 class="text-2xl font-bold py-4">Overview</h1>
                 <!-- Overview Section -->
@@ -38,7 +38,7 @@
                             <img src="{{ asset('image/overviewimage2.png') }}" class="  text-center h-16 w-16  "
                                 alt="Flowbite Logo" />
                             <h2 class="text-xl text-semibold flex-wrap">Total Inventaris</h2>
-                            <p class="text-4xl font-bold">{{ $jumlahinventariss  }}</p>
+                            <p class="text-4xl font-bold">{{ $jumlahinventariss }}</p>
                         </div>
                     </div>
                     <div class="bg-[rgba(98,143,142,0.1)]  rounded-3xl p-8 shadow-lg">
@@ -117,11 +117,12 @@
                         <h1 class="text-xl font-bold py-4 px-2 border-b-2">Semua </h1>
                         <ul>
                             <li class="flex justify-between items-center mb-2 p-2 text-md">
-                                <span>Tamara mengajukan peminjaman</span>
-                                <span class="bg-[#499DBC] text-white px-3 py-1 rounded-2xl">Published</span>
+                                <span>{{ $jadwal['email'] }}</span>
+                                <span
+                                    class="bg-[#499DBC] text-white px-5 py-2 rounded-2xl">{{ $jadwal['is_approved'] ? 'Approved' : 'Waiting' }}</span>
                             </li>
                             <li class="flex justify-between items-center mb-2 p-2 text-md">
-                                <span>Tamara mengajukan peminjaman</span>
+                                <span>{{ $jadwal['email'] }}</span>
                                 <span class="bg-[#F5CD51] text-white px-5 py-1 rounded-2xl">Waiting</span>
                             </li>
                             <li class="flex justify-between items-center mb-2 p-2 text-md">
@@ -139,8 +140,9 @@
                         <ul>
                             <ul>
                                 <li class="flex justify-between items-center mb-2 p-2 text-md">
-                                    <span>Tamara mengajukan peminjaman</span>
-                                    <span class="bg-[#499DBC] text-white px-3 py-1 rounded-2xl">Published</span>
+                                    <span>{{ $jadwal['email'] }}</span>
+                                    <span
+                                        class="bg-[#499DBC] text-white px-3 py-1 rounded-2xl">{{ $jadwal['is_approved'] ? 'Approved' : 'Waiting' }}</span>
                                 </li>
                                 <li class="flex justify-between items-center mb-2 p-2 text-md">
                                     <span>Tamara mengajukan peminjaman</span>

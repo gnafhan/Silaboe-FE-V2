@@ -26,29 +26,8 @@
             <div class="flex flex-col mt-12 ">
                 <div class="font-bold text-xl lg:text-2xl flex mb-4">Laboratorium HU104</div>
                 <img src="{{ asset('image/fotolab.png') }}" class="h-[50%] rounded-xl grid" alt="foto lab" />
-                <div class="text-sm lg:text-xl text-black text-justify lg:py-12 py-6">lorem Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Aut saepe tempore ipsum, provident, excepturi culpa exercitationem omnis
-                    ex
-                    deserunt iusto officia alias doloremque! Tenetur placeat debitis ex veritatis labore accusantium. lorem
-                    lorem lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut saepe tempore ipsum, provident,
-                    excepturi culpa exercitationem omnis ex deserunt iusto officia alias doloremque! Tenetur placeat debitis
-                    ex
-                    veritatis labore accusantium. lorem lorem Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Pariatur
-                    obcaecati excepturi, tempore vel reprehenderit sequi itaque nihil dolorum. Illum, sed alias quidem harum
-                    esse mollitia, dolor veniam a sequi reprehenderit facere rem. Dignissimos minus totam neque suscipit eum
-                    autem adipisci animi aperiam, officia nulla recusandae cupiditate eos reprehenderit blanditiis? Deserunt
-                    iste perspiciatis nesciunt obcaecati, nam dolorem. Minima aperiam laboriosam, distinctio consequuntur
-                    dicta
-                    doloribus possimus quos maxime, dignissimos corporis labore consequatur. Consequuntur vitae eveniet,
-                    officiis, atque vero dolorum facere facilis aliquid officia animi inventore. Odio alias accusantium
-                    blanditiis quo saepe libero animi deleniti quod doloremque illo incidunt nulla, est ipsum corporis iure
-                    eos
-                    quia molestiae. Perspiciatis voluptatibus asperiores distinctio alias aliquam. Explicabo nemo veniam
-                    eligendi expedita. Iure illo explicabo autem. Unde dolorem quibusdam non incidunt maxime labore iusto
-                    amet
-                    nobis veritatis earum pariatur provident recusandae quisquam expedita quaerat eligendi, architecto
-                    laboriosam cum ullam repellat. Id praesentium voluptatem consectetur modi, unde rerum sit dolore </div>
+                <div class="text-sm lg:text-xl text-black text-justify lg:py-12 py-6">{{ $laboratoriums ['description'] }}
+                </div>
                 {{-- 
                 Bagian Rendering  --}}
 

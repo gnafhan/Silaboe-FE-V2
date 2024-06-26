@@ -17,6 +17,9 @@ class AdminController extends Controller
         $jadwal = Http::withToken($token)->get(env('API_URL') . '/dashboard/labReserve');
         $jumlahlab = Http::withToken($token)->get(env('API_URL') . '/dashboard/countLab');
         $jumlahinventaris = Http::withToken($token)->get(env('API_URL') . '/dashboard/countInventory');
+        // $inventarisreserve = Http::withToken($token)->get(env('API_URL') . '/dashboard/inventoryReserve');
+
+
         
         if($jadwal->successful()){
             $jadwals = $jadwal->json();
@@ -28,6 +31,9 @@ class AdminController extends Controller
             $jumlahinventariss = $jumlahinventaris->json();
             // dd($jumlahinventaris);
             $jumlahinventariss = $jumlahinventariss['data'];
+
+            // $inventarisreserves = $inventarisreserve ->json();
+            // $inventarisreserves = $inventarisreserves['data'];
         }
 
 
@@ -41,17 +47,65 @@ class AdminController extends Controller
 //Laboratorium
     public function laboratorium()
     {
-        return view('Admin.Laboratorium');
+        $token = session('api_token');
+        $laboratorium = Http::withToken($token)->get(env('API_URL') . '/laboratorium');
+
+
+
+        
+        if($laboratorium ->successful()){
+            $laboratoriums = $laboratorium->json();
+            // dd($laboratoriums);
+            $laboratoriums = $laboratoriums['data'];
+
+           
+        }
+        return view('Admin.Laboratorium',compact('laboratoriums'));
     }
     public function laboratoriumdetail()
     {
-        return view('Admin.LaboratoriumDetail');
+        $token = session('api_token');
+        $laboratorium = Http::withToken($token)->get(env('API_URL') . '/laboratorium/1');
+    
+        if($laboratorium ->successful()){
+            $laboratoriums = $laboratorium->json();
+            // dd($laboratoriums);
+            $laboratoriums = $laboratoriums['data'];
+
+           
+        }
+        return view('Admin.LaboratoriumDetail',compact('laboratoriums'));
     }
 
-    public function laboratoriumtambah()
+    public function laboratoriumtambah(Request $request)
     {
         return view('Admin.LaboratoriumTambah');
     }
+
+    public function laboratoriumtambahPost(Request $request)
+    {
+        $token = session('api_token');
+        dd($request);
+        $request = [
+            'name' => $request->name,
+            'type' => $request->email,
+            'description' => $request->description,  
+        ];
+        dd($request);
+        $laboratorium = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '. $token
+        ])->post(env('API_URL').'/rooms', $request);
+
+        dd($laboratorium);
+
+        return view('Admin.LaboratoriumTambah');
+    }
+
+    
+    
+
     public function laboratoriumedit()
     {
         return view('Admin.LaboratoriumEdit');
