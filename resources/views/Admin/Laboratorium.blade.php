@@ -42,7 +42,7 @@
                 <div class="grid gap-8">
                     <!-- Card 1 -->
                     @foreach ($laboratoriums as $laboratorium)
-                        <a href="{{ Route('laboratoriumdetail.admin') }}"
+                        <a href="{{ Route('laboratoriumdetail.admin', $laboratorium['id']) }}"
                             class="bg-[rgba(98,143,142,0.2)] lg:rounded-2xl rounded-3xl rounded-l-3xl shadow p-0 flex flex-col md:flex-row items-start md:items-stretch">
                             <div class="w-full md:w-1/3 ">
                                 <img src="{{ asset('image/laboratoriumimage.png') }}"
@@ -60,8 +60,6 @@
                                         <p class="text-gray-600 text-sm lg:text-md font-medium md:text-base lg:mr-20 mb-4 ">
                                             {{ $laboratorium['description'] }}
                                         </p>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +71,16 @@
                         </a>
                     @endforeach
 
-
+                    @if (Session::has('message'))
+                    <script>
+                        swal({
+                            title: "{{ Session::get('alert-type') == 'success' ? 'Success' : 'Error' }}",
+                            text: "{{ Session::get('message') }}",
+                            icon: "{{ Session::get('alert-type') == 'success' ? 'success' : 'error' }}",
+                            button: "Ok",
+                        }); 
+                    </script>
+                @endif
 
                     <!-- Card 4 -->
 

@@ -59,10 +59,10 @@ class AdminController extends Controller
         }
         return view('Admin.Laboratorium',compact('laboratoriums'));
     }
-    public function laboratoriumdetail()
+    public function laboratoriumdetail($id)
     {
         $token = session('api_token');
-        $laboratorium = Http::withToken($token)->get(env('API_URL') . '/laboratorium/1');
+        $laboratorium = Http::withToken($token)->get(env('API_URL') . '/laboratorium/'.$id);
     
         if($laboratorium ->successful()){
             $laboratoriums = $laboratorium->json();
@@ -80,30 +80,79 @@ class AdminController extends Controller
     public function laboratoriumtambahPost(Request $request)
     {
         $token = session('api_token');
-        dd($request);
+        // dd($request);
         $request = [
             'name' => $request->name,
-            'type' => $request->email,
+            'type' => $request->type,
             'description' => $request->description,  
         ];
-        dd($request);
+        // dd($request);
         $laboratorium = Http::withHeaders([
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '. $token
         ])->post(env('API_URL').'/rooms', $request);
 
-        dd($laboratorium);
+        // dd($laboratorium);
 
-        return view('Admin.LaboratoriumTambah');
+        if ($laboratorium->successful()) {
+            return redirect()->route('laboratorium.admin')->with('message', 'Berhasil menambahkan data')->with('alert-type', 'success');
+        } else {
+            $errorBody = $laboratorium->body();
+            return redirect()->back()->with('error', 'Gagal: ' . $errorBody)->with('alert-type', 'error');
+        }
     }
 
-    
-    
-
-    public function laboratoriumedit()
+    public function laboratoriumedit($id)
     {
-        return view('Admin.LaboratoriumEdit');
+        $token = session('api_token');
+        $laboratorium = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '. $token
+        ])->get(env('API_URL').'/rooms/'.$id);
+        return view('Admin.LaboratoriumEdit', [
+            'laboratorium' => $laboratorium->json()['data']
+        ]);
+    }
+
+    public function laboratoriumupdate(Request $request, $id)
+    {
+        $token = session('api_token');
+        $request = [
+            'name' => $request->name,
+            'type' => $request->type,
+            'description' => $request->description
+        ];
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '. $token
+        ])->put(env('API_URL').'/rooms/'.$id, $request);
+        
+        if ($response->successful()) {
+            return redirect()->route('laboratorium.admin')->with('message', 'Berhasil mengedit data')->with('alert-type', 'success');
+        } else {
+            $errorBody = $response->body();
+            return redirect()->back()->with('error', 'Gagal: ' . $errorBody)->with('alert-type', 'error');
+        }    }
+
+    public function laboratoriumhapus($id)
+    {
+        $token = session('api_token');
+        $laboratorium = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '. $token
+        ])->delete(env('API_URL').'/rooms/'.$id);
+
+
+        if ($laboratorium->successful()) {
+            return redirect()->route('laboratorium.admin')->with('message', 'Berhasil menghapus data')->with('alert-type', 'success');
+        } else {
+            $errorBody = $laboratorium->body();
+            return redirect()->back()->with('error', 'Gagal: ' . $errorBody)->with('alert-type', 'error');
+        }
     }
     
 

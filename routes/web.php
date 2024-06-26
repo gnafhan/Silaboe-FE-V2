@@ -56,10 +56,12 @@ Route::get('/admin', [AdminController::class, 'Dashboard'])->name('dashboard.adm
 
 //laboratorium
 Route::get('admin/laboratorium', [AdminController::class, 'Laboratorium'])->name('laboratorium.admin');
-Route::get('admin/laboratorium/detail', [AdminController::class, 'LaboratoriumDetail'])->name('laboratoriumdetail.admin');
+Route::get('admin/laboratorium/{id}/detail', [AdminController::class, 'LaboratoriumDetail'])->name('laboratoriumdetail.admin');
 Route::get('admin/laboratorium/tambah', [AdminController::class, 'LaboratoriumTambah'])->name('laboratoriumtambah.admin');
 Route::post('admin/laboratorium/tambah', [AdminController::class, 'laboratoriumtambahPost'])->name('laboratoriumtambah.admin.post');
-Route::get('admin/laboratorium/Edit', [AdminController::class, 'LaboratoriumEdit'])->name('laboratoriumedit.admin');
+Route::get('admin/laboratorium/{id}/edit', [AdminController::class, 'Laboratoriumedit'])->name('laboratoriumedit.admin');
+Route::put('admin/laboratorium/{id}/update', [AdminController::class, 'laboratoriumupdate'])->name('laboratoriumeupdate.admin');
+Route::delete('admin/laboratorium/{id}', [AdminController::class, 'Laboratoriumhapus'])->name('laboratoriumhapus.admin');
 
 //JadwalLab
 Route::get('admin/jadwallab', [AdminController::class, 'JadwalLab'])->name('jadwallab.admin');
@@ -74,7 +76,6 @@ Route::get('admin/peminjamanlab/detail', [AdminController::class, 'PeminjamanLab
 Route::get('admin/peminjamanlab/archive', [AdminController::class, 'PeminjamanLabArchive'])->name('peminjamanlabarchive.admin');
 
 //Inventaris
-
 Route::get('admin/inventaris', [AdminController::class, 'Inventaris'])->name('inventaris.admin');
 Route::get('admin/inventaris/tambah', [AdminController::class, 'InventarisTambah'])->name('inventaristambah.admin');
 Route::get('admin/inventaris/edit', [AdminController::class, 'InventarisEdit'])->name('inventarisedit.admin');
