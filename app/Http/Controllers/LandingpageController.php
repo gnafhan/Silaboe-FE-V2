@@ -135,24 +135,5 @@ class LandingpageController extends Controller
             $errorBody = $response->body();
             return redirect()->back()->with('error', 'Reservation failed: ' . $errorBody);
         }
-    }
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-  
-
-
+    }       
 }
