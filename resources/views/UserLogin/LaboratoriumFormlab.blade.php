@@ -1,43 +1,6 @@
 @extends('layouts.homelayouts')
 @section('content')
-    {{-- <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Full Calendar js</title>
-        <meta name="csrf-token" content="{{ csrf_token() }}" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    </head> --}}
-
-    {{-- <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h3 class="text-center mt-5">FullCalendar js Laravel series with Career Development Lab</h3>
-                <div class="col-md-11 offset-1 mt-5 mb-5">
-
-                    <div id="calendar">
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        $(document).ready(function() {
-            $('#calendar').fullCalendar({})
-        });
-    </script> --}}
-
-    <sectio n class="lg:mx-24 md:mx-6 mx-4 bg-white flex flex-col">
+    <section class="lg:mx-16 md:mx-6 mx-4 bg-white flex flex-col">
         <div class="border-b-2 border-yellow-500 w-[100%] mb-2 mt-12"></div>
         <div class="py-4">
 
@@ -54,39 +17,23 @@
             </div>
         </div>
 
-        <body>
-            <div class="container mx-auto py-6">
-                <div class="bg-white p-6 rounded shadow-md">
-                    <div class="flex justify-between items-center mb-4">
-                        <h1 class="text-3xl font-bold text-gray-700">Form Reservasi {{ $lab['name'] }}</h1>
-                        <p class="text-gray-500">Oleh: trpl.sv</p>
-                    </div>
-                    <div class="flex flex-wrap">
-                        <div class="w-full md:w-1/3 lg:w-1/4">
-                            <div class="mb-4">
-                                <div id="calendar" class="overflow-auto max-h-96"></div>
-                            </div>
-                            <button class="bg-blue-500 text-white px-4 py-2 rounded">Riwayat Reservasi</button>
-                        </div>
-                        <div class="w-full md:w-2/3 lg:w-3/4">
-                            <div class="bg-white p-4 rounded shadow">
-                                <div id="event-list" class="text-gray-700"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js"></script>
-            <script src="https://apis.google.com/js/api.js"></script>
 
-        </body>
+        <div class="w-full md:w-1/3 lg:w-1/4">
+            <div class="mb-4">
+                <div id="calendar" class="overflow-auto max-h-96"></div>
+            </div>
+            <button
+                class="bg-[#628F8E] text-white px-4 py-2 lg:text-lg md:text-md text-sm rounded hover:scale-105 shadow-md ">Riwayat
+                Reservasi</button>
+        </div>
+
 
         <div class="bg-[#e9f8f7]  border-[#4C8F8B] border-2 rounded-lg  min-h-24   px-8 py-4 my-12">
             <div class="flex flex-col text-justify ">
                 <div class="lg:text-2xl text-md pb-4 font-semibold flex justify-start">Aturan /Syarat Pemesanan oleh
                     Pengguna</div>
                 @foreach ($syarat as $index => $item)
-                <h1 class="lg:text-xl text-md text-[#4C8F8B]">{{ $index + 1 }}. {{ $item['rule'] }}</h1>
+                    <h1 class="lg:text-xl text-md text-[#4C8F8B]">{{ $index + 1 }}. {{ $item['rule'] }}</h1>
                 @endforeach
             </div>
 
@@ -108,113 +55,122 @@
                                     <label for="email"
                                         class="block mb-2 lg:text-xl text-md font-medium text-gray-900">Email</label>
                                     <input type="email" id="email" name="email"
-                                        class="bg-gray-50 border text-sm border-[#DADADA] text-gray-900 lg:text-lg  rounded-lg  block w-full p-2 lg:p-4 dark:bg-gray-20 dark:border-[#DADADA] dark:placeholder-gray-400 dark:text-white "
+                                        class="bg-gray-50 border text-sm border-[#DADADA] text-gray-900 lg:text-lg  rounded-lg  block w-full p-2 lg:p-4  dark:border-[#DADADA] dark:placeholder-gray-400 dark:text-black"
                                         placeholder="Masukkan Nama Email Peminjam" required />
                                 </div>
                                 <div class="mb-8">
                                     <label for="email" class="block mb-2 lg:text-xl text-md font-medium text-gray-900">No
                                         Whatsap</label>
                                     <input type="text" id="wa" name="wa"
-                                        class="bg-gray-50 border text-sm border-[#DADADA] text-gray-900 lg:text-lg  rounded-lg  block w-full p-2 lg:p-4 dark:bg-gray-20 dark:border-[#DADADA] dark:placeholder-gray-400 dark:text-white "
+                                        class="bg-gray-50 border text-sm border-[#DADADA] text-gray-900 lg:text-lg  rounded-lg  block w-full p-2 lg:p-4 dark:bg-gray-20 dark:border-[#DADADA] dark:placeholder-gray-400 dark:text-black "
                                         placeholder="Masukkan No Whatsapp Peminjam" required />
                                 </div>
                                 <div class="mb-5">
-                                    <label for="email" class="block mb-2 lg:text-xl text-md font-medium text-gray-900">Foto
+                                    <label for="email"
+                                        class="block mb-2 lg:text-xl text-md font-medium text-gray-900">Foto
                                         Identitas (KTP/KTM) </label>
                                     <input type="file" name="identitas"
-                                        class="text-white bg-[#628F8E] hover:scale-105 focus:ring-4 focus:outline-none font-semibold text-lg rounded-lg mt-4 w-full sm:w-auto px-8 py-2.5 text-center  dark:hover:bg-blue-70" >
+                                        class="text-white bg-[#628F8E] hover:scale-105 focus:ring-4 focus:outline-none font-semibold text-lg rounded-lg mt-4 w-full sm:w-auto px-8 py-2.5 text-center  dark:hover:bg-blue-70">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-    
-                <div class=" lg:mx-16 lg:my-24 mx-2 my-16 bg-white rounded-xl border-[#DADADA] border-2">
-                    <div class="bg-[#628F8E] w-full px-12 py-2 rounded-t-xl border-[#DADADA] border-b-2">
-                        <div class="text-white font-medium text-xl ">Waktu dan Keterangan</div>
-                    </div>
-                    <div class="flex lg:flex-row flex-col  lg:m-8 gap-4 lg:gap-12 ">
-                        <div date-rangepicker class=" ">
-                            <div class="flex flex-col md:gap-6 lg:gap-6 gap-4 max-w-max lg:px-8 px-4 py-6">
-                                <div class="mb-5">
-                                    <label for="email" class="block mb-4 text-md lg:text-xl font-medium text-black">Tanggal
+
+                    <div class=" lg:mx-16 lg:my-24 mx-2 my-16 bg-white rounded-xl border-[#DADADA] border-2">
+                        <div class="bg-[#628F8E] w-full px-12 py-2 rounded-t-xl border-[#DADADA] border-b-2">
+                            <div class="text-white font-medium text-xl ">Waktu dan Keterangan</div>
+                        </div>
+                        <div class="flex lg:flex-row flex-col  lg:m-8 gap-4 lg:gap-12 ">
+                            <div date-rangepicker class=" ">
+                                <div class="flex flex-col md:gap-6 lg:gap-6 gap-4 max-w-max lg:px-8 px-4 py-6">
+                                    <div class="mb-5">
+                                        <label for="email"
+                                            class="block mb-4 text-md lg:text-xl font-medium text-black">Tanggal
+                                            Mulai</label>
+                                        <div class="relative gap-2">
+                                            <div
+                                                class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                    viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                                                </svg>
+                                            </div>
+                                            <input name="start" type="text" name="start_tanggal"
+                                                class="bg-gray-50 border text-center  border-[#DADADA] text-gray-900 lg:text-lg text-md rounded-lg block w-full pl-12 lg:p-4 p-2  dark:bg-gray-20 dark:border-[#DADADA] dark:placeholder-gray-400 dark:text-black "
+                                                placeholder="10/02/2024">
+                                        </div>
+                                    </div>
+                                    <div class="mb-5">
+                                        <label for="email"
+                                            class="block mb-4 lg:text-xl text-md font-medium text-black">Tanggal
+                                            Selesai</label>
+                                        <div class="relative">
+                                            <div
+                                                class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="gray-500" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                                                </svg>
+                                            </div>
+                                            <input name="end" type="text" name="end_tanggal"
+                                                class="bg-gray-50 border text-center border-[#DADADA] text-gray-900 lg:text-lg text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-12 lg:p-4 p-2  dark:bg-gray-20 dark:border-[#DADADA] dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                placeholder="12/02/2024">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:gap-6 lg:gap-8 max-w-max p-4">
+                                <div class="mb-6 ">
+                                    <label for="email" class="block mb-4 lg:text-xl text-md font-medium text-black">Jam
                                         Mulai</label>
-                                    <div class="relative gap-2">
-                                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                                <path
-                                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                                            </svg>
+                                    <div class="relative ">
+                                        <div
+                                            class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+
                                         </div>
-                                        <input name="start" type="text" name="start_tanggal"
-                                            class="bg-gray-50 border text-center  border-[#DADADA] text-gray-900 lg:text-lg text-md rounded-lg block w-full pl-12 lg:p-4 p-2  dark:bg-gray-20 dark:border-[#DADADA] dark:placeholder-gray-400 dark:text-white "
-                                            placeholder="10/02/2024">
+                                        <input type="time" id="time" name="start_time"
+                                            class="bg-gray-50 border lg:px-8 leading-none border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-4 dark:bg-gray-20 dark:border-gray-20 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-gray-400 dark:focus:border-gray-500"
+                                            min="09:00" max="18:00" value="00:00" required />
                                     </div>
                                 </div>
+
                                 <div class="mb-5">
-                                    <label for="email" class="block mb-4 lg:text-xl text-md font-medium text-black">Tanggal
+                                    <label for="email" class="block mb-4 lg:text-xl text-md font-medium text-black">Jam
                                         Selesai</label>
-                                    <div class="relative">
-                                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="gray-500" viewBox="0 0 20 20">
-                                                <path
-                                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                                            </svg>
+                                    <div class="relative ">
+                                        <div
+                                            class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+
                                         </div>
-                                        <input name="end" type="text" name="end_tanggal"
-                                            class="bg-gray-50 border text-center border-[#DADADA] text-gray-900 lg:text-lg text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-12 lg:p-4 p-2  dark:bg-gray-20 dark:border-[#DADADA] dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="12/02/2024">
+                                        <input type="time" id="time" name="end_time"
+                                            class="bg-gray-50 border lg:px-8 leading-none border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-4 dark:bg-gray-20 dark:border-gray-20 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-gray-400 dark:focus:border-gray-500"
+                                            min="09:00" max="18:00" value="00:00" required />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="flex flex-col md:gap-6 lg:gap-8 max-w-max p-4">
-                            <div class="mb-6 ">
-                                <label for="email" class="block mb-4 lg:text-xl text-md font-medium text-black">Jam
-                                    Mulai</label>
-                                <div class="relative ">
-                                    <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
-    
-                                    </div>
-                                    <input type="time" id="time" name="start_time"
-                                        class="bg-gray-50 border lg:px-8 leading-none border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-4 dark:bg-gray-20 dark:border-gray-20 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-gray-400 dark:focus:border-gray-500"
-                                        min="09:00" max="18:00" value="00:00" required />
-                                </div>
-                            </div>
-    
-                            <div class="mb-5">
-                                <label for="email" class="block mb-4 lg:text-xl text-md font-medium text-black">Jam
-                                    Selesai</label>
-                                <div class="relative ">
-                                    <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
-    
-                                    </div>
-                                    <input type="time" id="time" name="end_time"
-                                        class="bg-gray-50 border lg:px-8 leading-none border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-4 dark:bg-gray-20 dark:border-gray-20 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-gray-400 dark:focus:border-gray-500"
-                                        min="09:00" max="18:00" value="00:00" required />
-                                </div>
-                            </div>
+                        <div class="mb-5 lg:py-8 lg:px-16 px-6">
+                            <label for="keterangan"
+                                class="block mb-4 lg:text-xl text-md font-medium text-gray-900">Keterangan</label>
+                            <input type="text" id="text" name="keterangan"
+                                class="bg-gray-50 border  border-[#DADADA] text-gray-900 lg:text-xl text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full px-8 pb-32 pt-4 dark:bg-gray-20 "
+                                placeholder="Masukkan keterangan  reservasi" required />
                         </div>
                     </div>
-                    <div class="mb-5 lg:py-8 lg:px-16 px-6">
-                        <label for="keterangan"
-                            class="block mb-4 lg:text-xl text-md font-medium text-gray-900">Keterangan</label>
-                        <input type="text" id="text" name="keterangan"
-                            class="bg-gray-50 border  border-[#DADADA] text-gray-900 lg:text-xl text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full px-8 pb-32 pt-4 dark:bg-gray-20 dark:border-[#DADADA] dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Masukkan keterangan  reservasi" required />
+
+                    <div class="flex flex-row gap-4 lg:my-16  justify-end lg:mx-16">
+                        <button type="submit"
+                            class="text-white bg-[#499DBC] hover:scale-105   font-medium rounded-lg lg:text-xl md:text-md text-sm w-max-xl   lg:w-max-auto md:w-max-auto lg:px-8 lg:py-4 px-4 py-4 text-center dark:bg-[#499DBC]">Ajukan
+                            Reservasi</button>
+                        <button type="button"
+                            class="text-white bg-[#D46857] hover:scale-105 font-medium rounded-lg lg:text-xl md:text-md text-sm w-max-xl lg:w-max-auto md:w-max-auto lg:px-8 lg:py-4 px-4 py-4 text-center dark:bg-[#D46857] ">cancel</button>
                     </div>
-                </div>
-    
-                <div class="flex flex-row gap-4 lg:my-16  justify-end lg:mx-16">
-                    <button type="submit"
-                        class="text-white bg-[#499DBC] hover:scale-105   font-medium rounded-lg lg:text-xl md:text-md text-sm w-max-xl   lg:w-max-auto md:w-max-auto lg:px-8 lg:py-4 px-4 py-4 text-center dark:bg-[#499DBC]">Ajukan Reservasi</button>
-                    <button type="button"
-                        class="text-white bg-[#D46857] hover:scale-105 font-medium rounded-lg lg:text-xl md:text-md text-sm w-max-xl lg:w-max-auto md:w-max-auto lg:px-8 lg:py-4 px-4 py-4 text-center dark:bg-[#D46857] ">cancel</button>
-                </div>
             </form>
         </div>
-        </section>
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
+    </section>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
     <script src="../path/to/flowbite/dist/datepicker.js"></script> --}}
-    @endsection
+@endsection

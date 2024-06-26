@@ -73,28 +73,28 @@
 
 
             @foreach ($labs as $lab)
-            <div class="flex flex-col mt-8">
-                <a href="{{ Route('laboratoriumdetail.login', $lab['id']) }}" class="flex flex-col w-fit my-8">
-                    <div class="lg:text-3xl  text-xl font-bold   text-[#628F8E]">{{ $lab['name'] }}
-                    </div>
-                    <div class="border-b-4 border-yellow-500 w-full mt-2"></div>
-                </a>
+                <div class="flex flex-col mt-8">
+                    <a href="{{ Route('laboratoriumdetail.login', $lab['id']) }}" class="flex flex-col w-fit my-8">
+                        <div class="lg:text-3xl  text-xl font-bold   text-[#628F8E]">{{ $lab['name'] }}
+                        </div>
+                        <div class="border-b-4 border-yellow-500 w-full mt-2"></div>
+                    </a>
 
-                <div class="grid lg:grid-cols-2 lg:grid-flow-row  max-h-xl lg:gap-8">
-                    <div class=" grid lg:text-lg text-sm md:text-md text-justify ">{{ $lab['description'] }}
-                    </div>
-                    <div class="flex flex-wrap gap-8 my-8 lg:my-0 ">
-                        <img src="{{ asset('image/background.png') }}" class="h-[40%] rounded-lg grid" alt="foto lab" />
-                        <div class="flex flex-col gap-2 ">
-                            <div class="font-bold text-[#628F8E] lg:text-2xl text-xl grid mb-4 ">Support</div>
-                            <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
-                            <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
-                            <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
-                            <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
+                    <div class="grid lg:grid-cols-2 lg:grid-flow-row  max-h-xl lg:gap-8">
+                        <div class=" grid lg:text-lg text-sm md:text-md text-justify ">{{ $lab['description'] }}
+                        </div>
+                        <div class="flex flex-wrap gap-8 my-8 lg:my-0 ">
+                            <img src="{{ asset('image/background.png') }}" class="h-[40%] rounded-lg grid" alt="foto lab" />
+                            <div class="flex flex-col gap-2 ">
+                                <div class="font-bold text-[#628F8E] lg:text-2xl text-xl grid mb-4 ">Support</div>
+                                <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
+                                <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
+                                <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
+                                <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endforeach
     </section>
 @endsection
