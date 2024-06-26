@@ -19,17 +19,19 @@
 
             <h1 class="lg:text-2xl text-xl font-bold mb-2">Edit Inventaris</h1>
 
-            <form>
+            <form action="{{ route('inventarisupdate.admin', $inventaris['id']) }}" method="POST">
+                @csrf
+                @method('put')
                 <div class="mb-4">
                     <label class="block text-gray-700 text-lg font-bold mb-2" for="nama-laboratorium">Nama
                         Inventaris</label>
-                    <input
+                    <input name="item_name" value="{{ $inventaris['item_name'] }}"
                         class="shadow-sm appearance-none border rounded-xl w-full lg:py-4 py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-[rgba(98,143,142,0.2)]"
                         id="nama-laboratorium" type="text" placeholder="ex: Laboratorium HU 105">
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700 text-lg font-bold mb-2" for="nama-laboratorium">No ID</label>
-                    <input
+                    <input name="no_item" value="{{ $inventaris['no_item'] }}"
                         class="shadow-sm appearance-none border rounded-xl w-full lg:py-4 py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-[rgba(98,143,142,0.2)]"
                         id="nama-laboratorium" type="text" placeholder="ex: Laboratorium HU 105">
                 </div>
@@ -38,12 +40,12 @@
                     <div class="w-full md:w-2/5 lg:w-1/5 px-2 mb-4 md:mb-0">
                         <label class="block text-gray-700 text-lg font-bold mb-2" for="kondisi">Kondisi</label>
                         <div class="relative">
-                            <select
+                            <select name="condition"
                                 class="block appearance-none w-full shadow border rounded-xl lg:py-4 py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-[rgba(98,143,142,0.2)]"
                                 id="kondisi">
                                 <option value="" disabled selected>Pilih kondisi</option>
-                                <option value="baik">Baik</option>
-                                <option value="tidak_baik">Tidak Baik</option>
+                                <option value="good" {{ ($inventaris['condition']=='good' ? 'selected' : '') }}>Baik</option>
+                                <option value="bad" {{ ($inventaris['condition']=='bad' ? 'selected' : '') }}>Tidak Baik</option>
                             </select>
                             <div
                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -57,15 +59,15 @@
 
                 <div class="mb-4">
                     <label class="block text-gray-700 text-lg font-bold mb-2" for="penanggung-jawab">Informasi</label>
-                    <input
+                    <input name="information" value="{{  $inventaris['information'] ?? '' }}""
                         class="shadow appearance-none border rounded-xl w-full lg:py-4 py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-[rgba(98,143,142,0.2)]"
-                        id="penanggung-jawab" type="text" placeholder="ex: Laboratorium HU 105">
+                        id="penanggung-jawab" type="text" placeholder="ex: Meja untuk belajar">
                 </div>
 
 
                 <div class="flex justify-start gap-4 mt-12">
                     <a href="{{ Route('inventaris.admin') }}" type="button"
-                        class=" hover:scale-105 bg-[#D46857] text-white py-2 px-6 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">Delete</a>
+                        class="hover:scale-105 bg-[#D46857] text-white py-2 px-6 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">Cancel</a>
                     <button type="submit"
                         class="hover:scale-105 bg-[#4C8F8B] text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">Submit</button>
                 </div>

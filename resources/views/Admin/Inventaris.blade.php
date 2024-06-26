@@ -14,6 +14,7 @@
             </div>
         </div>
     </header>
+    {{-- {{ dd($inventaris) }} --}}
     <div class="bg-white">
         <div class="flex-1 lg:mx-20 mx-12  py-8 flex-col flex lg:gap-4 md:gap-4 gap-2">
 
@@ -51,121 +52,74 @@
                 <table class="min-w-full bg-[rgba(98,143,142,0.2)] rounded-xl">
                     <thead>
                         <tr class="bg-[rgba(98,143,142,0.2)]">
-                            <th class="px-4 py-2 text-lg font-bold">Jenis Inventaris</th>
-                            <th class="px-4 py-2 text-lg font-bold">No Id</th>
-                            <th class="px-4 py-2 text-lg font-bold border-b-2 border-gray-400" colspan="2">Kondisi</th>
-                            <th class="px-4 py-2 text-lg font-bold">Informasi</th>
-                            <th class="px-4 py-2 text-lg font-bold">Aksi</th>
+                            <th class="px-2 py-2 text-lg font-bold">Jenis Inventaris</th>
+                            <th class="px-2 py-2 text-lg font-bold">No Id</th>
+                            <th class="px-2 py-2 text-lg font-bold border-b-2 border-gray-400" colspan="2">Kondisi</th>
+                            <th class="px-2 py-2 text-lg font-bold">Informasi</th>
+                            <th class="px-2 py-2 text-lg font-bold">Aksi</th>
                         </tr>
                         <tr class="bg-[rgba(98,143,142,0.2)]">
-                            <th class="px-4 py-2"></th>
-                            <th class="px-4 py-2"></th>
-                            <th class="px-4 py-2 text-lg font-bold">Baik</th>
-                            <th class="px-4 py-2 text-lg font-bold">Tidak Baik</th>
-                            <th class="px-4 py-2"></th>
-                            <th class="px-4 py-2"></th>
+                            <th class="px-2 py-2"></th>
+                            <th class="px-2 py-2"></th>
+                            <th class="px-2 py-2 text-lg font-bold">Baik</th>
+                            <th class="px-2 py-2 text-lg font-bold">Tidak Baik</th>
+                            <th class="px-2 py-2"></th>
+                            <th class="px-2 py-2"></th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($inventaris as $item)    
                         <tr>
-                            <td class="border px-4 text-md py-4">Meja PC Server</td>
-                            <td class="border px-4 text-md py-4">MPC001</td>
-                            <td class="border px-4 py-4 flex justify-center"><svg width="18" height="14"
+                            <td class="border px-2 text-md py-4">{{ $item['item_name'] }}</td>
+                            <td class="border px-2 text-md py-4">{{ $item['no_item'] }}</td>
+                            <td class="border px-2 py-2 flex justify-center">
+                                @if ($item['condition'] == "good")   
+                                <svg width="18" height="14"
                                     viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M6.29448 13.2791L0 6.98466L1.57362 5.41104L6.29448 10.1319L16.4264 0L18 1.57362L6.29448 13.2791Z"
                                         fill="#121212" />
                                 </svg>
+                                @endif
                             </td>
-                            <td class="border px-4 py-2"></td>
-                            <td class="border text-md px-4 py-4">Laboratorium HU106</td>
-                            <td class="border px-4 py-2"><a href="{{ Route('inventarisedit.admin') }}"
-                                    class="bg-[#4C8F8B] text-white px-8 py-1 rounded-2xl text-md hover:bg-gray-700">Edit</button>
+                            <td class="border px-2 py-2">
+                                <div class="w-full flex justify-center">
+                                    @if ($item['condition'] == "bad")   
+                                    <svg width="18" height="14"
+                                        viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M6.29448 13.2791L0 6.98466L1.57362 5.41104L6.29448 10.1319L16.4264 0L18 1.57362L6.29448 13.2791Z"
+                                            fill="#121212" />
+                                    </svg>
+                                    @endif
+                                </div>
+                            </td>
+                            <td class="border text-md px-2 py-4">{{ $item['information'] ?? '' }}</td>
+                            <td class="border px-2 py-2 flex flex-wrap gap-2 justify-center">
+                                <a href="{{ Route('inventarisedit.admin', $item['id']) }}"
+                                    class="bg-[#4C8F8B] text-white px-8 py-1 rounded-2xl text-md hover:bg-gray-700">Edit
+                                </a>
+                                <form action="{{ Route('inventarishapus.admin', $item['id']) }}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="bg-[#D46857] text-white px-8 py-1 rounded-2xl text-md hover:bg-gray-700">Hapus</button>
+                                </form>
                             </td>
                         </tr>
-                        <tr>
-                            <td class="border px-4 text-md py-4">Meja PC Server</td>
-                            <td class="border px-4 text-md py-4">MPC001</td>
-                            <td class="border px-4 py-4 flex justify-center"><svg width="18" height="14"
-                                    viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M6.29448 13.2791L0 6.98466L1.57362 5.41104L6.29448 10.1319L16.4264 0L18 1.57362L6.29448 13.2791Z"
-                                        fill="#121212" />
-                                </svg>
-                            </td>
-                            <td class="border px-4 py-2"></td>
-                            <td class="border text-md px-4 py-4">Laboratorium HU106</td>
-                            <td class="border px-4 py-2"><a href="{{ Route('inventarisedit.admin') }}"
-                                    class="bg-[#4C8F8B] text-white px-8 py-1 rounded-2xl text-md hover:bg-gray-700">Edit</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border px-4 text-md py-4">Meja PC Server</td>
-                            <td class="border px-4 text-md py-4">MPC001</td>
-                            <td class="border px-4 py-4 flex justify-center"><svg width="18" height="14"
-                                    viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M6.29448 13.2791L0 6.98466L1.57362 5.41104L6.29448 10.1319L16.4264 0L18 1.57362L6.29448 13.2791Z"
-                                        fill="#121212" />
-                                </svg>
-                            </td>
-                            <td class="border px-4 py-2"></td>
-                            <td class="border text-md px-4 py-4">Laboratorium HU106</td>
-                            <td class="border px-4 py-2"><a href="{{ Route('inventarisedit.admin') }}"
-                                    class="bg-[#4C8F8B] text-white px-8 py-1 rounded-2xl text-md hover:bg-gray-700">Edit</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border px-4 text-md py-4">Meja PC Server</td>
-                            <td class="border px-4 text-md py-4">MPC001</td>
-                            <td class="border px-4 py-4 flex justify-center"><svg width="18" height="14"
-                                    viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M6.29448 13.2791L0 6.98466L1.57362 5.41104L6.29448 10.1319L16.4264 0L18 1.57362L6.29448 13.2791Z"
-                                        fill="#121212" />
-                                </svg>
-                            </td>
-                            <td class="border px-4 py-2"></td>
-                            <td class="border text-md px-4 py-4">Laboratorium HU106</td>
-                            <td class="border px-4 py-2"><a href="{{ Route('inventarisedit.admin') }}"
-                                    class="bg-[#4C8F8B] text-white px-8 py-1 rounded-2xl text-md hover:bg-gray-700">Edit</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border px-4 text-md py-4">Meja PC Server</td>
-                            <td class="border px-4 text-md py-4">MPC001</td>
-                            <td class="border px-4 py-4 flex justify-center"><svg width="18" height="14"
-                                    viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M6.29448 13.2791L0 6.98466L1.57362 5.41104L6.29448 10.1319L16.4264 0L18 1.57362L6.29448 13.2791Z"
-                                        fill="#121212" />
-                                </svg>
-                            </td>
-                            <td class="border px-4 py-2"></td>
-                            <td class="border text-md px-4 py-4">Laboratorium HU106</td>
-                            <td class="border px-4 py-2"><a href="{{ Route('inventarisedit.admin') }}"
-                                    class="bg-[#4C8F8B] text-white px-8 py-1 rounded-2xl text-md hover:bg-gray-700">Edit</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border px-4 text-md py-4">Meja PC Server</td>
-                            <td class="border px-4 text-md py-4">MPC001</td>
-                            <td class="border px-4 py-4 flex justify-center"><svg width="18" height="14"
-                                    viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M6.29448 13.2791L0 6.98466L1.57362 5.41104L6.29448 10.1319L16.4264 0L18 1.57362L6.29448 13.2791Z"
-                                        fill="#121212" />
-                                </svg>
-                            </td>
-                            <td class="border px-4 py-2"></td>
-                            <td class="border text-md px-4 py-4">Laboratorium HU106</td>
-                            <td class="border px-4 py-2"><a href="{{ Route('inventarisedit.admin') }}"
-                                    class="bg-[#4C8F8B] text-white px-8 py-1 rounded-2xl text-md hover:bg-gray-700">Edit</button>
-                            </td>
-                        </tr>>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    @if (Session::has('message'))
+    <script>
+        swal({
+            title: "{{ Session::get('alert-type') == 'success' ? 'Success' : 'Error' }}",
+            text: "{{ Session::get('message') }}",
+            icon: "{{ Session::get('alert-type') == 'success' ? 'success' : 'error' }}",
+            button: "Ok",
+        }); 
+    </script>
+    @endif
 @endsection
