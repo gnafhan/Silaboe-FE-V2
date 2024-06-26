@@ -35,11 +35,11 @@ class AuthController extends Controller
                     session(['user' => $user]);
                     return redirect()->route('login')->with('message', 'Sukses masuk')->with('alert-type', 'success');
                 } else {
-                    return back()->with('message', 'Token atau data pengguna tidak ditemukan dalam respons')->with('alert-type', 'error');
+                    return back()->with('message','Token atau data pengguna tidak ditemukan dalam respons')->with('alert-type', 'error');
                 }
             } else {
                 $errorMessage = $response->json('message') ?? 'Kesalahan tidak diketahui';
-                return back()->with('message', 'Kesalahan dalam mengambil data: ' . $errorMessage)->with('alert-type', 'error');
+                return back()->with('message', $errorMessage)->with('alert-type', 'error');
             }
         } catch (\Exception $e) {
             return back()->with('message', 'Email atau passowrd yang Anda masukkan salah')->with('alert-type', 'error');
