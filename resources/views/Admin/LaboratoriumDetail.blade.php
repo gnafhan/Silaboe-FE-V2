@@ -16,21 +16,11 @@
     </header>
     <div class="bg-[rgba(237,245,245,1)]">
         <section class="flex-1 lg:mx-20 mx-12 my-2 flex-col flex lg:gap-4 md:gap-4 gap-16">
-
-
-
-
-
-
-
             <div class="flex flex-col mt-12 ">
-                <div class="font-bold text-xl lg:text-2xl flex mb-4">Laboratorium HU104</div>
+                <div class="font-bold text-xl lg:text-2xl flex mb-4">{{ $laboratoriums ['name'] }}</div>
                 <img src="{{ asset('image/fotolab.png') }}" class="h-[50%] rounded-xl grid" alt="foto lab" />
-                <div class="text-sm lg:text-xl text-black text-justify lg:py-12 py-6">{{ $laboratoriums ['description'] }}
+                    <div class="text-sm lg:text-xl text-black text-justify lg:py-12 py-6">{{ $laboratoriums ['description'] }}
                 </div>
-                {{-- 
-                Bagian Rendering  --}}
-
                 <div class="lg:text-xl text-lg font-bold text-[#628F8E] mb-4">Support : </div>
                 <div class="flex flex-row gap-4 mb-8 ">
                     <button
@@ -60,7 +50,7 @@
                     </a>
 
                     <div class="flex flex-row gap-4 w-full md:w-auto">
-                        <a href="{{ Route('laboratoriumedit.admin') }}"
+                        <a href="{{ Route('laboratoriumedit.admin', $laboratoriums ['id']) }}"
                             class="hover:scale-105 flex flex-row gap-3 items-center bg-[#499DBC] px-4 py-2 hover:bg-[#608B8A] justify-center w-full md:w-auto rounded-md">
                             <button class="font-medium text-md lg:text-lg text-white flex items-center">
                                 Edit Lab
@@ -73,9 +63,11 @@
                             </svg>
                         </a>
 
-                        <a href="#"
+                        <form action="{{ route('laboratoriumhapus.admin', $laboratoriums ['id']) }}" method="POST"
                             class="shadow-md flex flex-row gap-2 items-center bg-[#D46857] px-4 py-2 rounded-md hover:bg-[#608B8A] justify-center w-full md:w-auto">
-                            <button class="font-medium text-md lg:text-lg text-white flex items-center">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="font-medium text-md lg:text-lg text-white flex items-center">
                                 Hapus Lab
                             </button>
                             <svg width="15" height="18" viewBox="0 0 15 18" fill="none"
@@ -84,7 +76,7 @@
                                     d="M1.15385 1.2C0.847827 1.2 0.554342 1.32643 0.337954 1.55147C0.121566 1.77652 0 2.08174 0 2.4V3.6C0 3.91826 0.121566 4.22348 0.337954 4.44853C0.554342 4.67357 0.847827 4.8 1.15385 4.8H1.73077V15.6C1.73077 16.2365 1.9739 16.847 2.40668 17.2971C2.83945 17.7471 3.42642 18 4.03846 18H10.9615C11.5736 18 12.1605 17.7471 12.5933 17.2971C13.0261 16.847 13.2692 16.2365 13.2692 15.6V4.8H13.8462C14.1522 4.8 14.4457 4.67357 14.662 4.44853C14.8784 4.22348 15 3.91826 15 3.6V2.4C15 2.08174 14.8784 1.77652 14.662 1.55147C14.4457 1.32643 14.1522 1.2 13.8462 1.2H9.80769C9.80769 0.88174 9.68613 0.576516 9.46974 0.351472C9.25335 0.126428 8.95987 0 8.65385 0L6.34615 0C6.04013 0 5.74665 0.126428 5.53026 0.351472C5.31387 0.576516 5.19231 0.88174 5.19231 1.2H1.15385ZM4.61538 6C4.76839 6 4.91514 6.06321 5.02333 6.17574C5.13152 6.28826 5.19231 6.44087 5.19231 6.6V15C5.19231 15.1591 5.13152 15.3117 5.02333 15.4243C4.91514 15.5368 4.76839 15.6 4.61538 15.6C4.46238 15.6 4.31563 15.5368 4.20744 15.4243C4.09924 15.3117 4.03846 15.1591 4.03846 15V6.6C4.03846 6.44087 4.09924 6.28826 4.20744 6.17574C4.31563 6.06321 4.46238 6 4.61538 6ZM7.5 6C7.65301 6 7.79975 6.06321 7.90795 6.17574C8.01614 6.28826 8.07692 6.44087 8.07692 6.6V15C8.07692 15.1591 8.01614 15.3117 7.90795 15.4243C7.79975 15.5368 7.65301 15.6 7.5 15.6C7.34699 15.6 7.20025 15.5368 7.09205 15.4243C6.98386 15.3117 6.92308 15.1591 6.92308 15V6.6C6.92308 6.44087 6.98386 6.28826 7.09205 6.17574C7.20025 6.06321 7.34699 6 7.5 6ZM10.9615 6.6V15C10.9615 15.1591 10.9008 15.3117 10.7926 15.4243C10.6844 15.5368 10.5376 15.6 10.3846 15.6C10.2316 15.6 10.0849 15.5368 9.97667 15.4243C9.86847 15.3117 9.80769 15.1591 9.80769 15V6.6C9.80769 6.44087 9.86847 6.28826 9.97667 6.17574C10.0849 6.06321 10.2316 6 10.3846 6C10.5376 6 10.6844 6.06321 10.7926 6.17574C10.9008 6.28826 10.9615 6.44087 10.9615 6.6Z"
                                     fill="#FCFCFC" />
                             </svg>
-                        </a>
+                        </form>
                     </div>
                 </div>
 
