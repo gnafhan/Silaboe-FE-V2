@@ -2,7 +2,7 @@
     use Illuminate\Support\Facades\Request;
 @endphp
 
-<nav class="bg-white border-gray-200 dark:bg-[#4C8F8B]">
+<nav class="bg-[#4C8F8B] border-gray-200 dark:bg-[#4C8F8B]">
     <div class="max-w-screen-2.5xl flex flex-wrap items-center justify-between mx-auto p-4 px-8">
         <a href="{{ route('homepage.login') }}" class="flex items-center space-x-2 rtl:space-x-reverse flex-row">
             <img src="{{ asset('image/logo.png') }}" class="h-10 lg:h-24" alt="Flowbite Logo" />
@@ -18,7 +18,7 @@
         <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <div class="flex flex-row gap-4">
                 <a href={{ route('login') }} type="button"
-                    class=" bg-white px-6  py-1.5 rounded-md items-center justify-center text-black">
+                    class=" bg-[#4C8F8B] text-white px-6 py-1.5 rounded-md items-center justify-center">
                     Login
                 </a>
 
@@ -37,7 +37,7 @@
             </div>
 
             <button data-collapse-toggle="navbar-user" type="button"
-                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400  "
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 text-gray-400  "
                 aria-controls="navbar-user" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -51,7 +51,7 @@
 
         <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
             <ul
-                class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white bg-[#4C8F8B] ">
+                class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-[#4C8F8B] ">
                 <li>
                     <a href="{{ route('about.login') }}"
                         class=" block py-2 px-3 rounded md:p-0 {{ Request::routeIs('about.login') ? 'text-yellow-500 ' : 'text-lg md:text-md  md:hover:bg-transparent md:hover:text-yellow-500 text-white md:dark:hover:text-yellow-500 dark:hover:text-yellow-500  md:dark:hover:bg-transparent ' }}"
