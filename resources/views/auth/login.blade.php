@@ -15,7 +15,7 @@
 
 <body class="bg-[#294A4A] relative overflow-hidden min-h-screen">
     <!-- Top ornament section -->
-    <div class="fixed top-0 left-0 w-full h-20 md:h-20 lg:10 bg-cover bg-center"
+    <div class="fixed top-0 left-0 w-full h-10 md:h-20 lg:h-14 bg-cover bg-center"
         style="background-image: url('{{ asset('image/component.png') }}'); z-index: 10;"></div>
 
     <div
@@ -102,7 +102,7 @@
     </div>
 
     <!-- Bottom ornament section -->
-    <div class="fixed bottom-0 left-0 w-full h-20 md:h-20 lg:10 bg-cover bg-center"
+    <div class="fixed bottom-0 left-0 w-full h-10 md:h-20 lg:h-14 bg-cover bg-center"
         style="background-image: url('{{ asset('image/component.png') }}'); z-index: 1;"></div>
 
     <script>
