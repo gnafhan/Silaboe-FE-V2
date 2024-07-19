@@ -1,6 +1,6 @@
 @extends('layouts.homelayouts')
 @section('content')
-    <section class="lg:mx-24 mx-16 bg-white flex flex-col">
+    <section class="lg:mx-24 mx- bg-white flex flex-col">
         <div class="flex flex-wrap mt-10 items-center space-x-2 lg:space-x-4">
             <button class="lg:text-lg text-md">Beranda</button>
             <svg class="w-4 h-4 text-gray-800 dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
