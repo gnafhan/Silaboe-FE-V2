@@ -15,7 +15,7 @@
         </div>
     </header>
 
-    <main class="flex-1 lg:mx-20 mx-12  md:mx-16  my-8 ">
+    <main class="flex-1 lg:mx-12 mx-12  md:mx-16  my-8 ">
         <h2 class="text-2xl font-bold mb-6">Tambah Laboratorium</h2>
         <form action="{{ route('laboratoriumeupdate.admin', $laboratorium['id']) }}" method="POST">
             @csrf

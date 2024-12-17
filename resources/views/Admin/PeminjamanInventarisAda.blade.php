@@ -15,7 +15,7 @@
         </div>
     </header>
 
-    <section class="flex-1 lg:mx-20 mx-6 my-2 flex-col flex lg:gap-4 md:gap-4 gap-4">
+    <section class="flex-1 lg:mx-12 mx-6 my-2 flex-col flex lg:gap-4 md:gap-4 gap-4">
         <div class="w-full mb-2">
             <h1 class="text-xl md:text-2xl font-bold my-6">Persetujuan Peminjaman Inventaris</h1>
 

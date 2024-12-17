@@ -16,7 +16,7 @@
     </header>
     <div class="bg-[rgba(237,245,245,1)] ">
         <!-- Main Content -->
-        <div class="flex-1 lg:mx-8   mx-12  py-8 flex-col flex lg:gap-4 md:gap-4 gap-16">
+        <div class="flex-1 lg:mx-8  mx-12  py-8 flex-col flex lg:gap-4 md:gap-4 gap-16">
             <!-- Navbar -->
             <div
                 class="inline-flex flex-col md:flex-row lg:inline-flex space-y-2 md:space-y-0 md:space-x-4 items-center justify-between h-16 p-4 text-black">

@@ -15,7 +15,7 @@
         </div>
     </header>
     <div class="bg-whihte ">
-        <div class="flex-1 lg:mx-20 mx-12  py-8 flex-col flex lg:gap-4 md:gap-4 gap-2">
+        <div class="flex-1 lg:mx-12 mx-12  py-8 flex-col flex lg:gap-4 md:gap-4 gap-2">
 
 
             <div class="mb-6">
