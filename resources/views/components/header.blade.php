@@ -7,7 +7,6 @@
         <a href="{{ route('homepage.login') }}" class="flex items-center space-x-2 rtl:space-x-reverse flex-row">
             <img src="{{ asset('image/logo.png') }}" class="h-10 lg:h-24" alt="Flowbite Logo" />
             <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">
-            <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">
                 <div class="flex flex-col  text-sm md:text-md lg:text-lg font-normal">
                     <div class="">Sistem Informasi</div>
                     <div class="">Teknologi Rekayasa Perangkat Lunak</div>
