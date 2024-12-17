@@ -14,11 +14,10 @@ Route::post('/do-login', [AuthController::class, 'doLogin'])->name('do-login');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 
 
-
 //Landing Page 
 //
 //POV User Non Login
-Route::get('landingpage', [LandingpageumumController::class, 'index'])->name('homepage.nonlogin');
+Route::get('/', [LandingpageumumController::class, 'index'])->name('homepage.nonlogin');
 Route::get('landingpage/about', [LandingpageumumController::class, 'about'])->name('about.nonlogin');
 Route::get('landingpage/datasoftware', [LandingpageumumController::class, 'datasoftware'])->name('datasoftware.nonlogin');
 Route::get('landingpage/laboratorium', [LandingpageumumController::class, 'laboratorium'])->name('laboratorium.nonlogin');
@@ -32,11 +31,12 @@ Route::get('login/landingpage/datasoftware', [LandingpageController::class, 'dat
 
 
 //Laboretorium 
-    Route::get('login/landingpage/laboratorium', [LandingpageController::class, 'laboratorium'])->name('laboratorium.login');
-    Route::get('login/landingpage/laboratorium/detail', [LandingpageController::class, 'laboratoriumdetail'])->name('laboratoriumdetail.login');
-    Route::get('login/landingpage/laboratorium/reservasi', [LandingpageController::class, 'reservasilaboratorium'])->name('reservasilab.login');
-    Route::get('login/landingpage/laboratorium/reservasi/status', [LandingpageController::class, 'reservasilaboratoriumstatus'])->name('statusreservasilab.login');
-    Route::get('login/landingpage/laboratorium/formlab', [LandingpageController::class, 'laboratoriumformlab'])->name('formlab.login');
+Route::get('login/landingpage/laboratorium', [LandingpageController::class, 'laboratorium'])->name('laboratorium.login');
+Route::get('login/landingpage/laboratorium/{id}/detail', [LandingpageController::class, 'laboratoriumdetail'])->name('laboratoriumdetail.login');
+// Route::get('login/landingpage/laboratorium/reservasi', [LandingpageController::class, 'reservasilaboratorium'])->name('reservasilab.login');
+Route::get('login/landingpage/laboratorium/reservasi/{id}/status', [LandingpageController::class, 'reservasilaboratoriumstatus'])->name('statusreservasilab.login');
+Route::get('login/landingpage/laboratorium/{id}/formlab', [LandingpageController::class, 'laboratoriumformlab'])->name('formlab.login');
+Route::post('login/landingpage/laboratorium/{id}/formlab', [LandingpageController::class, 'postFormLab'])->name('formlab.login.post');
 
 
 //Reservasi Login 
@@ -56,10 +56,12 @@ Route::get('/admin', [AdminController::class, 'Dashboard'])->name('dashboard.adm
 
 //laboratorium
 Route::get('admin/laboratorium', [AdminController::class, 'Laboratorium'])->name('laboratorium.admin');
-Route::get('admin/laboratorium/detail', [AdminController::class, 'LaboratoriumDetail'])->name('laboratoriumdetail.admin');
+Route::get('admin/laboratorium/{id}/detail', [AdminController::class, 'LaboratoriumDetail'])->name('laboratoriumdetail.admin');
 Route::get('admin/laboratorium/tambah', [AdminController::class, 'LaboratoriumTambah'])->name('laboratoriumtambah.admin');
 Route::post('admin/laboratorium/tambah', [AdminController::class, 'laboratoriumtambahPost'])->name('laboratoriumtambah.admin.post');
-Route::get('admin/laboratorium/Edit', [AdminController::class, 'LaboratoriumEdit'])->name('laboratoriumedit.admin');
+Route::get('admin/laboratorium/{id}/edit', [AdminController::class, 'Laboratoriumedit'])->name('laboratoriumedit.admin');
+Route::put('admin/laboratorium/{id}/update', [AdminController::class, 'laboratoriumupdate'])->name('laboratoriumeupdate.admin');
+Route::delete('admin/laboratorium/{id}', [AdminController::class, 'Laboratoriumhapus'])->name('laboratoriumhapus.admin');
 
 //JadwalLab
 Route::get('admin/jadwallab', [AdminController::class, 'JadwalLab'])->name('jadwallab.admin');
@@ -74,13 +76,14 @@ Route::get('admin/peminjamanlab/detail', [AdminController::class, 'PeminjamanLab
 Route::get('admin/peminjamanlab/archive', [AdminController::class, 'PeminjamanLabArchive'])->name('peminjamanlabarchive.admin');
 
 //Inventaris
-
 Route::get('admin/inventaris', [AdminController::class, 'Inventaris'])->name('inventaris.admin');
 Route::get('admin/inventaris/tambah', [AdminController::class, 'InventarisTambah'])->name('inventaristambah.admin');
-Route::get('admin/inventaris/edit', [AdminController::class, 'InventarisEdit'])->name('inventarisedit.admin');
+Route::post('admin/inventaris/tambah', [AdminController::class, 'InventarisTambahPost'])->name('inventaristambah.admin.post');
+Route::get('admin/inventaris/{id}/edit', [AdminController::class, 'InventarisEdit'])->name('inventarisedit.admin');
+Route::put('admin/inventaris/{id}/update', [AdminController::class, 'Inventarisupdate'])->name('inventarisupdate.admin');
+Route::delete('admin/inventaris/{id}', [AdminController::class, 'Inventarishapus'])->name('inventarishapus.admin');
 
 //Peminjaman Inventaris
-
 Route::get('admin/peminjamaninvenatris/tidakAda', [AdminController::class, 'PeminjamanInventarisTidakAda'])->name('peminjamaninvenatristidakada.admin');
 Route::get('admin/peminjamaninvenatris/ada', [AdminController::class, 'PeminjamanInventarisAda'])->name('peminjamaninvenatrisada.admin');
 Route::get('admin/peminjamaninvenatris/detail', [AdminController::class, 'PeminjamanInventarisDetail'])->name('peminjamaninvenatrisdetail.admin ');

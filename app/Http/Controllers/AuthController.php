@@ -17,7 +17,10 @@ class AuthController extends Controller
     public function doLogin(Request $request)
     {
         try {
-            $response = Http::post(env('API_URL') . '/login', [
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
+            ])->post(env('API_URL') . '/login', [
                 'email' => $request->email,
                 'password' => $request->password,
             ]);
@@ -25,16 +28,18 @@ class AuthController extends Controller
             if ($response->successful()) {
                 $content = $response->json();
                 $token = $content['token'] ?? null;
+                $user = $content['data'];
 
                 if ($token) {
                     session(['api_token' => $token]);
+                    session(['user' => $user]);
                     return redirect()->route('login')->with('message', 'Sukses masuk')->with('alert-type', 'success');
                 } else {
-                    return back()->with('message', 'Token atau data pengguna tidak ditemukan dalam respons')->with('alert-type', 'error');
+                    return back()->with('message','Token atau data pengguna tidak ditemukan dalam respons')->with('alert-type', 'error');
                 }
             } else {
                 $errorMessage = $response->json('message') ?? 'Kesalahan tidak diketahui';
-                return back()->with('message', 'Kesalahan dalam mengambil data: ' . $errorMessage)->with('alert-type', 'error');
+                return back()->with('message', $errorMessage)->with('alert-type', 'error');
             }
         } catch (\Exception $e) {
             return back()->with('message', 'Email atau passowrd yang Anda masukkan salah')->with('alert-type', 'error');

@@ -14,7 +14,7 @@
             </div>
         </div>
     </header>
-    <main class="flex-1 lg:mx-20 mx-12  md:mx-16  my-8 ">
+    <main class="flex-1 lg:mx-12 mx-12  md:mx-16  my-8 ">
         <h2 class="text-2xl font-bold mb-6">Tambah Laboratorium</h2>
         <form action="{{ route('laboratoriumtambah.admin.post') }}" method="POST">
             @csrf
@@ -32,12 +32,12 @@
                     class="w-full mb-2 p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#628F8E] bg-[rgba(98,143,142,0.2)]"></textarea>
             </div>
             <div class="mb-12">
-                <label for="foto-laboratorium" class="block text-black font-medium mb-2 text-lg">Foto
-                    Laboratorium</label>
-                <input type="file" id="foto-laboratorium"
-                    class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#628F8E] bg-[rgba(98,143,142,0.2)]">
+                <label for="foto-laboratorium" class="block text-black font-medium mb-2 text-lg">Tipe</label>
+                <select name="type" id="type" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#628F8E] bg-[rgba(98,143,142,0.2)]">
+                    <option value="gudang">Gudang</option>
+                    <option value="laboratorium">Laboratorium</option>
+                </select>                
             </div>
-
 
             <div class="flex justify-start gap-4">
                 <a href="{{ Route('laboratorium.admin') }}" type="button"

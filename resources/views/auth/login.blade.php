@@ -15,7 +15,7 @@
 
 <body class="bg-[#294A4A] relative overflow-hidden min-h-screen">
     <!-- Top ornament section -->
-    <div class="fixed top-0 left-0 w-full h-20 md:h-20 lg:10 bg-cover bg-center"
+    <div class="fixed top-0 left-0 w-full h-10 md:h-20 lg:h-14 bg-cover bg-center"
         style="background-image: url('{{ asset('image/component.png') }}'); z-index: 10;"></div>
 
     <div
@@ -59,11 +59,8 @@
                 </div>
                 <small id="passwordError" class="text-red-500 hidden mt-0 ">Wajib diisi</small>
 
-                <div class="flex justify-between w-full py-4">
-                    <div class="mr-24">
-                        <input type="checkbox" name="ch" id="ch" class="mr-2" />
-                        <span class="text-md text-gray-400">Remember Me</span>
-                    </div>
+                <div class="flex justify-end w-full py-4">
+
                     <button type="button" class="text-md text-gray-400">Lupa password?</button>
                 </div>
                 <button type="button" id="loginButton"
@@ -74,6 +71,8 @@
                 </div>
             </form>
 
+            {{-- {{ dd(Session::get('user')) }} --}}
+
             @if (Session::has('message'))
                 <script>
                     swal({
@@ -83,9 +82,18 @@
                         button: "Ok",
                     }).then((value) => {
                         if ("{{ Session::get('alert-type') }}" == 'success') {
-                            setTimeout(() => {
-                                window.location.href = "{{ route('dashboard.admin') }}";
-                            }, 1000); // Delay 1 second before redirecting
+                            @if (Session::has('user'))
+                                @php
+                                    $user = Session::get('user');
+                                @endphp
+                                if ("{{ $user['role'] }}" == 'admin') {
+                                    window.location.href = "{{ route('dashboard.admin') }}";
+                                } else if ("{{ $user['role'] }}" == 'umum') {
+                                    window.location.href = "{{ route('homepage.login') }}";
+                                } else if ("{{ $user['role'] }}" == 'kaleb') {
+                                    window.location.href = "{{ route('dashboard.kaleb') }}";
+                                }
+                            @endif
                         }
                     });
                 </script>
@@ -94,7 +102,7 @@
     </div>
 
     <!-- Bottom ornament section -->
-    <div class="fixed bottom-0 left-0 w-full h-20 md:h-20 lg:10 bg-cover bg-center"
+    <div class="fixed bottom-0 left-0 w-full h-10 md:h-20 lg:h-14 bg-cover bg-center"
         style="background-image: url('{{ asset('image/component.png') }}'); z-index: 1;"></div>
 
     <script>

@@ -117,12 +117,12 @@
                         <h1 class="text-xl font-bold py-4 px-2 border-b-2">Semua </h1>
                         <ul>
                             <li class="flex justify-between items-center mb-2 p-2 text-md">
-                                <span>{{ $jadwal['email'] }}</span>
+                                <span>{{ $jadwal['email'] ?? "-" }}</span>
                                 <span
-                                    class="bg-[#499DBC] text-white px-5 py-2 rounded-2xl">{{ $jadwal['is_approved'] ? 'Approved' : 'Waiting' }}</span>
+                                    class="bg-[#499DBC] text-white px-5 py-2 rounded-2xl">{{ isset($jadwal['is_approved']) ? ($jadwal['is_approved'] ? 'Approved' : 'Waiting') : '-' }}</span>
                             </li>
                             <li class="flex justify-between items-center mb-2 p-2 text-md">
-                                <span>{{ $jadwal['email'] }}</span>
+                                <span>{{ $jadwal['email'] ?? "-" }}</span>
                                 <span class="bg-[#F5CD51] text-white px-5 py-1 rounded-2xl">Waiting</span>
                             </li>
                             <li class="flex justify-between items-center mb-2 p-2 text-md">
@@ -140,9 +140,9 @@
                         <ul>
                             <ul>
                                 <li class="flex justify-between items-center mb-2 p-2 text-md">
-                                    <span>{{ $jadwal['email'] }}</span>
+                                    <span>{{ $jadwal['email'] ?? "-" }}</span>
                                     <span
-                                        class="bg-[#499DBC] text-white px-3 py-1 rounded-2xl">{{ $jadwal['is_approved'] ? 'Approved' : 'Waiting' }}</span>
+                                        class="bg-[#499DBC] text-white px-3 py-1 rounded-2xl">{{ isset($jadwal['is_approved']) ? ($jadwal['is_approved'] ? 'Approved' : 'Waiting') : '-' }}</span>
                                 </li>
                                 <li class="flex justify-between items-center mb-2 p-2 text-md">
                                     <span>Tamara mengajukan peminjaman</span>

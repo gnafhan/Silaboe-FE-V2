@@ -1,6 +1,6 @@
 @extends('layouts.homelayouts')
 @section('content')
-    <section class="lg:mx-24 mx-16 bg-white flex flex-col">
+    <section class="lg:mx-24 mx- bg-white flex flex-col">
         <div class="flex flex-wrap mt-10 items-center space-x-2 lg:space-x-4">
             <button class="lg:text-lg text-md">Beranda</button>
             <svg class="w-4 h-4 text-gray-800 dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -72,43 +72,29 @@
             </div>
 
 
-            <div class="flex flex-col mt-8">
-                <a href="{{ Route('laboratoriumdetail.login') }}" class="flex flex-col w-fit my-8">
-                    <div class="lg:text-3xl  text-xl font-bold   text-[#628F8E]">Laboratorium HU104
-                    </div>
-                    <div class="border-b-4 border-yellow-500 w-full mt-2"></div>
-                </a>
+            @foreach ($labs as $lab)
+                <div class="flex flex-col mt-8">
+                    <a href="{{ Route('laboratoriumdetail.login', $lab['id']) }}" class="flex flex-col w-fit my-8">
+                        <div class="lg:text-3xl  text-xl font-bold   text-[#628F8E]">{{ $lab['name'] }}
+                        </div>
+                        <div class="border-b-4 border-yellow-500 w-full mt-2"></div>
+                    </a>
 
-                <div class="grid lg:grid-cols-2 lg:grid-flow-row  max-h-xl lg:gap-8">
-                    <div class=" grid lg:text-lg text-sm md:text-md text-justify ">lorem Lorem ipsum dolor sit amet
-                        consectetur
-                        adipisicing elit.
-                        Aut
-                        saepe
-                        tempore ipsum. adipisicing elit. Aut saepe tempore ipsum. lorem Lorem ipsum dolor sit amet
-                        consectetur
-                        adipisicing elit. Aut saepe tempore ipsum. adipisicing elit. Aut saepe tempore ipsum. lorem Lorem
-                        ipsum
-                        dolor sit amet consectetur adipisicing elit. Aut saepe tempore ipsum. adipisicing elit. Aut saepe
-                        tempore ipsum. lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut saepe tempore
-                        ipsum.
-                        adipisicing elit. Aut saepe tempore ipsum. lorem Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit. Aut saepe tempore ipsum. adipisicing elit. Aut saepe tempore ipsum.
-                    </div>
-                    <div class="flex flex-wrap gap-8 my-8 lg:my-0 ">
-                        <img src="{{ asset('image/background.png') }}" class="h-[40%] rounded-lg grid" alt="foto lab" />
-                        <div class="flex flex-col gap-2 ">
-                            <div class="font-bold text-[#628F8E] lg:text-2xl text-xl grid mb-4 ">Support</div>
-                            <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
-                            <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
-                            <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
-                            <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
-
+                    <div class="grid lg:grid-cols-2 lg:grid-flow-row  max-h-xl lg:gap-8">
+                        <div class=" grid lg:text-lg text-sm md:text-md text-justify ">{{ $lab['description'] }}
+                        </div>
+                        <div class="flex flex-wrap gap-8 my-8 lg:my-0 ">
+                            <img src="{{ asset('image/background.png') }}" class="h-[40%] rounded-lg grid" alt="foto lab" />
+                            <div class="flex flex-col gap-2 ">
+                                <div class="font-bold text-[#628F8E] lg:text-2xl text-xl grid mb-4 ">Support</div>
+                                <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
+                                <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
+                                <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
+                                <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-
+            @endforeach
     </section>
 @endsection

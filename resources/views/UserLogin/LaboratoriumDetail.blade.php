@@ -22,14 +22,14 @@
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="m9 5 7 7-7 7" />
             </svg>
-            <button class="lg:text-lg text-md text-blue-500">Laboratorium HU 104</button>
+            <button class="lg:text-lg text-md text-blue-500">{{ $lab['name'] }}</button>
 
         </div>
         <div class="border-b-2 border-yellow-500 w-[100%]  mt-6 LG:mb-8 mb-6"></div>
 
 
 
-        <div class="lg:text-4xl text-2xl font-bold text-[#628F8E] mb-4">Laboratorium HU104
+        <div class="lg:text-4xl text-2xl font-bold text-[#628F8E] mb-4">{{ $lab['name'] }}
         </div>
 
 
@@ -49,39 +49,7 @@
 
         <div class="flex flex-col mt-12 ">
             <img src="{{ asset('image/fotolab.png') }}" class="h-[40%] rounded-sm grid" alt="foto lab" />
-            <div class="text-md lg:text-xl text-black text-justify lg:py-12 py-8">lorem Lorem ipsum dolor sit amet
-                consectetur
-                adipisicing
-                elit.
-                Aut
-                saepe tempore
-                ipsum, provident, excepturi culpa exercitationem omnis ex deserunt iusto officia alias doloremque! Tenetur
-                placeat debitis ex veritatis labore accusantium. lorem lorem lorem Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Aut saepe tempore ipsum, provident, excepturi culpa exercitationem omnis ex deserunt iusto
-                officia alias doloremque! Tenetur placeat debitis ex veritatis labore accusantium. lorem lorem Lorem ipsum
-                dolor sit amet consectetur adipisicing elit. Pariatur obcaecati excepturi, tempore vel reprehenderit sequi
-                itaque nihil dolorum. Illum, sed alias quidem harum esse mollitia, dolor veniam a sequi reprehenderit facere
-                rem. Dignissimos minus totam neque suscipit eum autem adipisci animi aperiam, officia nulla recusandae
-                cupiditate eos reprehenderit blanditiis? Deserunt iste perspiciatis nesciunt obcaecati, nam dolorem. Minima
-                aperiam laboriosam, distinctio consequuntur dicta doloribus possimus quos maxime, dignissimos corporis
-                labore consequatur. Consequuntur vitae eveniet, officiis, atque vero dolorum facere facilis aliquid officia
-                animi inventore. Odio alias accusantium blanditiis quo saepe libero animi deleniti quod doloremque illo
-                incidunt nulla, est ipsum corporis iure eos quia molestiae. Perspiciatis voluptatibus asperiores distinctio
-                alias aliquam. Explicabo nemo veniam eligendi expedita. Iure illo explicabo autem. Unde dolorem quibusdam
-                non incidunt maxime labore iusto amet nobis veritatis earum pariatur provident recusandae quisquam expedita
-                quaerat eligendi, architecto laboriosam cum ullam repellat. Id praesentium voluptatem consectetur modi, unde
-                rerum sit dolore ducimus obcaecati atque nostrum deserunt facilis! Iste placeat illum, a, blanditiis officia
-                recusandae aperiam voluptatum, voluptatem architecto delectus laudantium ea saepe corrupti officiis.
-                Perspiciatis, quae aspernatur ab illum modi a temporibus labore? Id, saepe laboriosam neque ex quaerat eum
-                sapiente perspiciatis deserunt mollitia, pariatur quasi voluptatum quibusdam quisquam, magnam sint odit
-                incidunt sequi impedit commodi. Provident est dolorem quos vitae accusantium, accusamus amet. Deserunt ipsa,
-                voluptatum quibusdam culpa deleniti laboriosam harum, voluptates temporibus delectus alias facilis numquam,
-                corporis itaque at consectetur non iusto dolores corrupti. Sunt quae, iusto itaque, doloribus distinctio
-                error nisi repudiandae id, commodi placeat ullam? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Pariatur obcaecati excepturi, tempore vel reprehenderit sequi itaque nihil dolorum. Illum, sed alias quidem
-                harum esse mollitia, dolor veniam a sequi reprehenderit facere rem. Dignissimos minus totam neque suscipit
-                eum autem adipisci animi aperiam, officia nulla recusandae cupiditate eos reprehenderit blanditiis? Deserunt
-                iste perspiciatis nesciunt obcaecati, nam dolorem. </div>
+            <div class="text-md lg:text-xl text-black text-justify lg:py-12 py-8">{{ $lab['description'] }}</div>
 
             <div class="lg:text-3xl text-xl font-bold text-[#628F8E] mb-8">Support </div>
             <div class="flex flex-row gap-4 mb-8 ">
@@ -95,7 +63,7 @@
                     class=" bg-[#628F8E] lg:text-sm  text-sm  text-white lg:px-8 lg:py-2 py-2 px-6 rounded-md hover:scale-110   ">Rendering
                 </button>
             </div>
-            <a href="{{ route('formlab.login') }}" class="flex lg:justify-end  mb-24 hover:scale-y-125 duration-400">
+            <a href="{{ route('formlab.login', $id) }}" class="flex lg:justify-end  mb-24 hover:scale-y-125 duration-400">
                 <button class="bg-[#F5CD51] text-white py-3 px-4 text-sm lg:text-md flex rounded-md">Reservasi
                     Laboratorium</button>
             </a>

@@ -49,7 +49,7 @@
         </div>
         <div class="border-b-2 border-yellow-500 w-[100%] lg:mb-2 mt-4"></div>
         <div class="py-4">
-            <div class=" lg:text-4xl text-2xl font-bold text-[#628F8E] lg:mb-4 lg:mb-4">Reservasi Laboratorium HU104</div>
+            <div class=" lg:text-4xl text-2xl font-bold text-[#628F8E] lg:mb-4">Reservasi Laboratorium HU104</div>
         </div>
         <div class="flex flex-row items-center gap-4">
             <svg class="" width="16" height="16" viewBox="0 0 15 15" fill="none"

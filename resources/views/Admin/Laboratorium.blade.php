@@ -16,7 +16,7 @@
     </header>
     <div class="bg-[rgba(237,245,245,1)] ">
         <!-- Main Content -->
-        <div class="flex-1 lg:mx-8   mx-12  py-8 flex-col flex lg:gap-4 md:gap-4 gap-16">
+        <div class="flex-1 lg:mx-8  mx-12  py-8 flex-col flex lg:gap-4 md:gap-4 gap-16">
             <!-- Navbar -->
             <div
                 class="inline-flex flex-col md:flex-row lg:inline-flex space-y-2 md:space-y-0 md:space-x-4 items-center justify-between h-16 p-4 text-black">
@@ -24,7 +24,7 @@
                     class="shadow-md px-6 py-3 rounded-xl bg-[rgba(98,143,142,0.2)] text-black border w-full md:w-auto lg:w-auto lg:text-xl">
                 <div
                     class=" hover:scale-105 shadow-md flex flex-row gap-2 items-center w-full bg-[#628F8E] lg:px-8 lg:py-3 p-2 lg:rounded-xl  hover:bg-[#608B8A] md:w-auto lg:w-auto justify-center rounded-md">
-                    <a href="{{ Route('laboratoriumtambah,admin') }}"
+                    <a href="{{ Route('laboratoriumtambah.admin') }}"
                         class=" font-medium lg:text-xl  text-md text-white  flex items-center">
                         Tambah Lab
                         <svg width="14" height="14" viewBox="0 0 18 18" fill="none"
@@ -42,7 +42,7 @@
                 <div class="grid gap-8">
                     <!-- Card 1 -->
                     @foreach ($laboratoriums as $laboratorium)
-                        <a href="{{ Route('laboratoriumdetail.admin') }}"
+                        <a href="{{ Route('laboratoriumdetail.admin', $laboratorium['id']) }}"
                             class="bg-[rgba(98,143,142,0.2)] lg:rounded-2xl rounded-3xl rounded-l-3xl shadow p-0 flex flex-col md:flex-row items-start md:items-stretch">
                             <div class="w-full md:w-1/3 ">
                                 <img src="{{ asset('image/laboratoriumimage.png') }}"
@@ -60,8 +60,6 @@
                                         <p class="text-gray-600 text-sm lg:text-md font-medium md:text-base lg:mr-20 mb-4 ">
                                             {{ $laboratorium['description'] }}
                                         </p>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +71,16 @@
                         </a>
                     @endforeach
 
-
+                    @if (Session::has('message'))
+                    <script>
+                        swal({
+                            title: "{{ Session::get('alert-type') == 'success' ? 'Success' : 'Error' }}",
+                            text: "{{ Session::get('message') }}",
+                            icon: "{{ Session::get('alert-type') == 'success' ? 'success' : 'error' }}",
+                            button: "Ok",
+                        }); 
+                    </script>
+                    @endif
 
                     <!-- Card 4 -->
 
