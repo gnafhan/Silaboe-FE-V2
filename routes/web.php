@@ -17,7 +17,7 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 //Landing Page 
 //
 //POV User Non Login
-Route::get('landingpage', [LandingpageumumController::class, 'index'])->name('homepage.nonlogin');
+Route::get('/', [LandingpageumumController::class, 'index'])->name('homepage.nonlogin');
 Route::get('landingpage/about', [LandingpageumumController::class, 'about'])->name('about.nonlogin');
 Route::get('landingpage/datasoftware', [LandingpageumumController::class, 'datasoftware'])->name('datasoftware.nonlogin');
 Route::get('landingpage/laboratorium', [LandingpageumumController::class, 'laboratorium'])->name('laboratorium.nonlogin');
