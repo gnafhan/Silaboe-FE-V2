@@ -15,7 +15,7 @@
         </div>
     </header>
     <div class="bg-[rgba(237,245,245,1)]">
-        <section class="flex-1 lg:mx-20 mx-12 my-2 flex-col flex lg:gap-4 md:gap-4 gap-16">
+        <section class="flex-1 lg:mx-12 mx-12 my-2 flex-col flex lg:gap-4 md:gap-4 gap-16">
             <div class="flex flex-col mt-12 ">
                 <div class="font-bold text-xl lg:text-2xl flex mb-4">{{ $laboratoriums ['name'] }}</div>
                 <img src="{{ asset('image/fotolab.png') }}" class="h-[50%] rounded-xl grid" alt="foto lab" />

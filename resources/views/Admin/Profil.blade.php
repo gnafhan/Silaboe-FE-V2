@@ -14,7 +14,7 @@
             </div>
         </div>
     </header>
-    <div class="flex-1 lg:mx-20 mx-6 py-8 flex-col flex lg:gap-4 md:gap-4 gap-2">
+    <div class="flex-1 lg:mx-12 mx-12 py-8 flex-col flex lg:gap-4 md:gap-4 gap-2">
         <div class="bg-[rgba(98,143,142,0.2)] p-6 rounded-xl w-full lg:mx-auto shadow-lg">
             <div
                 class="flex flex-col md:flex-row lg:justify-between md:justify-between justify-center  items-center mb-6 space-y-4 md:space-y-0">

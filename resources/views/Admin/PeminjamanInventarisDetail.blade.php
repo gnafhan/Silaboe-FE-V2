@@ -14,7 +14,7 @@
             </div>
         </div>
     </header>
-    <section class="flex-1 lg:mx-20 mx-12 my-6
+    <section class="flex-1 lg:mx-12 mx-12 my-6
 flex-col flex lg:gap-4 md:gap-4 gap-4">
 
 

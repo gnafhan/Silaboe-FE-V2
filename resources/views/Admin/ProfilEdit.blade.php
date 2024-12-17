@@ -14,8 +14,8 @@
             </div>
         </div>
     </header>
-    <div class="bg-[rgba(237,245,245,1)]">
-        <div class="flex-1 lg:mx-20 mx-6 py-8 flex-col flex lg:gap-4 md:gap-4 gap-2">
+    <div class="bg-white">
+        <div class="flex-1 lg:mx-12 mx-6 py-8 flex-col flex lg:gap-4 md:gap-4 gap-2">
 
             <div class="p-4 rounded-xl w-full  mx-auto">
                 <h1 class="text-2xl font-semibold text-black mb-6">Edit Profil</h1>
