@@ -156,10 +156,54 @@ class AdminController extends Controller
     
 
     //Jawal Lab
-    public function jadwallab()
-    {
-        return view('Admin.JadwalLab');
+    // public function jadwallab()
+    // {
+    //     $token = session('api_token');
+    //     $jadwallab = Http::withToken($token)->get(env('API_URL') . '/schedules');
+    //     return view('Admin.JadwalLab'
+    //     , [
+    //         'jadwallab' => $jadwallab->json()['data']
+    //     ]
+    // );
+    // }
+    public function jadwallab(Request $request)
+{
+    $token = session('api_token');
+
+    // Get the selected date from the query parameter, default to today's date if not provided
+    $selectedDate = $request->query('date', \Carbon\Carbon::today()->toDateString());
+
+    // Fetch the data from the API
+    $response = Http::withToken($token)->get(env('API_URL') . '/schedules');
+
+    // Process the data if the request is successful
+    if ($response->successful()) {
+        $jadwallab = $response->json()['data'];
+
+        // Filter the schedules based on the selected date
+        $jadwallab = array_map(function($room) use ($selectedDate) {
+            // Filter the schedules for each room based on the selected date
+            $room['schedules'] = array_filter($room['schedules'], function($schedule) use ($selectedDate) {
+                // Compare only the date part of the start_time with the selected date
+                $scheduleDate = substr($schedule['start_time'], 0, 10); // Extract date (yyyy-mm-dd)
+                return $scheduleDate === $selectedDate;
+            });
+
+            // Sort the schedules by start_time (earliest to latest)
+            usort($room['schedules'], function($a, $b) {
+                return strtotime($a['start_time']) - strtotime($b['start_time']);
+            });
+            
+            return $room;
+        }, $jadwallab);
     }
+
+    // Return the filtered data to the view
+    return view('Admin.JadwalLab', [
+        'jadwallab' => $jadwallab
+    ]);
+}
+
 
     public function jadwallabdetail()
     {
@@ -193,14 +237,21 @@ class AdminController extends Controller
         return view('Admin.PeminjamanLabArchive');
     }
 //Inventaris
-    public function inventaris()
+    public function inventaris(Request $request)
     {
         $token = session('api_token');
+        $search = $request->query('search');
         $response = Http::withToken($token)->get(env('API_URL') . '/inventories');
         
         if($response->successful()){
             $response = $response->json();
             $response = $response['data'];
+        // If search keyword is provided, filter the data
+        if ($search) {
+            $response = array_filter($response, function($item) use ($search) {
+                return stripos($item['item_name'], $search) !== false;
+            });
+        }
         }
 
         return view('Admin.Inventaris', [
