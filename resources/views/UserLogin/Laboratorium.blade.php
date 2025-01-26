@@ -41,18 +41,18 @@
                     <div class="relative flex items-center">
                         <span class="mr-2">Pencarian :</span>
                         <div class="relative">
-                            <input type="text" placeholder="Search..." class="border rounded-md p-1 pl-8">
+                            <input type="text" 
+                               id="searchInput" 
+                               placeholder="Search..." 
+                               class="border rounded-md p-1 pl-8">
                             <svg class="absolute right-2 top-1/2 transform -translate-y-1/2" width="18" height="18"
                                 viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M16.6 18L10.3 11.7C9.8 12.1 9.225 12.4167 8.575 12.65C7.925 12.8833 7.23333 13 6.5 13C4.68333 13 3.146 12.3707 1.888 11.112C0.63 9.85333 0.000666667 8.316 0 6.5C0 4.68333 0.629333 3.146 1.888 1.888C3.14667 0.63 4.684 0.000666667 6.5 0C8.31667 0 9.85433 0.629333 11.113 1.888C12.3717 3.14667 13.0007 4.684 13 6.5C13 7.23333 12.8833 7.925 12.65 8.575C12.4167 9.225 12.1 9.8 11.7 10.3L18 16.6L16.6 18ZM6.5 11C7.75 11 8.81267 10.5627 9.688 9.688C10.5633 8.81333 11.0007 7.75067 11 6.5C11 5.25 10.5627 4.18767 9.688 3.313C8.81333 2.43833 7.75067 2.00067 6.5 2C5.25 2 4.18767 2.43767 3.313 3.313C2.43833 4.18833 2.00067 5.25067 2 6.5C2 7.75 2.43767 8.81267 3.313 9.688C4.18833 10.5633 5.25067 11.0007 6.5 11Z"
+                                <path d="M16.6 18L10.3 11.7C9.8 12.1 9.225 12.4167 8.575 12.65C7.925 12.8833 7.23333 13 6.5 13C4.68333 13 3.146 12.3707 1.888 11.112C0.63 9.85333 0.000666667 8.316 0 6.5C0 4.68333 0.629333 3.146 1.888 1.888C3.14667 0.63 4.684 0.000666667 6.5 0C8.31667 0 9.85433 0.629333 11.113 1.888C12.3717 3.14667 13.0007 4.684 13 6.5C13 7.23333 12.8833 7.925 12.65 8.575C12.4167 9.225 12.1 9.8 11.7 10.3L18 16.6L16.6 18ZM6.5 11C7.75 11 8.81267 10.5627 9.688 9.688C10.5633 8.81333 11.0007 7.75067 11 6.5C11 5.25 10.5627 4.18767 9.688 3.313C8.81333 2.43833 7.75067 2.00067 6.5 2C5.25 2 4.18767 2.43767 3.313 3.313C2.43833 4.18833 2.00067 5.25067 2 6.5C2 7.75 2.43767 8.81267 3.313 9.688C4.18833 10.5633 5.25067 11.0007 6.5 11Z"
                                     fill="#CBCBCB" />
                             </svg>
                         </div>
                     </div>
                 </div>
-
-
             </div>
 
             <div class="bg-[#F8F7FC] mt-8 relative">
@@ -73,28 +73,76 @@
 
 
             @foreach ($labs as $lab)
-                <div class="flex flex-col mt-8">
-                    <a href="{{ Route('laboratoriumdetail.login', $lab['id']) }}" class="flex flex-col w-fit my-8">
-                        <div class="lg:text-3xl  text-xl font-bold   text-[#628F8E]">{{ $lab['name'] }}
-                        </div>
-                        <div class="border-b-4 border-yellow-500 w-full mt-2"></div>
-                    </a>
+                <div class="lab-item" 
+                     data-name="{{ strtolower($lab['name']) }}"
+                     data-description="{{ strtolower($lab['description']) }}">
+                    <div class="flex flex-col mt-8">
+                        <a href="{{ Route('laboratoriumdetail.login', $lab['id']) }}" class="flex flex-col w-fit my-8">
+                            <div class="lg:text-3xl  text-xl font-bold   text-[#628F8E]">{{ $lab['name'] }}
+                            </div>
+                            <div class="border-b-4 border-yellow-500 w-full mt-2"></div>
+                        </a>
 
-                    <div class="grid lg:grid-cols-2 lg:grid-flow-row  max-h-xl lg:gap-8">
-                        <div class=" grid lg:text-lg text-sm md:text-md text-justify ">{{ $lab['description'] }}
-                        </div>
-                        <div class="flex flex-wrap gap-8 my-8 lg:my-0 ">
-                            <img src="{{ asset('image/background.png') }}" class="h-[40%] rounded-lg grid" alt="foto lab" />
-                            <div class="flex flex-col gap-2 ">
-                                <div class="font-bold text-[#628F8E] lg:text-2xl text-xl grid mb-4 ">Support</div>
-                                <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
-                                <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
-                                <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
-                                <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
+                        <div class="grid lg:grid-cols-2 lg:grid-flow-row  max-h-xl lg:gap-8">
+                            <div class=" grid lg:text-lg text-sm md:text-md text-justify ">{{ $lab['description'] }}
+                            </div>
+                            <div class="flex flex-wrap gap-8 my-8 lg:my-0 ">
+                                <img src="{{ asset('image/background.png') }}" class="h-[40%] rounded-lg grid" alt="foto lab" />
+                                <div class="flex flex-col gap-2 ">
+                                    <div class="font-bold text-[#628F8E] lg:text-2xl text-xl grid mb-4 ">Support</div>
+                                    <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
+                                    <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
+                                    <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
+                                    <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             @endforeach
+
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let searchTimer;
+                const searchDelay = 300; // milliseconds
+
+                document.getElementById('searchInput').addEventListener('input', function() {
+                    clearTimeout(searchTimer);
+                    searchTimer = setTimeout(() => performSearch(this.value), searchDelay);
+                });
+
+                function performSearch(searchTerm) {
+                    searchTerm = searchTerm.toLowerCase();
+                    let items = document.querySelectorAll('.lab-item');
+                    let hasResults = false;
+
+                    items.forEach(item => {
+                        let name = item.getAttribute('data-name');
+                        let description = item.getAttribute('data-description');
+
+                        if (name.includes(searchTerm) || description.includes(searchTerm)) {
+                            item.style.display = '';
+                            hasResults = true;
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+
+                    // Optional: Show "no results" message
+                    let noResults = document.getElementById('noResults');
+                    if (!hasResults) {
+                        if (!noResults) {
+                            noResults = document.createElement('div');
+                            noResults.id = 'noResults';
+                            noResults.className = 'text-center py-4 text-gray-500';
+                            noResults.textContent = 'Tidak ada laboratorium yang ditemukan';
+                            document.querySelector('.section').appendChild(noResults);
+                        }
+                    } else if (noResults) {
+                        noResults.remove();
+                    }
+                }
+            });
+            </script>
     </section>
 @endsection

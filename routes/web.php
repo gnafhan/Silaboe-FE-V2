@@ -37,6 +37,8 @@ Route::get('login/landingpage/laboratorium/{id}/detail', [LandingpageController:
 Route::get('login/landingpage/laboratorium/reservasi/{id}/status', [LandingpageController::class, 'reservasilaboratoriumstatus'])->name('statusreservasilab.login');
 Route::get('login/landingpage/laboratorium/{id}/formlab', [LandingpageController::class, 'laboratoriumformlab'])->name('formlab.login');
 Route::post('login/landingpage/laboratorium/{id}/formlab', [LandingpageController::class, 'postFormLab'])->name('formlab.login.post');
+Route::get('login/landingpage/laboratorium/{id}/riwayatreservasi', [LandingpageController::class, 'riwayatreservasilab'])->name('riwayatreservasilab.login');
+Route::get('login/landingpage/laboratorium/{id}/riwayatreservasi/search', [LandingpageController::class, 'searchReservasiLab'])->name('riwayatreservasilab.search');
 
 
 //Reservasi Login 
