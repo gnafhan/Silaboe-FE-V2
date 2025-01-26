@@ -377,16 +377,128 @@ class AdminController extends Controller
         return view('Admin.PeminjamanInventarisArchive');
     }
 
-//Profil
-public function profil()
+    //Profil
+    public function profil()
     {
-        return view('Admin.Profil');
-    }
-    public function profiledit()
-    {
-        return view('Admin.ProfilEdit');
+        try {
+            $token = session('api_token');
+            
+            if (!$token) {
+                return redirect()->route('login')->with('message', 'Anda harus login terlebih dahulu')->with('alert-type', 'error');
+            }
+    
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json'
+            ])->get(env('API_URL').'/current');
+            
+            if ($response->successful()) {
+                $user = $response->json();
+                // dd($user);
+                return view('Admin.Profil', compact('user'));
+            } else {
+                // Handle unauthorized or failed request
+                return redirect()->route('login')->with('message', 'Sesi login telah berakhir')->with('alert-type', 'error');
+            }
+        } catch (\Exception $e) {
+            return redirect()->route('login')->with('message', 'Terjadi kesalahan saat mengambil data profil')->with('alert-type', 'error');
+        }
     }
 
+
+    public function profiledit()
+    {
+        try {
+            // Ambil token dari sesi
+            $token = session('api_token');
+            
+            if (!$token) {
+                // Redirect ke login jika token tidak ditemukan
+                return redirect()->route('login')->with('message', 'Anda harus login terlebih dahulu')->with('alert-type', 'error');
+            }
+
+            // Mengambil data profil dengan API
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json'
+            ])->get(env('API_URL').'/current');
+
+            if ($response->successful()) {
+                // Jika berhasil, ambil data pengguna dari respons API
+                $user = $response->json();
+                return view('Admin.ProfilEdit', compact('user'));
+            } else {
+                // Redirect jika gagal mendapatkan data
+                return redirect()->route('login')->with('message', 'Sesi login telah berakhir')->with('alert-type', 'error');
+            }
+        } catch (\Exception $e) {
+            // Redirect dengan pesan error jika terjadi kesalahan
+            return redirect()->route('login')->with('message', 'Terjadi kesalahan saat mengambil data profil: ' . $e->getMessage())->with('alert-type', 'error');
+        }
+    }
+    
+    // Memperbarui profil
+    public function updateProfile(Request $request)
+    {
+
+        try {
+            // Ambil token dari sesi
+            $token = session('api_token');
+            
+            if (!$token) {
+                // Redirect ke login jika token tidak ditemukan
+                return redirect()->route('login')->with('message', 'Anda harus login terlebih dahulu')->with('alert-type', 'error');
+            }
+
+            // Mengambil data profil dengan API
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json'
+            ])->get(env('API_URL').'/current');
+
+            if ($response->successful()) {
+                // Jika berhasil, ambil data pengguna dari respons API
+                $user = $response->json();
+            } else {
+                // Redirect jika gagal mendapatkan data
+                return redirect()->route('login')->with('message', 'Sesi login telah berakhir')->with('alert-type', 'error');
+            }
+        } catch (\Exception $e) {
+            // Redirect dengan pesan error jika terjadi kesalahan
+            return redirect()->route('login')->with('message', 'Terjadi kesalahan saat mengambil data profil: ' . $e->getMessage())->with('alert-type', 'error');
+        }
+
+        // Validasi input
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
+        ]);
+    
+        try {
+            $token = session('api_token');
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json',
+            ])->post(env('API_URL').'/update/profil', [
+                'first_name' => $validated['first_name'],
+                'last_name' => $validated['last_name'],
+                'username' => $validated['username'],
+                'email' => $user['email'],
+            ]);
+    
+            if ($response->successful()) {
+                return redirect()->route('profil.admin')->with('success', 'Profil berhasil diperbarui');
+            }
+    
+            // More detailed error handling
+            $errorMessage = $response->json('message') ?? 'Gagal memperbarui profil';
+            return redirect()->back()->with('error', $errorMessage);
+    
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
 
 
 }

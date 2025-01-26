@@ -93,6 +93,7 @@ Route::get('admin/peminjamaninvenatris/archive', [AdminController::class, 'Pemin
 //Profile
 Route::get('admin/profil', [AdminController::class, 'Profil'])->name('profil.admin');
 Route::get('admin/profil/edit', [AdminController::class, 'ProfilEdit'])->name('profiledit.admin');
+Route::post('/profile/update', [AdminController::class, 'updateProfile'])->name('profil.update');
 
 
 
