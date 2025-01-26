@@ -60,14 +60,20 @@ class AdminController extends Controller
             $search = strtolower(request('search'));
             $keywords = explode(' ', $search);
 
-            $laboratoriums = collect($laboratoriums)->filter(function ($item) use ($keywords) {
+            $laboratoriums = collect($laboratoriums)->filter(function ($item) use ($search, $keywords) {
                 $name = strtolower($item['name']);
+
+                if (stripos($name, $search) !== false) {
+                    return true;
+                }
+
                 foreach ($keywords as $keyword) {
-                    if (stripos($name, $keyword) !== false) {
-                        return true;
+                    if (stripos($name, $keyword) === false) {
+                        return false;
                     }
                 }
-                return false;
+
+                return true; // Semua keyword cocok
             })->toArray();
         }
         return view('Admin.Laboratorium',compact('laboratoriums'));
