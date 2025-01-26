@@ -17,43 +17,58 @@ class AdminController extends Controller
         $jadwal = Http::withToken($token)->get(env('API_URL') . '/dashboard/labReserve');
         $jumlahlab = Http::withToken($token)->get(env('API_URL') . '/dashboard/countLab');
         $jumlahinventaris = Http::withToken($token)->get(env('API_URL') . '/dashboard/countInventory');
-        // $inventarisreserve = Http::withToken($token)->get(env('API_URL') . '/dashboard/inventoryReserve');
+        $labDigunakan =  Http::withToken($token)->get(env('API_URL') . 'dashboard/labReserve');
+        $inverntarisDigunakan =  Http::withToken($token)->get(env('API_URL') . 'dashboard/inventoryReserve');
+        $inventarisreserve = Http::withToken($token)->get(env('API_URL') . '/dashboard/inventoryReserve');
 
-
-        
         if($jadwal->successful()){
             $jadwals = $jadwal->json();
             $jadwals = $jadwals['data'];
+            //dd($jadwals);
 
             $jumlahlabs = $jumlahlab->json();
+            // dd($jumlahlabs);
             $jumlahlabs = $jumlahlabs['data'];
 
             $jumlahinventariss = $jumlahinventaris->json();
-            // dd($jumlahinventaris);
+            // dd($jumlahinventariss);
             $jumlahinventariss = $jumlahinventariss['data'];
 
-            // $inventarisreserves = $inventarisreserve ->json();
-            // $inventarisreserves = $inventarisreserves['data'];
+            $inventarisreserves = $inventarisreserve ->json();
+            $inventarisreserves = $inventarisreserves['data'];
+            // dd($inventarisreserves);
         }
 
-
- 
         // $response = Http::get('https://api.thecatapi.com/v1/images/0XYvRd7oD');
         // $response_json = $response->json();
-        // dd($response_json['id']);    
-        return view('Admin.Dashboard', compact('jadwals','jumlahlabs','jumlahinventariss'));
-    //   'jumlahinventariss'
+        // dd($response_json['id']);
+        return view('Admin.Dashboard', compact('jadwals','jumlahlabs','jumlahinventariss','inventarisreserves'));
     }
 //Laboratorium
     public function laboratorium()
     {
         $token = session('api_token');
         $laboratorium = Http::withToken($token)->get(env('API_URL') . '/laboratorium');
-        
+
         if($laboratorium ->successful()){
             $laboratoriums = $laboratorium->json();
             // dd($laboratoriums);
             $laboratoriums = $laboratoriums['data'];
+        }
+        // functional search
+        if (request('search')) {
+            $search = strtolower(request('search'));
+            $keywords = explode(' ', $search);
+
+            $laboratoriums = collect($laboratoriums)->filter(function ($item) use ($keywords) {
+                $name = strtolower($item['name']);
+                foreach ($keywords as $keyword) {
+                    if (stripos($name, $keyword) !== false) {
+                        return true;
+                    }
+                }
+                return false;
+            })->toArray();
         }
         return view('Admin.Laboratorium',compact('laboratoriums'));
     }
@@ -61,11 +76,11 @@ class AdminController extends Controller
     {
         $token = session('api_token');
         $laboratorium = Http::withToken($token)->get(env('API_URL') . '/laboratorium/'.$id);
-    
+
         if($laboratorium ->successful()){
             $laboratoriums = $laboratorium->json();
             // dd($laboratoriums);
-            $laboratoriums = $laboratoriums['data'];           
+            $laboratoriums = $laboratoriums['data'];
         }
         return view('Admin.LaboratoriumDetail',compact('laboratoriums'));
     }
@@ -82,7 +97,7 @@ class AdminController extends Controller
         $request = [
             'name' => $request->name,
             'type' => $request->type,
-            'description' => $request->description,  
+            'description' => $request->description,
         ];
         // dd($request);
         $laboratorium = Http::withHeaders([
@@ -127,7 +142,7 @@ class AdminController extends Controller
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '. $token
         ])->put(env('API_URL').'/rooms/'.$id, $request);
-        
+
         if ($response->successful()) {
             return redirect()->route('laboratorium.admin')->with('message', 'Berhasil mengedit data')->with('alert-type', 'success');
         } else {
@@ -153,7 +168,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Gagal: ' . $errorBody)->with('alert-type', 'error');
         }
     }
-    
+
 
     //Jawal Lab
     public function jadwallab()
@@ -187,7 +202,7 @@ class AdminController extends Controller
     {
         return view('Admin.PeminjamanLabDetail');
     }
-   
+
     public function peminjamanlabarchive()
     {
         return view('Admin.PeminjamanLabArchive');
@@ -197,7 +212,7 @@ class AdminController extends Controller
     {
         $token = session('api_token');
         $response = Http::withToken($token)->get(env('API_URL') . '/inventories');
-        
+
         if($response->successful()){
             $response = $response->json();
             $response = $response['data'];
@@ -219,8 +234,8 @@ class AdminController extends Controller
         $request = [
             'item_name' => $request->item_name,
             'no_item' => $request->no_item,
-            'condition' => $request->condition,  
-            'information' => $request->information,  
+            'condition' => $request->condition,
+            'information' => $request->information,
         ];
         // dd($request);
         $response = Http::withHeaders([
@@ -238,7 +253,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Gagal: ' . $errorBody)->with('alert-type', 'error');
         }
     }
-    
+
     public function inventarisedit($id)
     {
         $token = session('api_token');
@@ -259,15 +274,15 @@ class AdminController extends Controller
         $request = [
             'item_name' => $request->item_name,
             'no_item' => $request->no_item,
-            'condition' => $request->condition,  
-            'information' => $request->information,  
+            'condition' => $request->condition,
+            'information' => $request->information,
         ];
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '. $token
         ])->put(env('API_URL').'/inventories/'.$id, $request);
-        
+
         if ($response->successful()) {
             return redirect()->route('inventaris.admin')->with('message', 'Berhasil mengedit data')->with('alert-type', 'success');
         } else {
