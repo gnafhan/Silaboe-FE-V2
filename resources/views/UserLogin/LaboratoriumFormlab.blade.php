@@ -22,9 +22,9 @@
             <div class="mb-4">
                 <div id="calendar" class="overflow-auto max-h-96"></div>
             </div>
-            <button
-                class="bg-[#628F8E] text-white px-4 py-2 lg:text-lg md:text-md text-sm rounded hover:scale-105 shadow-md ">Riwayat
-                Reservasi</button>
+            <a
+                href="{{ route('riwayatreservasilab.login', $id) }}" class="bg-[#628F8E] text-white px-4 py-2 lg:text-lg md:text-md text-sm rounded hover:scale-105 shadow-md ">Riwayat
+                Reservasi</a>
         </div>
 
 
