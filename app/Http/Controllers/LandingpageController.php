@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class LandingpageController extends Controller
 
@@ -69,14 +70,14 @@ class LandingpageController extends Controller
     //Laboratorium
     public function laboratorium()
     {
-        $response = Http::get(env('API_URL').'/laboratorium');
+        $response = Http::get(env('API_URL').'/laboratorium/');
         return view('UserLogin.Laboratorium', [
             'labs' => $response->json()['data']
         ]);
     }
     public function laboratoriumdetail($id)
     {
-        $response = Http::get(env('API_URL').'/laboratorium/'. $id);
+        $response = Http::get('http://127.0.0.1:8000/api/laboratorium/'. $id);
         return view('UserLogin.LaboratoriumDetail', [
             'lab' => $response->json()['data'],
             'id' => $id
@@ -89,7 +90,7 @@ class LandingpageController extends Controller
     }
     public function reservasilaboratoriumstatus($id)
     {
-        $lab = Http::get(env('API_URL').'/laboratorium/'. $id);
+        $lab = Http::get('http://127.0.0.1:8000/api/laboratorium/'. $id);
         // dd($lab);
         return view('UserLogin.ReservasiLaboratoriumStatus', [
             'lab' => $lab->json()['data']
@@ -97,8 +98,8 @@ class LandingpageController extends Controller
     }
     public function laboratoriumformlab($id)
     {
-        $lab = Http::get(env('API_URL').'/laboratorium/'. $id);
-        $syarat = Http::get(env('API_URL').'/rules');
+        $lab = Http::get('http://127.0.0.1:8000/api/laboratorium/'. $id);
+        $syarat = Http::get('http://127.0.0.1:8000/api/rules');
         return view('UserLogin.LaboratoriumFormlab', [
             'id' => $id,   
             'syarat' => $syarat->json()['data'],
@@ -106,10 +107,58 @@ class LandingpageController extends Controller
         ]);
     }
 
+    public function riwayatreservasilab($id, Request $request)
+    {
+        $token = session('api_token');
+        $perPage = $request->input('entries', 10);
+        $page = $request->input('page', 1);
+        $search = ''; // Default empty search string
+        
+        $labResponse = Http::get('http://127.0.0.1:8000/api/laboratorium/'. $id);
+        $reserveResponse = Http::withHeaders([
+            'Authorization' => 'Bearer '. $token,
+            'Accept' => 'application/json'
+        ])->get('http://127.0.0.1:8000/api/laboratorium/'. $id .'/reserve');
+    
+        $reservations = [];
+        $totalEntries = 0;
+        $startEntry = 0;
+        $endEntry = 0;
+    
+        if ($reserveResponse->successful() && $labResponse->successful()) {
+            $reservations = collect($reserveResponse->json()['data'] ?? []);
+            $totalEntries = $reservations->count();
+            
+            // Calculate pagination
+            $offset = ($page - 1) * $perPage;
+            $reservations = $reservations->slice($offset, $perPage);
+            
+            $startEntry = $offset + 1;
+            $endEntry = min($offset + $perPage, $totalEntries);
+        }
+    
+        return view('UserLogin.RiwayatReservasiLaboratorium', [
+            'id' => $id,
+            'lab' => $labResponse->json()['data'] ?? null,
+            'reservations' => $reservations,
+            'totalEntries' => $totalEntries,
+            'startEntry' => $startEntry,
+            'endEntry' => $endEntry,
+            'currentPage' => $page,
+            'perPage' => $perPage,
+            'lastPage' => ceil($totalEntries / $perPage),
+            'search' => $search
+        ]);
+    }
+
     public function postFormLab(Request $request, $id){
         // dd($request);
-        $start_datetime = Carbon::parse($request->start . $request->start_time)->format('Y-m-d H:i');
-        $end_datetime = Carbon::parse($request->end . $request->end_time)->format('Y-m-d H:i');
+        $start_datetime = Carbon::parse($request->start . ' ' . $request->start_time)
+            ->setTimezone('UTC')
+            ->format('Y-m-d H:i:s');
+        $end_datetime = Carbon::parse($request->end . ' ' . $request->end_time)
+            ->setTimezone('UTC')
+            ->format('Y-m-d H:i:s');
 
         $token = session('api_token');
 
@@ -127,7 +176,7 @@ class LandingpageController extends Controller
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer '. $token
-            ])->post(env('API_URL').'/laboratorium/reserve', $request);
+            ])->post('http://127.0.0.1:8000/api/laboratorium/reserve', $request);
 
         if ($response->successful()) {
             return redirect()->route('statusreservasilab.login', $id);
@@ -136,4 +185,6 @@ class LandingpageController extends Controller
             return redirect()->back()->with('error', 'Reservation failed: ' . $errorBody);
         }
     }       
+
+
 }
