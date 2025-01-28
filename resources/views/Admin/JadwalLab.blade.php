@@ -22,9 +22,17 @@
                 <label for="date-picker" class="block text-black mb-2 font-medium">Pilih tanggal untuk menampilkan jadwal
                     pemakaian ruang
                     laboratorium.</label>
-                <input type="date" id="date-picker"
+                <!-- <input type="date" id="date-picker"
                     class="block appearance-none   border border-gray-300 text-black py-2 px-8 rounded-xl leading-tight focus:outline-none bg-[rgba(98,143,142,0.2)] focus:bg-white focus:border-gray-500"
-                    value="2024-12-14">.
+                    value="2024-12-14">. -->
+                    <form method="GET" action="{{ route('jadwallab.admin') }}" class="flex items-center space-x-2" id="date-form">
+    <!-- Date picker input with default value as today's date -->
+    <input type="date" id="date-picker" name="date" 
+        class="block appearance-none border border-gray-300 text-black py-2 px-8 rounded-xl leading-tight focus:outline-none bg-[rgba(98,143,142,0.2)] focus:bg-white focus:border-gray-500"
+        value="{{ request()->query('date', \Carbon\Carbon::today()->toDateString()) }}" onchange="this.form.submit()">
+</form>
+
+
             </div>
 
 
@@ -52,7 +60,20 @@
                     </thead>
                     <tbody class="text-black ">
                         <!-- Repeat this block for each lab schedule -->
+                        @foreach($jadwallab as $room)
+                        @foreach($room['schedules'] as $i => $jadwal)
                         <tr class="border-t bg-[rgba(98,143,142,0.2)]">
+                            <td class="py-3 px-4">{{($i==0) ? $room['name'] : ''}}</td>
+                            <td class="py-3 px-4">{{\Carbon\Carbon::parse($jadwal['start_time'])->format('H:i')}}</td>
+                            <td class="py-3 px-4">{{\Carbon\Carbon::parse($jadwal['end_time'])->format('H:i')}}</td>
+                            <td class="py-3 px-4">
+                                <a href="{{ Route('jadwallabdetail.admin') }}"
+                                    class="hover:bg-gray-700 bg-[#4C8F8B] text-white py-1 px-6 rounded-xl">Lihat</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                        @endforeach
+                        <!-- <tr class="border-t bg-[rgba(98,143,142,0.2)]">
                             <td class="py-3 px-4">Laboratorium HU 105</td>
                             <td class="py-3 px-4">07.15</td>
                             <td class="py-3 px-4">09.15</td>
@@ -116,7 +137,7 @@
                             <td class="py-3 px-4">
                                 <button class="bg-[#4C8F8B] text-white py-1 px-6 rounded-xl">Lihat</button>
                             </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
