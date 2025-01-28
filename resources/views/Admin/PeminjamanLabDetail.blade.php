@@ -4,52 +4,56 @@
         <h2 class="text-2xl font-semibold">Peminjaman Lab</h2>
         <div class="flex items-center space-x-4">
             <button class="text-white hover:text-gray-300 focus:outline-none">
-                <img src="{{ asset('image/Notification.png') }}" class="  h-10 w-10" alt="Flowbite Logo" />
+                <img src="{{ asset('image/Notification.png') }}" class="h-10 w-10" alt="Notification" />
             </button>
             <div class="relative">
                 <button
                     class="flex items-center text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
-                    <img src="{{ asset('image/Profile.png') }}" class=" h-10 w-10 " alt="Flowbite Logo" />
+                    <img src="{{ asset('image/Profile.png') }}" class="h-10 w-10" alt="Profile" />
                 </button>
             </div>
         </div>
     </header>
-    <section class="flex-1 lg:mx-20 mx-12 my-6
-     flex-col flex lg:gap-4 md:gap-4 gap-4">
-        <h2 class="text-2xl font-bold mb-6">Peminjaman Laboratorium HU 106</h2>
+    <section class="flex-1 lg:mx-20 mx-12 my-6 flex-col flex lg:gap-4 md:gap-4 gap-4">
+        <h2 class="text-2xl font-bold mb-6">Peminjaman Laboratorium</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="bg-[rgba(98,143,142,0.1)] px-8 py-6 rounded-lg">
                 <p class="text-xl font-bold text-black mb-2">Email</p>
-                <p class="text-lg break-words">tamarashsis@mail.ugm.ac.id</p>
+                <p class="text-lg break-words">{{ $reservation['email'] ?? 'N/A' }}</p>
             </div>
-            <div class="bg-[rgba(98,143,142,0.1)]  px-8 py-6 rounded-lg">
+            <div class="bg-[rgba(98,143,142,0.1)] px-8 py-6 rounded-lg">
                 <p class="text-xl font-bold text-black mb-2">Tanggal Peminjaman</p>
-                <p class="text-lg break-words">14/02/2024 - 16/02/2024</p>
+                <p class="text-lg break-words">
+                    {{ $reservation['start_time'] ?? 'N/A' }} - 
+                    {{ $reservation['end_time'] ?? 'N/A' }}
+                </p>
             </div>
             <div class="bg-[rgba(98,143,142,0.1)] px-8 py-6 rounded-lg">
                 <p class="text-xl font-bold text-gray-700 mb-2">Nama</p>
-                <p class="text-lg">Tamara Sashikirana</p>
+                <p class="text-lg">{{ $reservation['identity'] ?? 'N/A' }}</p>
             </div>
-            <div class="bg-[rgba(98,143,142,0.1)]  px-8 py-6 rounded-lg">
-                <p class="text-xl font-bold text-gray-700 mb-2">Jam Peminjaman</p>
-                <p class="text-lg">07.15 - 16.00</p>
+            <div class="bg-[rgba(98,143,142,0.1)] px-8 py-6 rounded-lg">
+                <p class="text-xl font-bold text-gray-700 mb-2">Status Persetujuan</p>
+                <p class="text-lg {{ $reservation['is_approved'] ? 'text-green-600' : 'text-red-600' }}">
+                    {{ $reservation['is_approved'] ? 'Disetujui' : 'Belum Disetujui' }}
+                </p>
             </div>
-            <div class="bg-[rgba(98,143,142,0.1)]  px-8 py-6 rounded-lg">
+            <div class="bg-[rgba(98,143,142,0.1)] px-8 py-6 rounded-lg">
                 <p class="text-xl font-bold text-gray-700 mb-2">No Whatsapp</p>
-                <p class="text-lg">08756721973</p>
+                <p class="text-lg">{{ $reservation['no_wa'] ?? 'N/A' }}</p>
             </div>
-            <div class="bg-[rgba(98,143,142,0.1)]  px-8 py-6 rounded-lg">
+            <div class="bg-[rgba(98,143,142,0.1)] px-8 py-6 rounded-lg">
                 <p class="text-xl font-bold text-gray-700 mb-2">Keperluan Peminjaman</p>
-                <p class="text-lg">Sekolah Kepelatihan Design Graphic</p>
+                <p class="text-lg">{{ $reservation['needs'] ?? 'N/A' }}</p>
             </div>
-            <div class="bg-[rgba(98,143,142,0.1)]  px-8 py-6 rounded-lg ">
-                <p class="text-xl font-bold text-gray-700 mb-2">Foto Identitas</p>
-                <a href="#" class="text-blue-500">Fotoidentitas.png</a>
+            <div class="bg-[rgba(98,143,142,0.1)] px-8 py-6 rounded-lg">
+                <p class="text-xl font-bold text-gray-700 mb-2">Ruang Lab</p>
+                <p class="text-lg">{{ $reservation['room']['name'] ?? 'N/A' }}</p>
             </div>
         </div>
         <div class="flex justify-start">
-            <a href="{{ Route('peminjamanlabada.admin') }}"
-                class="mt-6 bg-[#4C8F8B] hover:scale-105  text-white px-8 py-2 rounded-md flex items-center">
+            <a href="{{ route('peminjamanlabada.admin') }}"
+                class="mt-6 bg-[#4C8F8B] hover:scale-105 text-white px-8 py-2 rounded-md flex items-center">
                 <svg width="9" height="17" viewBox="0 0 9 17" fill="none" xmlns="http://www.w3.org/2000/svg"
                     class="mr-2">
                     <path

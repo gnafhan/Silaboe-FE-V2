@@ -4,12 +4,12 @@
         <h2 class="text-2xl font-semibold">Profil</h2>
         <div class="flex items-center space-x-4">
             <button class="text-white hover:text-gray-300 focus:outline-none">
-                <img src="{{ asset('image/Notification.png') }}" class="  h-10 w-10" alt="Flowbite Logo" />
+                <img src="{{ asset('image/Notification.png') }}" class="h-10 w-10" alt="Notification" />
             </button>
             <div class="relative">
                 <button
                     class="flex items-center text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
-                    <img src="{{ asset('image/Profile.png') }}" class=" h-10 w-10 " alt="Flowbite Logo" />
+                    <img src="{{ asset('image/Profile.png') }}" class="h-10 w-10" alt="Profile" />
                 </button>
             </div>
         </div>
@@ -17,17 +17,17 @@
     <div class="flex-1 lg:mx-12 mx-12 py-8 flex-col flex lg:gap-4 md:gap-4 gap-2">
         <div class="bg-[rgba(98,143,142,0.2)] p-6 rounded-xl w-full lg:mx-auto shadow-lg">
             <div
-                class="flex flex-col md:flex-row lg:justify-between md:justify-between justify-center  items-center mb-6 space-y-4 md:space-y-0">
+                class="flex flex-col md:flex-row lg:justify-between md:justify-between justify-center items-center mb-6 space-y-4 md:space-y-0">
                 <div class="flex items-center space-x-4">
                     <img src="{{ asset('image/Profile.png') }}" alt="foto profil"
                         class="w-16 h-16 rounded-full object-cover">
                     <div>
-                        <h2 class="text-2xl font-semibold text-black">Maritza Angel</h2>
-                        <p class="text-md font-semibold text-gray-600">Admin</p>
+                        <h2 class="text-2xl font-semibold text-black">{{ $user['first_name'] }} {{ $user['last_name'] }}</h2>
+                        <p class="text-md font-semibold text-gray-600">{{ ucfirst($user['role']) }}</p>
                     </div>
                 </div>
                 <a href="{{ Route('profiledit.admin') }}"
-                    class="flex items-center  space-x-2 bg-[#4C8F8B] text-white py-2 lg:px-7 md:px-6 px-10 rounded-2xl hover:bg-green-900 lg:text-lg text-md font-medium">
+                    class="flex items-center space-x-2 bg-[#4C8F8B] text-white py-2 lg:px-7 md:px-6 px-10 rounded-2xl hover:bg-green-900 lg:text-lg text-md font-medium">
                     <span>Edit</span>
                     <svg width="16" height="16" viewBox="0 0 18 18" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -41,23 +41,23 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <h3 class="text-lg font-semibold text-gray-500">Nama Depan</h3>
-                    <p class="text-xl text-black font-semibold">Maritza</p>
+                    <p class="text-xl text-black font-semibold">{{ $user['first_name'] }}</p>
                 </div>
                 <div>
                     <h3 class="text-lg font-semibold text-gray-500">Nama Akhir</h3>
-                    <p class="text-xl text-black font-semibold">Angel</p>
+                    <p class="text-xl text-black font-semibold">{{ $user['last_name'] }}</p>
                 </div>
                 <div>
                     <h3 class="text-lg font-semibold text-gray-500">Alamat Email</h3>
-                    <p class="text-xl text-black font-semibold break-words">maritzaangelinaazzahra@mail.ugm.ac.id</p>
+                    <p class="text-xl text-black font-semibold break-words">{{ $user['email'] }}</p>
                 </div>
                 <div>
                     <h3 class="text-lg font-semibold text-gray-500">Username</h3>
-                    <p class="text-xl text-black font-semibold">maritzaangel</p>
+                    <p class="text-xl text-black font-semibold">{{ $user['username'] }}</p>
                 </div>
                 <div>
                     <h3 class="text-lg font-semibold text-gray-500">Role</h3>
-                    <p class="text-xl text-black font-semibold">Admin</p>
+                    <p class="text-xl text-black font-semibold">{{ ucfirst($user['role']) }}</p>
                 </div>
             </div>
         </div>

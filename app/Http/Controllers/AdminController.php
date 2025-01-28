@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
+
 class AdminController extends Controller
 
 
@@ -244,19 +245,84 @@ class AdminController extends Controller
     {
         return view('Admin.PeminjamanLabTidakAda');
     }
+
     public function peminjamanlabada()
     {
-        return view('Admin.PeminjamanLabAda');
+        $response = Http::get(env('API_URL').'/laboratorium/all-reserve');
+        $data = $response->json();
+
+        // KONVERSI UTC KE JAKARTA
+        $transformedData = array_map(function($reservation) {
+            $reservation['start_time'] = \Carbon\Carbon::parse($reservation['start_time'])
+                ->setTimezone('Asia/Jakarta')
+                ->format('Y-m-d H:i:s');
+            
+            $reservation['end_time'] = \Carbon\Carbon::parse($reservation['end_time'])
+                ->setTimezone('Asia/Jakarta')
+                ->format('Y-m-d H:i:s');
+            
+            return $reservation;
+        }, $data['data']);
+
+        return view('Admin.PeminjamanLabAda', ['reservations' => $transformedData]);
     }
-    public function peminjamanlabdetail()
+
+    public function peminjamanlabdetail(Request $request)
     {
-        return view('Admin.PeminjamanLabDetail');
+        $id = $request->input('id');
+    
+        try {
+            $response = Http::get(env('API_URL').'/laboratorium/reserve/'. $id);
+            $data = $response->json();
+            // dd($data);
+            if ($response->successful()) {
+                $data = $response->json()['data'];
+                
+                // Convert times to Jakarta timezone if needed
+                $data['start_time'] = \Carbon\Carbon::parse($data['start_time'])
+                    ->setTimezone('Asia/Jakarta')
+                    ->format('d/m/Y');
+                
+                $data['end_time'] = \Carbon\Carbon::parse($data['end_time'])
+                    ->setTimezone('Asia/Jakarta')
+                    ->format('d/m/Y');
+                
+                return view('Admin.PeminjamanLabDetail', ['reservation' => $data]);
+            } else {
+                // Handle API error
+                return redirect()->back()->with('error', 'Failed to fetch reservation details');
+            }
+        } catch (\Exception $e) {
+            // Handle any exceptions
+            return redirect()->back()->with('error', 'An error occurred while fetching reservation details');
+        }
+    
+
+        
+        return view('Admin.PeminjamanLabDetail',['reservation' => $data]);
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('search');
+
+        $response = Http::get(env('API_URL').'/laboratorium/reserve/search/'. $query);
+        
+        // Check if the response is successful
+        if ($response->successful()) {
+            $reservations = $response->json()['data'] ?? [];
+        } else {
+            $reservations = []; 
+        }
+        
+        return view('admin.peminjamanLabAda', compact('reservations'));
     }
 
     public function peminjamanlabarchive()
     {
         return view('Admin.PeminjamanLabArchive');
     }
+    
 //Inventaris
     public function inventaris(Request $request)
     {
@@ -383,16 +449,128 @@ class AdminController extends Controller
         return view('Admin.PeminjamanInventarisArchive');
     }
 
-//Profil
-public function profil()
+    //Profil
+    public function profil()
     {
-        return view('Admin.Profil');
-    }
-    public function profiledit()
-    {
-        return view('Admin.ProfilEdit');
+        try {
+            $token = session('api_token');
+            
+            if (!$token) {
+                return redirect()->route('login')->with('message', 'Anda harus login terlebih dahulu')->with('alert-type', 'error');
+            }
+    
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json'
+            ])->get(env('API_URL').'/current');
+            
+            if ($response->successful()) {
+                $user = $response->json();
+                // dd($user);
+                return view('Admin.Profil', compact('user'));
+            } else {
+                // Handle unauthorized or failed request
+                return redirect()->route('login')->with('message', 'Sesi login telah berakhir')->with('alert-type', 'error');
+            }
+        } catch (\Exception $e) {
+            return redirect()->route('login')->with('message', 'Terjadi kesalahan saat mengambil data profil')->with('alert-type', 'error');
+        }
     }
 
+
+    public function profiledit()
+    {
+        try {
+            // Ambil token dari sesi
+            $token = session('api_token');
+            
+            if (!$token) {
+                // Redirect ke login jika token tidak ditemukan
+                return redirect()->route('login')->with('message', 'Anda harus login terlebih dahulu')->with('alert-type', 'error');
+            }
+
+            // Mengambil data profil dengan API
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json'
+            ])->get(env('API_URL').'/current');
+
+            if ($response->successful()) {
+                // Jika berhasil, ambil data pengguna dari respons API
+                $user = $response->json();
+                return view('Admin.ProfilEdit', compact('user'));
+            } else {
+                // Redirect jika gagal mendapatkan data
+                return redirect()->route('login')->with('message', 'Sesi login telah berakhir')->with('alert-type', 'error');
+            }
+        } catch (\Exception $e) {
+            // Redirect dengan pesan error jika terjadi kesalahan
+            return redirect()->route('login')->with('message', 'Terjadi kesalahan saat mengambil data profil: ' . $e->getMessage())->with('alert-type', 'error');
+        }
+    }
+    
+    // Memperbarui profil
+    public function updateProfile(Request $request)
+    {
+
+        try {
+            // Ambil token dari sesi
+            $token = session('api_token');
+            
+            if (!$token) {
+                // Redirect ke login jika token tidak ditemukan
+                return redirect()->route('login')->with('message', 'Anda harus login terlebih dahulu')->with('alert-type', 'error');
+            }
+
+            // Mengambil data profil dengan API
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json'
+            ])->get(env('API_URL').'/current');
+
+            if ($response->successful()) {
+                // Jika berhasil, ambil data pengguna dari respons API
+                $user = $response->json();
+            } else {
+                // Redirect jika gagal mendapatkan data
+                return redirect()->route('login')->with('message', 'Sesi login telah berakhir')->with('alert-type', 'error');
+            }
+        } catch (\Exception $e) {
+            // Redirect dengan pesan error jika terjadi kesalahan
+            return redirect()->route('login')->with('message', 'Terjadi kesalahan saat mengambil data profil: ' . $e->getMessage())->with('alert-type', 'error');
+        }
+
+        // Validasi input
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
+        ]);
+    
+        try {
+            $token = session('api_token');
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json',
+            ])->post(env('API_URL').'/update/profil', [
+                'first_name' => $validated['first_name'],
+                'last_name' => $validated['last_name'],
+                'username' => $validated['username'],
+                'email' => $user['email'],
+            ]);
+    
+            if ($response->successful()) {
+                return redirect()->route('profil.admin')->with('success', 'Profil berhasil diperbarui');
+            }
+    
+            // More detailed error handling
+            $errorMessage = $response->json('message') ?? 'Gagal memperbarui profil';
+            return redirect()->back()->with('error', $errorMessage);
+    
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
 
 
 }

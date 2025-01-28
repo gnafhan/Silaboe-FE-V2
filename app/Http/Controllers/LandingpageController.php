@@ -69,7 +69,7 @@ class LandingpageController extends Controller
     //Laboratorium
     public function laboratorium()
     {
-        $response = Http::get(env('API_URL').'/laboratorium');
+        $response = Http::get(env('API_URL').'/laboratorium/');
         return view('UserLogin.Laboratorium', [
             'labs' => $response->json()['data']
         ]);

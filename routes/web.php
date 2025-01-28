@@ -74,6 +74,7 @@ Route::get('admin/peminjamanlab/tidakada', [AdminController::class, 'PeminjamanL
 Route::get('admin/peminjamanlab/ada', [AdminController::class, 'PeminjamanLabAda'])->name('peminjamanlabada.admin');
 Route::get('admin/peminjamanlab/detail', [AdminController::class, 'PeminjamanLabDetail'])->name('peminjamanlabdetail.admin');
 Route::get('admin/peminjamanlab/archive', [AdminController::class, 'PeminjamanLabArchive'])->name('peminjamanlabarchive.admin');
+Route::get('admin/peminjamanlab/search', [AdminController::class, 'search'])->name('peminjamanlablist.search');
 
 //Inventaris
 Route::get('admin/inventaris', [AdminController::class, 'Inventaris'])->name('inventaris.admin');
@@ -92,6 +93,7 @@ Route::get('admin/peminjamaninvenatris/archive', [AdminController::class, 'Pemin
 //Profile
 Route::get('admin/profil', [AdminController::class, 'Profil'])->name('profil.admin');
 Route::get('admin/profil/edit', [AdminController::class, 'ProfilEdit'])->name('profiledit.admin');
+Route::post('/profile/update', [AdminController::class, 'updateProfile'])->name('profil.update');
 
 
 
