@@ -20,25 +20,25 @@
 
             <div class="flex flex-col md:flex-row items-center justify-between">
                 <div class="flex items-center mb-4 md:mb-0">
-                    <select
+                    <select id="statusFilter"
                         class="bg-[rgba(98,143,142,0.2)] shadow appearance-none border rounded-xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-4">
-                        <option>Cari per status</option>
+                        <option value="">Cari per status</option>
+                        <option value="published">Published</option>
+                        <option value="pending">Pending</option>
                     </select>
                     <span>entri per kategori</span>
                 </div>
                 <div class="relative">
-                    <form action="{{ route('peminjamanlablist.search') }}" method="GET">
-                        <input type="text" name="search" placeholder="Cari laboratorium disini..."
-                            value="{{ request('search') }}"
-                            class="bg-[rgba(98,143,142,0.2)] shadow appearance-none border rounded-xl py-2 px-3 text-[#4C8F8B] leading-tight focus:outline-none focus:shadow-outline pr-10">
-                        <button type="submit" class="absolute inset-y-0 right-0 pr-3 flex items-center text-[#4C8F8B]">
-                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-4.35-4.35m0 0a7.5 7.5 0 10-10.61-10.61 7.5 7.5 0 0010.61 10.61z"></path>
-                            </svg>
-                        </button>
-                    </form>
+                    <div class="flex items-center">
+                        <input type="text" 
+                               id="searchInput"
+                               placeholder="Cari laboratorium disini..."
+                               class="bg-[rgba(98,143,142,0.2)] shadow appearance-none border rounded-xl py-2 px-3 text-[#4C8F8B] leading-tight focus:outline-none focus:shadow-outline pr-10">
+                        <svg class="h-5 w-5 absolute right-3 text-[#4C8F8B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-4.35-4.35m0 0a7.5 7.5 0 10-10.61-10.61 7.5 7.5 0 0010.61 10.61z"></path>
+                        </svg>
+                    </div>
                 </div>
             </div>
         </div>
@@ -101,4 +101,69 @@
             </table>
         </div>
     </section>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const originalRows = Array.from(document.querySelectorAll('tbody tr'));
+        
+        function filterTable() {
+            const searchInput = document.getElementById('searchInput');
+            const statusFilter = document.getElementById('statusFilter');
+            const tbody = document.querySelector('tbody');
+            
+            const searchTerm = searchInput.value.toLowerCase();
+            const statusTerm = statusFilter.value.toLowerCase();
+            
+            // Filter the original rows
+            const filteredRows = originalRows.filter(row => {
+                // Skip the "no data" row if it exists
+                if (row.children.length === 1 && row.children[0].colSpan === 6) {
+                    return false;
+                }
+                
+                // Get text content for searching
+                const text = row.textContent.toLowerCase();
+                
+                // Get status cell specifically (Published/Pending)
+                const statusCell = row.querySelector('td:nth-child(5)').textContent.toLowerCase().trim();
+                
+                // Match search term against all text (lab name, penanggung jawab, etc)
+                const matchesSearch = searchTerm === '' || text.includes(searchTerm);
+                
+                // Match status exactly if selected, or show all if no status selected
+                const matchesStatus = statusTerm === '' || statusCell.includes(statusTerm);
+                
+                return matchesSearch && matchesStatus;
+            });
+            
+            // Clear and repopulate tbody
+            tbody.innerHTML = '';
+            
+            if (filteredRows.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="text-center p-4 text-gray-500">
+                            Tidak ada reservasi laboratorium
+                        </td>
+                    </tr>
+                `;
+            } else {
+                filteredRows.forEach(row => tbody.appendChild(row.cloneNode(true)));
+            }
+        }
+
+        // Add event listeners with debouncing
+        let debounceTimer;
+        function debounce(func, delay) {
+            return function() {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => func(), delay);
+            }
+        }
+
+        // Add event listeners
+        document.getElementById('searchInput').addEventListener('input', debounce(filterTable, 300));
+        document.getElementById('statusFilter').addEventListener('change', filterTable);
+    });
+    </script>
 @endsection

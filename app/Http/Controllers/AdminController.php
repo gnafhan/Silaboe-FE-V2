@@ -364,18 +364,51 @@ class AdminController extends Controller
     {
         return view('Admin.PeminjamanInventarisTidakAda');
     }
+    
     public function peminjamaninventarisada()
     {
-        return view('Admin.PeminjamanInventarisAda');
+        $response = Http::get(env('API_URL').'/inventory/reserve');
+        $data = $response->json();
+        // dd($data);
+        if (!isset($data['data'])) {
+            return view('Admin.PeminjamanInventarisAda', ['reservations' => []]);
+        }
+
+        // Convert UTC to Jakarta timezone
+        $transformedData = array_map(function($reservation) {
+            $reservation['start_time'] = \Carbon\Carbon::parse($reservation['start_time'])
+                ->setTimezone('Asia/Jakarta')
+                ->format('Y-m-d H:i:s');
+            
+            $reservation['end_time'] = \Carbon\Carbon::parse($reservation['end_time'])
+                ->setTimezone('Asia/Jakarta')
+                ->format('Y-m-d H:i:s');
+            
+            return $reservation;
+        }, $data['data']);
+
+        return view('Admin.PeminjamanInventarisAda', ['reservations' => $transformedData]);
     }
-    public function peminjamaninventarisdetail()
+
+    public function peminjamaninventarisdetail($id)
     {
-        return view('Admin.PeminjamanInventarisDetail');
+        $token = session('api_token');
+        $inventoryreserf = Http::withToken($token)->get(env('API_URL') . '/inventory/reserve/' . $id);
+        
+        if($inventoryreserf->successful()){
+            $inventoryreserfs = $inventoryreserf->json();
+            return view('Admin.PeminjamanInventarisDetail', compact('inventoryreserfs'));
+        }
+        
+        // Handle error case
+        return redirect()->route('peminjamaninvenatrisada.admin')->with('error', 'Failed to fetch reservation details');
     }
+
     public function peminjamaninventarisarchive()
     {
         return view('Admin.PeminjamanInventarisArchive');
     }
+    
 
     //Profil
     public function profil()

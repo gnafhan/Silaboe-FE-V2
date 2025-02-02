@@ -87,7 +87,7 @@ Route::delete('admin/inventaris/{id}', [AdminController::class, 'Inventarishapus
 //Peminjaman Inventaris
 Route::get('admin/peminjamaninvenatris/tidakAda', [AdminController::class, 'PeminjamanInventarisTidakAda'])->name('peminjamaninvenatristidakada.admin');
 Route::get('admin/peminjamaninvenatris/ada', [AdminController::class, 'PeminjamanInventarisAda'])->name('peminjamaninvenatrisada.admin');
-Route::get('admin/peminjamaninvenatris/detail', [AdminController::class, 'PeminjamanInventarisDetail'])->name('peminjamaninvenatrisdetail.admin ');
+Route::get('admin/peminjamaninvenatris/detail/{id}', [AdminController::class, 'PeminjamanInventarisDetail'])->name('peminjamaninvenatrisdetail.admin');
 Route::get('admin/peminjamaninvenatris/archive', [AdminController::class, 'PeminjamanInventarisArchive'])->name('peminjamaninvenatrisarchive.admin ');
 
 //Profile
