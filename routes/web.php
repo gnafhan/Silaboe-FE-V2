@@ -42,7 +42,7 @@ Route::post('login/landingpage/laboratorium/{id}/formlab', [LandingpageControlle
 //Reservasi Login 
 Route::get('login/landingpage/inventaris', [LandingpageController::class, 'Inventaris'])->name('inventaris.login');
 Route::get('login/landingpage/inventaris/reservasiNull', [LandingpageController::class, 'InventarisReservasiNull'])->name('reservasiinventarisnull.login');
-Route::get('login/landinggpage/inventaris/riwayatreservasi/detail', [LandingpageController::class, 'InventarisRiwayatReservasiDetail'])->name('riwayatreservasiinventarisdetail.login');
+Route::get('login/landingpage/inventaris/riwayatreservasi/detail/{id}', [LandingpageController::class, 'InventarisRiwayatReservasiDetail'])->name('riwayatreservasiinventarisdetail.login');
 Route::get('login/landingpage/inventaris/reservasi', [LandingpageController::class, 'InventarisReservasi'])->name('reservasiinventaris.login');
 Route::get('login/landingpage/inventaris/formreservasi', [LandingpageController::class, 'FormReservasiInventaris'])->name('formreservasiinventaris.login');
 Route::get('login/landingpage/inventaris/formreservasi/cek', [LandingpageController::class, 'InventarisFormReservasiCek'])->name('formreservasiinventariscek.login');
@@ -132,3 +132,5 @@ Route::get('/kaleb/peminjamaninventaris/archive', [KalebController::class, 'Pemi
 //Profile
 Route::get('/kaleb/profil', [KalebController::class, 'Profil'])->name('profil.kaleb');
 Route::get('/kaleb/profil/edit', [KalebController::class, 'ProfilEdit'])->name('profiledit.edit');
+
+

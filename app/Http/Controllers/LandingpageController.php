@@ -55,12 +55,50 @@ class LandingpageController extends Controller
     
     public function inventarisriwayatreservasi()
     {
-        return view('UserLogin.InventarisRiwayatReservasi');
+        $response = Http::get(env('API_URL').'/inventory/reserve');
+        $data = $response->json();
+        // dd($data);
+        if (!isset($data['data'])) {
+            return view('Admin.PeminjamanInventarisAda', ['reservations' => []]);
+        }
+
+        // Convert UTC to Jakarta timezone
+        $transformedData = array_map(function($reservation) {
+            $reservation['start_time'] = \Carbon\Carbon::parse($reservation['start_time'])
+                ->setTimezone('Asia/Jakarta')
+                ->format('Y-m-d H:i:s');
+            
+            $reservation['end_time'] = \Carbon\Carbon::parse($reservation['end_time'])
+                ->setTimezone('Asia/Jakarta')
+                ->format('Y-m-d H:i:s');
+            
+            return $reservation;
+        }, $data['data']);
+        return view('UserLogin.InventarisRiwayatReservasi',  ['reservations' => $transformedData]);
     }
-    public function inventarisriwayatreservasidetail()
+
+    public function inventarisriwayatreservasidetail($id)
     {
-        return view('UserLogin.InventarisRiwayatReservasiDetail');
+        $response = Http::get(env('API_URL').'/inventory/reserve/'.$id);
+        $data = $response->json();
+        
+        if (!isset($data['data'])) {
+            return redirect()->back()->with('error', 'Data reservasi tidak ditemukan');
+        }
+
+        // Convert UTC to Jakarta timezone
+        $reservation = $data['data'];
+        $reservation['start_time'] = \Carbon\Carbon::parse($reservation['start_time'])
+            ->setTimezone('Asia/Jakarta')
+            ->format('Y-m-d H:i:s');
+        
+        $reservation['end_time'] = \Carbon\Carbon::parse($reservation['end_time'])
+            ->setTimezone('Asia/Jakarta')
+            ->format('Y-m-d H:i:s');
+        
+        return view('UserLogin.InventarisRiwayatReservasiDetail', ['reservation' => $reservation]);
     }
+
     public function inventarisformreservasicek()
     {
         return view('UserLogin.InventarisFormReservasiCek');
