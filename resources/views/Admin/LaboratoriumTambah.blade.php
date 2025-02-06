@@ -36,7 +36,15 @@
                 <select name="type" id="type" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#628F8E] bg-[rgba(98,143,142,0.2)]">
                     <option value="gudang">Gudang</option>
                     <option value="laboratorium">Laboratorium</option>
-                </select>                
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="foto-laboratorium" class="block text-black font-medium mb-2 text-lg">Foto Laboratorium</label>
+                <div class="relative">
+                    <input type="file" name="photo" id="foto-laboratorium"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#628F8E] bg-[rgba(98,143,142,0.2)] cursor-pointer file:cursor-pointer file:bg-[#4C8F8B] file:text-white file:border-none file:rounded-lg file:py-2 file:px-4 file:hover:bg-green-600 file:focus:ring-2 file:focus:ring-green-500" />
+                </div>
             </div>
 
             <div class="flex justify-start gap-4">

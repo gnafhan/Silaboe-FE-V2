@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth; // Import Auth facade
 use App\Models\User; // Assuming User model is in App\Models namespace
+use Illuminate\Support\Facades\Log as FacadesLog;
 
 class AuthController extends Controller
 {
@@ -25,7 +26,10 @@ class AuthController extends Controller
                 'password' => $request->password,
             ]);
 
+            FacadesLog::info('check success', ['response' => env('API_URL') . '/login']);
+
             if ($response->successful()) {
+                FacadesLog::info('Login success', ['response' => $response]);
                 $content = $response->json();
                 $token = $content['token'] ?? null;
                 $user = $content['data'];
@@ -42,6 +46,7 @@ class AuthController extends Controller
                 return back()->with('message', $errorMessage)->with('alert-type', 'error');
             }
         } catch (\Exception $e) {
+            FacadesLog::error($e->getMessage());
             return back()->with('message', 'Email atau passowrd yang Anda masukkan salah')->with('alert-type', 'error');
         }
     }

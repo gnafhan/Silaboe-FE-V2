@@ -14,7 +14,7 @@ Route::post('/do-login', [AuthController::class, 'doLogin'])->name('do-login');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 
 
-//Landing Page 
+//Landing Page
 //
 //POV User Non Login
 Route::get('/', [LandingpageumumController::class, 'index'])->name('homepage.nonlogin');
@@ -24,13 +24,13 @@ Route::get('landingpage/laboratorium', [LandingpageumumController::class, 'labor
 Route::get('landingpage/laboratorium/detail', [LandingpageumumController::class, 'laboratoriumdetail'])->name('laboratoriumdetail.nonlogin');
 Route::get('landingpage/inventaris', [LandingpageumumController::class, 'Inventarisumum'])->name('inventaris.nonlogin');
 
-//POV User Login 
+//POV User Login
 Route::get('landingpage/login', [LandingpageController::class, 'index'])->name('homepage.login');
 Route::get('login/landingpage/about', [LandingpageController::class, 'about'])->name('about.login');
 Route::get('login/landingpage/datasoftware', [LandingpageController::class, 'datasoftware'])->name('datasoftware.login');
 
 
-//Laboretorium 
+//Laboretorium
 Route::get('login/landingpage/laboratorium', [LandingpageController::class, 'laboratorium'])->name('laboratorium.login');
 Route::get('login/landingpage/laboratorium/{id}/detail', [LandingpageController::class, 'laboratoriumdetail'])->name('laboratoriumdetail.login');
 // Route::get('login/landingpage/laboratorium/reservasi', [LandingpageController::class, 'reservasilaboratorium'])->name('reservasilab.login');
@@ -41,7 +41,7 @@ Route::get('login/landingpage/laboratorium/{id}/riwayatreservasi', [LandingpageC
 Route::get('login/landingpage/laboratorium/{id}/riwayatreservasi/search', [LandingpageController::class, 'searchReservasiLab'])->name('riwayatreservasilab.search');
 
 
-//Reservasi Login 
+//Reservasi Login
 Route::get('login/landingpage/inventaris', [LandingpageController::class, 'Inventaris'])->name('inventaris.login');
 Route::get('login/landingpage/inventaris/reservasiNull', [LandingpageController::class, 'InventarisReservasiNull'])->name('reservasiinventarisnull.login');
 Route::get('login/landinggpage/inventaris/riwayatreservasi/detail', [LandingpageController::class, 'InventarisRiwayatReservasiDetail'])->name('riwayatreservasiinventarisdetail.login');
@@ -78,6 +78,7 @@ Route::get('admin/peminjamanlab/tidakada', [AdminController::class, 'PeminjamanL
 Route::get('admin/peminjamanlab/ada', [AdminController::class, 'PeminjamanLabAda'])->name('peminjamanlabada.admin');
 Route::get('admin/peminjamanlab/detail', [AdminController::class, 'PeminjamanLabDetail'])->name('peminjamanlabdetail.admin');
 Route::get('admin/peminjamanlab/archive', [AdminController::class, 'PeminjamanLabArchive'])->name('peminjamanlabarchive.admin');
+Route::get('admin/peminjamanlab/search', [AdminController::class, 'search'])->name('peminjamanlablist.search');
 
 //Inventaris
 Route::get('admin/inventaris', [AdminController::class, 'Inventaris'])->name('inventaris.admin');
@@ -96,6 +97,7 @@ Route::get('admin/peminjamaninvenatris/archive', [AdminController::class, 'Pemin
 //Profile
 Route::get('admin/profil', [AdminController::class, 'Profil'])->name('profil.admin');
 Route::get('admin/profil/edit', [AdminController::class, 'ProfilEdit'])->name('profiledit.admin');
+Route::post('/profile/update', [AdminController::class, 'updateProfile'])->name('profil.update');
 
 
 
@@ -104,7 +106,7 @@ Route::get('admin/profil/edit', [AdminController::class, 'ProfilEdit'])->name('p
 //Dashboard
 Route::get('/kaleb', [KalebController::class, 'Dashboard'])->name('dashboard.kaleb');
 
-//Laboratoium 
+//Laboratoium
 Route::get('/kaleb/laboratorium', [KalebController::class, 'Laboratorium'])->name('laboratorium.kaleb');
 Route::get('/kaleb/laboratorium/detail', [KalebController::class, 'LaboratoriumDetail'])->name('laboratoriumdetail.kaleb');
 
