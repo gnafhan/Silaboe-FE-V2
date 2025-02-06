@@ -52,7 +52,7 @@
 
         <div>
             <div class=" my-16 bg-white">
-                <div class="overflow-x-auto md:overflow-x-auto rounded-lg shadow-xl">
+                <div class="overflow-x-auto shadow-lg rounded-lg">
                     <table class="w-full border border-[#CBCBCB]">
                         <thead class="bg-[#F8F7FC] border-b-2 border-gray-200">
                             <tr>
@@ -84,140 +84,51 @@
                                     Selesai</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-100">
-                            <tr class="bg-[#F8F7FC]">
-                                <td
-                                    class="p-3
-                                text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    Meja PC
-                                    Server</td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    MPC001
-                                </td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    Laboratorium HU105</td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    03/05/2024
-                                </td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    08.00</td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    20.00</td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    03/05/2024
-                                </td>
+                        <tbody>
+                            @forelse($selectedInventories as $inventory)
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="py-3 px-4">{{ $inventory['item_name'] }}</td>
+                                <td class="py-3 px-4">{{ $inventory['no_item'] }}</td>
+                                <td class="py-3 px-4">{{ $inventory['information'] }}</td>
+                                <td class="py-3 px-4">{{ $formData['start'] }}</td>
+                                <td class="py-3 px-4">{{ $formData['start_time'] }}</td>
+                                <td class="py-3 px-4">{{ $formData['end_time'] }}</td>
+                                <td class="py-3 px-4">{{ $formData['end'] }}</td>
                             </tr>
-                            <tr class="bg-[#F8F7FC] ">
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    Meja PC
-                                    Server</td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    MPC001
-                                </td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    Laboratorium HU105</td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    03/05/2024
-                                </td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    08.00</td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    20.00</td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    03/05/2024
-                                </td>
+                            @empty
+                            <tr>
+                                <td colspan="7" class="py-6 text-center text-gray-500">No items selected</td>
                             </tr>
-                            <tr class="bg-[#F8F7FC]  ">
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    Meja PC
-                                    Server</td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    MPC001
-                                </td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    Laboratorium HU105</td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    03/05/2024
-                                </td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    08.00</td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    20.00</td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    03/05/2024
-                                </td>
-                            </tr>
-                            <tr class="bg-[#F8F7FC]  ">
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    Meja PC
-                                    Server</td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    MPC001
-                                </td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    Laboratorium HU105</td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    03/05/2024
-                                </td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    08.00</td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    20.00</td>
-                                <td
-                                    class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                    03/05/2024
-                                </td>
-                            </tr>
-                            <!-- Tambahkan baris data sesuai kebutuhan -->
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
 
-            </div>
-            <div class="flex flex-row gap-4 mb-48 justify-start ">
-                <a href="{{ Route('formreservasiinventaris.login') }}" type="submit"
-                    class="text-white bg-[#F5CD51] hover:scale-105 font-medium rounded-md lg:text-lg md:text-md text-sm w-max-xl  lg:w-max-auto md:w-max-auto lg:px-4 lg:py-4 px-4 py-4 text-center dark:bg-[#F5CD51] ">Tambahkan
-                    Inventaris</a>
-                <a href="{{ Route('formreservasiinventarisberhasil.login') }}" type="submit"
-                    class="text-white bg-[#499DBC] hover:scale-105   font-medium rounded-md lg:text-lg md:text-md text-sm w-max-xl lg:w-max-auto md:w-max-auto lg:px-4 lg:py-4 px-4 py-4 text-center dark:bg-[#499DBC] ">Ajukan
-                    Reservasi</a>
+                <div class="flex flex-row gap-4 mt-8 mb-48">
+                    {{-- Move Add Inventory button to the left --}}
+                    <a href="{{ Route('inventaris.login') }}" 
+                        class="text-white bg-[#F5CD51] hover:scale-105 font-medium rounded-md lg:text-lg md:text-md text-sm lg:px-4 lg:py-4 px-4 py-4 text-center">
+                        Tambahkan Inventaris
+                    </a>
+            
+            
+                    {{-- Move submit form and edit button to the right --}}
+                    <form action="{{ route('formreservasiinventaris.post') }}" method="POST" class="inline">
+                        @csrf
+                        {{-- Hidden fields to carry over the data --}}
+                        @foreach($formData as $key => $value)
+                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                        @endforeach
+                        @foreach($selectedInventories as $inventory)
+                            <input type="hidden" name="selected_items[]" value="{{ $inventory['id'] }}">
+                        @endforeach
+                        
+                        <button type="submit" class="text-white bg-[#499DBC] hover:scale-105 font-medium rounded-md lg:text-lg md:text-md text-sm lg:px-8 lg:py-4 px-4 py-4 text-center">
+                            Ajukan Reservasi
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
-
-
-        {{-- <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-            <span
-                class="p-1.5 text-xs font-medium uppercase tracking-wider text-green-800 bg-green-200 rounded-lg bg-opacity-50">Delivered</span>
-        </td> --}}
-        {{-- 
-        <td class="p-3 text-md text-gray-700 whitespace-nowrap">
-            <a href="#" class="font-bold text-hitam hover:underline">Meja PC Server</a>
-        </td> --}}
     </section>
 @endsection
