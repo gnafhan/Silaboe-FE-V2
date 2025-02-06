@@ -44,7 +44,7 @@ Route::get('login/landingpage/laboratorium/{id}/riwayatreservasi/search', [Landi
 //Reservasi Login
 Route::get('login/landingpage/inventaris', [LandingpageController::class, 'Inventaris'])->name('inventaris.login');
 Route::get('login/landingpage/inventaris/reservasiNull', [LandingpageController::class, 'InventarisReservasiNull'])->name('reservasiinventarisnull.login');
-Route::get('login/landinggpage/inventaris/riwayatreservasi/detail', [LandingpageController::class, 'InventarisRiwayatReservasiDetail'])->name('riwayatreservasiinventarisdetail.login');
+Route::get('login/landingpage/inventaris/riwayatreservasi/detail/{id}', [LandingpageController::class, 'InventarisRiwayatReservasiDetail'])->name('riwayatreservasiinventarisdetail.login');
 Route::get('login/landingpage/inventaris/reservasi', [LandingpageController::class, 'InventarisReservasi'])->name('reservasiinventaris.login');
 Route::get('login/landingpage/inventaris/formreservasi', [LandingpageController::class, 'FormReservasiInventaris'])->name('formreservasiinventaris.login');
 Route::get('login/landingpage/inventaris/formreservasi/cek', [LandingpageController::class, 'InventarisFormReservasiCek'])->name('formreservasiinventariscek.login');
@@ -89,7 +89,7 @@ Route::delete('admin/inventaris/{id}', [AdminController::class, 'Inventarishapus
 //Peminjaman Inventaris
 Route::get('admin/peminjamaninvenatris/tidakAda', [AdminController::class, 'PeminjamanInventarisTidakAda'])->name('peminjamaninvenatristidakada.admin');
 Route::get('admin/peminjamaninvenatris/ada', [AdminController::class, 'PeminjamanInventarisAda'])->name('peminjamaninvenatrisada.admin');
-Route::get('admin/peminjamaninvenatris/detail', [AdminController::class, 'PeminjamanInventarisDetail'])->name('peminjamaninvenatrisdetail.admin ');
+Route::get('admin/peminjamaninvenatris/detail/{id}', [AdminController::class, 'PeminjamanInventarisDetail'])->name('peminjamaninvenatrisdetail.admin');
 Route::get('admin/peminjamaninvenatris/archive', [AdminController::class, 'PeminjamanInventarisArchive'])->name('peminjamaninvenatrisarchive.admin ');
 
 //Profile
