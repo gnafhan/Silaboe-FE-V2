@@ -14,7 +14,34 @@ class LandingpageController extends Controller
     //homepage.userlogin
     public function index()
     {
-        return view('UserLogin.homepage');
+        $token = session('api_token');
+        $jumlahlab = Http::withToken($token)->get(env('API_URL') . '/dashboard/countLab');
+        $jumlahMahasiswa = Http::withToken($token)->get(env('API_URL') . '/studentCount');
+        $jumlahDosen = Http::withToken($token)->get(env('API_URL') . '/lecturerCount');
+        $jumlahResearch = Http::withToken($token)->get(env('API_URL') . '/researchCount');
+        $jumlahLaboran = Http::withToken($token)->get(env('API_URL') . '/laboranCount');
+
+        $jumlahLabs = $jumlahlab->json();
+        // dd($jumlahLabs);
+        $jumlahLabs = $jumlahLabs['data'];
+
+        $jumlahMahasiswa = $jumlahMahasiswa->json();
+        //dd($jumlahMahasiswa);
+        $jumlahMahasiswa = $jumlahMahasiswa['data'];
+
+        $jumlahDosen = $jumlahDosen->json();
+        //dd($jumlahDosen);
+        $jumlahDosen = $jumlahDosen['data'];
+
+        $jumlahResearch = $jumlahResearch->json();
+        //dd($jumlahResearch);
+        $jumlahResearch = $jumlahResearch['data'];
+
+        $jumlahLaboran = $jumlahLaboran->json();
+        //dd($jumlahLaboran);
+        $jumlahLaboran = $jumlahLaboran['data'];
+
+        return view('UserLogin.homepage', compact('jumlahLabs', 'jumlahMahasiswa', 'jumlahDosen', 'jumlahResearch', 'jumlahLaboran'));
     }
 
     public function about()
@@ -28,7 +55,7 @@ class LandingpageController extends Controller
         return view('UserLogin.DataSoftware');
     }
 
-    //Inventari.user login 
+    //Inventari.user login
 
     public function inventaris()
     {
@@ -52,7 +79,7 @@ class LandingpageController extends Controller
     {
         return view('UserLogin.InventarisFormReservasiBerhasil');
     }
-    
+
     public function inventarisriwayatreservasi()
     {
         return view('UserLogin.InventarisRiwayatReservasi');
@@ -100,7 +127,7 @@ class LandingpageController extends Controller
         $lab = Http::get(env('API_URL').'/laboratorium/'. $id);
         $syarat = Http::get(env('API_URL').'/rules');
         return view('UserLogin.LaboratoriumFormlab', [
-            'id' => $id,   
+            'id' => $id,
             'syarat' => $syarat->json()['data'],
             'lab' => $lab->json()['data'],
         ]);
@@ -118,7 +145,7 @@ class LandingpageController extends Controller
             'identity' => 'test',
             'email' => $request->email,
             'no_wa' => $request->wa,
-            'needs' => $request->keterangan,        
+            'needs' => $request->keterangan,
             'start_time' => $start_datetime,
             'end_time' => $end_datetime,
         ];
@@ -135,5 +162,5 @@ class LandingpageController extends Controller
             $errorBody = $response->body();
             return redirect()->back()->with('error', 'Reservation failed: ' . $errorBody);
         }
-    }       
+    }
 }
