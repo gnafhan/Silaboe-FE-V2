@@ -95,6 +95,7 @@
                         <thead class="bg-[#F8F7FC] border-b-2 border-gray-200">
                             <tr>
 
+                                <th class="py-6 px-4 text-sm md:text-md lg:text-xl font-semibold tracking-wide text-[#628F8E] text-center border-r border-gray-200">Penanggung Jawab</th>
                                 <th class="py-6 px-4 text-sm md:text-md lg:text-xl font-semibold tracking-wide text-[#628F8E] text-center border-r border-gray-200">Tanggal Mulai</th>
                                 <th class="py-6 px-4 text-sm md:text-md lg:text-xl font-semibold tracking-wide text-[#628F8E] text-center border-r border-gray-200">Jam Mulai</th>
                                 <th class="py-6 px-4 text-sm md:text-md lg:text-xl font-semibold tracking-wide text-[#628F8E] text-center border-r border-gray-200">Jam Selesai</th>
@@ -187,6 +188,7 @@
             row.className = 'bg-[#F8F7FC]';
             
             row.innerHTML = `
+                <td class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">${reservation.identity}</td>
                 <td class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">${formatDate(reservation.start_time)}</td>
                 <td class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">${formatTime(reservation.start_time)}</td>
                 <td class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">${formatTime(reservation.end_time)}</td>
