@@ -16,7 +16,34 @@ class LandingpageController extends Controller
     //homepage.userlogin
     public function index()
     {
-        return view('UserLogin.homepage');
+        $token = session('api_token');
+        $jumlahlab = Http::withToken($token)->get(env('API_URL') . '/dashboard/countLab');
+        $jumlahMahasiswa = Http::withToken($token)->get(env('API_URL') . '/studentCount');
+        $jumlahDosen = Http::withToken($token)->get(env('API_URL') . '/lecturerCount');
+        $jumlahResearch = Http::withToken($token)->get(env('API_URL') . '/researchCount');
+        $jumlahLaboran = Http::withToken($token)->get(env('API_URL') . '/laboranCount');
+
+        $jumlahLabs = $jumlahlab->json();
+        // dd($jumlahLabs);
+        $jumlahLabs = $jumlahLabs['data'];
+
+        $jumlahMahasiswa = $jumlahMahasiswa->json();
+        //dd($jumlahMahasiswa);
+        $jumlahMahasiswa = $jumlahMahasiswa['data'];
+
+        $jumlahDosen = $jumlahDosen->json();
+        //dd($jumlahDosen);
+        $jumlahDosen = $jumlahDosen['data'];
+
+        $jumlahResearch = $jumlahResearch->json();
+        //dd($jumlahResearch);
+        $jumlahResearch = $jumlahResearch['data'];
+
+        $jumlahLaboran = $jumlahLaboran->json();
+        //dd($jumlahLaboran);
+        $jumlahLaboran = $jumlahLaboran['data'];
+
+        return view('UserLogin.homepage', compact('jumlahLabs', 'jumlahMahasiswa', 'jumlahDosen', 'jumlahResearch', 'jumlahLaboran'));
     }
 
     public function about()
@@ -30,7 +57,7 @@ class LandingpageController extends Controller
         return view('UserLogin.DataSoftware');
     }
 
-    //Inventari.user login 
+    //Inventari.user login
 
     public function inventaris(Request $request)
     {
@@ -161,6 +188,7 @@ class LandingpageController extends Controller
     {
         return view('UserLogin.InventarisFormReservasiBerhasil');
     }
+
 
     public function inventarisriwayatreservasi()
     {
