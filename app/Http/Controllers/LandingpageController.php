@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class LandingpageController extends Controller
@@ -36,7 +37,8 @@ class LandingpageController extends Controller
         $perPage = $request->input('entries', 10);
         $page = $request->input('page', 1);
 
-        $response = Http::get('http://127.0.0.1:8000/api/inventory');
+        $response = Http::get(env('API_URL').'/inventory');
+        // dd($response->json());
         $inventories = collect($response->json()['data'] ?? []);
 
         $totalEntries = $inventories->count();
@@ -64,7 +66,7 @@ class LandingpageController extends Controller
         $inventories = collect(); // Initialize as a collection
 
         if (!empty($selectedItems)) {
-            $response = Http::get('http://127.0.0.1:8000/api/inventory', [
+            $response = Http::get(env('API_URL').'/inventory', [
                 'ids' => implode(',', $selectedItems)
             ]);
             $inventories = collect($response->json()['data'] ?? [])->filter(function ($inventory) use ($selectedItems) {
@@ -89,7 +91,7 @@ class LandingpageController extends Controller
         $inventories = collect();
 
         if (!empty($selectedItems)) {
-            $response = Http::get('http://127.0.0.1:8000/api/inventory', [
+            $response = Http::get(env('API_URL').'/inventory', [
                 'ids' => implode(',', $selectedItems)
             ]);
 
@@ -101,8 +103,8 @@ class LandingpageController extends Controller
         }
 
         // Debug information
-        \Log::info('Selected Items:', ['items' => $selectedItems]);
-        \Log::info('Retrieved Inventories:', ['inventories' => $inventories]);
+        Log::info('Selected Items:', ['items' => $selectedItems]);
+        Log::info('Retrieved Inventories:', ['inventories' => $inventories]);
 
         return view('UserLogin.FormReservasiInventaris', [
             'selectedInventories' => $inventories
@@ -143,7 +145,8 @@ class LandingpageController extends Controller
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer ' . $token
-            ])->post('http://127.0.0.1:8000/api/inventory/reserve', $requestData);
+            ])->post(env('API_URL').'/inventory/reserve', $requestData);
+            // dd($response->json());
 
             if (!$response->successful()) {
                 $errorBody = $response->body();
@@ -211,7 +214,7 @@ class LandingpageController extends Controller
         $inventories = collect();
 
         if (!empty($selectedItems)) {
-            $response = Http::get('http://127.0.0.1:8000/api/inventory', [
+            $response = Http::get(env('API_URL').'/inventory', [
                 'ids' => implode(',', $selectedItems)
             ]);
 
@@ -250,7 +253,7 @@ class LandingpageController extends Controller
     }
     public function laboratoriumdetail($id)
     {
-        $response = Http::get('http://127.0.0.1:8000/api/laboratorium/' . $id);
+        $response = Http::get(env('API_URL').'/laboratorium/' . $id);
         return view('UserLogin.LaboratoriumDetail', [
             'lab' => $response->json()['data'],
             'id' => $id
@@ -263,7 +266,7 @@ class LandingpageController extends Controller
     }
     public function reservasilaboratoriumstatus($id)
     {
-        $lab = Http::get('http://127.0.0.1:8000/api/laboratorium/' . $id);
+        $lab = Http::get(env('API_URL').'/laboratorium/' . $id);
         // dd($lab);
         return view('UserLogin.ReservasiLaboratoriumStatus', [
             'lab' => $lab->json()['data']
@@ -271,8 +274,8 @@ class LandingpageController extends Controller
     }
     public function laboratoriumformlab($id)
     {
-        $lab = Http::get('http://127.0.0.1:8000/api/laboratorium/' . $id);
-        $syarat = Http::get('http://127.0.0.1:8000/api/rules');
+        $lab = Http::get(env('API_URL').'/laboratorium/' . $id);
+        $syarat = Http::get(env('API_URL').'/rules');
         return view('UserLogin.LaboratoriumFormlab', [
             'id' => $id,
             'syarat' => $syarat->json()['data'],
@@ -287,11 +290,11 @@ class LandingpageController extends Controller
         $page = $request->input('page', 1);
         $search = ''; // Default empty search string
 
-        $labResponse = Http::get('http://127.0.0.1:8000/api/laboratorium/' . $id);
+        $labResponse = Http::get(env('API_URL').'/laboratorium/' . $id);
         $reserveResponse = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token,
             'Accept' => 'application/json'
-        ])->get('http://127.0.0.1:8000/api/laboratorium/' . $id . '/reserve');
+        ])->get(env('API_URL').'/laboratorium/' . $id . '/reserve');
 
         $reservations = [];
         $totalEntries = 0;
@@ -350,7 +353,7 @@ class LandingpageController extends Controller
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
             'Authorization' => 'Bearer ' . $token
-        ])->post('http://127.0.0.1:8000/api/laboratorium/reserve', $request);
+        ])->post(env('API_URL').'/laboratorium/reserve', $request);
 
         if ($response->successful()) {
             return redirect()->route('statusreservasilab.login', $id);

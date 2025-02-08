@@ -329,6 +329,7 @@ class AdminController extends Controller
         $token = session('api_token');
         $search = $request->query('search');
         $response = Http::withToken($token)->get(env('API_URL') . '/inventories');
+        // dd($response->json());
 
         if($response->successful()){
             $response = $response->json();
