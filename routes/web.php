@@ -44,12 +44,14 @@ Route::get('login/landingpage/laboratorium/{id}/riwayatreservasi/search', [Landi
 //Reservasi Login
 Route::get('login/landingpage/inventaris', [LandingpageController::class, 'Inventaris'])->name('inventaris.login');
 Route::get('login/landingpage/inventaris/reservasiNull', [LandingpageController::class, 'InventarisReservasiNull'])->name('reservasiinventarisnull.login');
-Route::get('login/landingpage/inventaris/riwayatreservasi/detail/{id}', [LandingpageController::class, 'InventarisRiwayatReservasiDetail'])->name('riwayatreservasiinventarisdetail.login');
-Route::get('login/landingpage/inventaris/reservasi', [LandingpageController::class, 'InventarisReservasi'])->name('reservasiinventaris.login');
+Route::get('login/landinggpage/inventaris/riwayatreservasi/detail', [LandingpageController::class, 'InventarisRiwayatReservasiDetail'])->name('riwayatreservasiinventarisdetail.login');
+Route::get('login/landingpage/inventaris/reservasi', [LandingpageController::class, 'inventarisreservasi'])->name('reservasiinventaris.login');
 Route::get('login/landingpage/inventaris/formreservasi', [LandingpageController::class, 'FormReservasiInventaris'])->name('formreservasiinventaris.login');
+Route::post('login/landingpage/inventaris/formreservasi/submit', [LandingpageController::class, 'postFormReservasiInventaris'])->name('formreservasiinventaris.post');
 Route::get('login/landingpage/inventaris/formreservasi/cek', [LandingpageController::class, 'InventarisFormReservasiCek'])->name('formreservasiinventariscek.login');
 Route::get('login/landingpage/inventaris/formreservasi/berhasil', [LandingpageController::class, 'InventarisFormReservasiBerhasil'])->name('formreservasiinventarisberhasil.login');
 Route::get('login/landingpage/inventaris/riwayatreservasi', [LandingpageController::class, 'InventarisRiwayatReservasi'])->name('riwayatreservasiinventaris.login');
+Route::post('login/landingpage/inventaris/remove', [LandingpageController::class, 'removeSelectedItem'])->name('removeSelectedItem');
 
 
 
