@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class LandingpageController extends Controller
 
@@ -128,10 +129,27 @@ class LandingpageController extends Controller
         // Cast selected_items to array to ensure foreach works
         $selectedItems = (array) $request->selected_items;
 
+        // Handle file upload directly
+        $identityPath = null;
+        if ($request->hasFile('identity')) {
+            $file = $request->file('identity');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('public/identitas', $filename);
+            $identityPath = 'storage/identitas/' . $filename;
+        }
+
+        // Get identity path from form data
+        $identityPath = null;
+        if ($request->has('identity_path')) {
+            $path = $request->input('identity_path');
+            $filename = basename($path);
+            $identityPath = 'storage/identitas/' . $filename;
+        }
+
         foreach ($selectedItems as $inventory_id) {
             $requestData = [
                 'inventory_id' => $inventory_id,
-                'identity' => 'test',
+                'identity' => $identityPath ?? 'no-identity',
                 'email' => $request->email,
                 'no_wa' => $request->no_wa,
                 'needs' => $request->keterangan,
@@ -185,7 +203,7 @@ class LandingpageController extends Controller
             }
         }
 
-        // Add request data for form
+        // Handle file upload and store temporarily
         $formData = [
             'start' => $request->input('start'),
             'end' => $request->input('end'),
@@ -197,6 +215,14 @@ class LandingpageController extends Controller
             'keterangan' => $request->input('keterangan'),
         ];
 
+        if ($request->hasFile('identity')) {
+            $file = $request->file('identity');
+            $extension = $file->getClientOriginalExtension();
+            $filename = date('Y-m-d_His') . '_' . Str::random(10) . '.' . $extension;
+            $path = $file->storeAs('public/identitas', $filename);
+            $formData['identity_path'] = $path;
+        }
+
         return view('UserLogin.InventarisFormReservasiCek', [
             'selectedInventories' => $inventories,
             'formData' => $formData
@@ -206,7 +232,7 @@ class LandingpageController extends Controller
     //Laboratorium
     public function laboratorium()
     {
-        $response = Http::get(env('API_URL').'/laboratorium/');
+        $response = Http::get(env('API_URL') . '/laboratorium/');
         return view('UserLogin.Laboratorium', [
             'labs' => $response->json()['data']
         ]);
@@ -289,7 +315,6 @@ class LandingpageController extends Controller
 
     public function postFormLab(Request $request, $id)
     {
-        // dd($request);
         $start_datetime = Carbon::parse($request->start . ' ' . $request->start_time)
             ->setTimezone('UTC')
             ->format('Y-m-d H:i:s');
@@ -299,9 +324,19 @@ class LandingpageController extends Controller
 
         $token = session('api_token');
 
-        $request = [
+        // Handle file upload with enhanced filename
+        $identityPath = null;
+        if ($request->hasFile('identitas')) {
+            $file = $request->file('identitas');
+            $extension = $file->getClientOriginalExtension();
+            $filename = date('Y-m-d_His') . '_' . Str::random(10) . '.' . $extension;
+            $path = $file->storeAs('public/identitas', $filename);
+            $identityPath = 'storage/identitas/' . $filename;
+        }
+
+        $requestData = [
             'room_id' => $id,
-            'identity' => 'test',
+            'identity' => $identityPath ?? 'no-identity',
             'email' => $request->email,
             'no_wa' => $request->wa,
             'needs' => $request->keterangan,
@@ -313,7 +348,7 @@ class LandingpageController extends Controller
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
             'Authorization' => 'Bearer ' . $token
-        ])->post('http://127.0.0.1:8000/api/laboratorium/reserve', $request);
+        ])->post('http://127.0.0.1:8000/api/laboratorium/reserve', $requestData);
 
         if ($response->successful()) {
             return redirect()->route('statusreservasilab.login', $id);

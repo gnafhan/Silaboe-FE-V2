@@ -113,12 +113,17 @@
             
             
                     {{-- Move submit form and edit button to the right --}}
-                    <form action="{{ route('formreservasiinventaris.post') }}" method="POST" class="inline">
+                    <form action="{{ route('formreservasiinventaris.post') }}" method="POST" enctype="multipart/form-data" class="inline">
                         @csrf
                         {{-- Hidden fields to carry over the data --}}
                         @foreach($formData as $key => $value)
-                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                            @if($key !== 'identity_preview')
+                                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                            @endif
                         @endforeach
+                        @if(isset($formData['identity_path']))
+                            <input type="hidden" name="identity_path" value="{{ $formData['identity_path'] }}">
+                        @endif
                         @foreach($selectedInventories as $inventory)
                             <input type="hidden" name="selected_items[]" value="{{ $inventory['id'] }}">
                         @endforeach
