@@ -66,7 +66,7 @@
                             </svg>
                         </a>
 
-                        <form action="{{ route('laboratoriumhapus.admin', $laboratoriums ['id']) }}" method="POST"
+                        <form action="{{ route('laboratoriumhapus.admin', $laboratoriums['id']) }}" method="POST"
                             class="shadow-md flex flex-row gap-2 items-center bg-[#D46857] px-4 py-2 rounded-md hover:bg-[#608B8A] justify-center w-full md:w-auto">
                             @csrf
                             @method('delete')
