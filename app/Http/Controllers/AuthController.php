@@ -26,10 +26,10 @@ class AuthController extends Controller
                 'password' => $request->password,
             ]);
 
-            FacadesLog::info('check success', ['response' => env('API_URL') . '/login']);
+            // FacadesLog::info('check success', ['response' => env('API_URL') . '/login']);
 
             if ($response->successful()) {
-                FacadesLog::info('Login success', ['response' => $response]);
+                // FacadesLog::info('Login success', ['response' => $response]);
                 $content = $response->json();
                 $token = $content['token'] ?? null;
                 $user = $content['data'];
@@ -37,6 +37,7 @@ class AuthController extends Controller
                 if ($token) {
                     session(['api_token' => $token]);
                     session(['user' => $user]);
+
                     return redirect()->route('login')->with('message', 'Sukses masuk')->with('alert-type', 'success');
                 } else {
                     return back()->with('message','Token atau data pengguna tidak ditemukan dalam respons')->with('alert-type', 'error');
@@ -51,15 +52,13 @@ class AuthController extends Controller
         }
     }
 
-    // public function logout()
-    // {
-    //     // Update user login status to 'off'
-    //     $currentUser = User::find(Auth::user()->id);
-    //     $currentUser->update(['loginstatus' => 'off']);
-
-    //     Auth::logout();
-    //     return redirect()->route('login')->with('success', 'Berhasil Logout');
-    // }
+    public function logout()
+    {
+        // Update user login status to 'off'
+        session()->forget('api_token');
+        session()->forget('user');
+        return redirect()->route('login')->with('message', 'Sukses keluar')->with('alert-type', 'success');
+    }
 
     public function register()
     {

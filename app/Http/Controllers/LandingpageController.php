@@ -215,7 +215,7 @@ class LandingpageController extends Controller
         $data = $response->json();
         // dd($data);
         if (!isset($data['data'])) {
-            return view('Admin.PeminjamanInventarisAda', ['reservations' => []]);
+            return view('UserLogin.InventarisRiwayatReservasi', ['reservations' => []]);
         }
 
         // Convert UTC to Jakarta timezone

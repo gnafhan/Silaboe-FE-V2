@@ -45,7 +45,7 @@
             <div class=" lg:text-3xl text-2xl font-bold text-[#628F8E] mb-4">Form Reservasi Inventaris</div>
 
         </div>
-        <div class="bg-[#F8E0E0] mt-8 relative">
+        {{-- <div class="bg-[#F8E0E0] mt-8 relative">
             <div class="absolute top-0 left-0 border-l-8 border-[#D46857] h-full"></div>
 
             <div class="flex flex-col border border-red-600">
@@ -56,7 +56,7 @@
                     pada waktu periode berjalan
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="bg-[#e9f8f7]  border-[#4C8F8B] border-2 rounded-lg  min-h-24   px-8 py-4 my-8">
             <div class="flex flex-col text-justify ">
                 <div class="lg:text-2xl text-md pb-4 font-semibold flex justify-start">Aturan /Syarat Pemesanan oleh
@@ -71,8 +71,9 @@
                     selesai dipinjam. </h1>
                 <h1 class="lg:text-xl text-md text-[#4C8F8B] ">5. Kerusakan inventaris ketika peminjaman menjadi tanggung
                     jawab peminjam. </h1>
-                <h1 class="lg:text-xl text-md text-[#4C8F8B] ">5. Keterlambatan pengembalian inventaris yang tidak sesuai
+                <h1 class="lg:text-xl text-md text-[#4C8F8B] ">6. Keterlambatan pengembalian inventaris yang tidak sesuai
                     jadwal peminjaman yang diajukan akan ditindak tegas. </h1>
+                <h1 class="lg:text-xl text-md text-[#4C8F8B] ">7. Harap tunjukkan KTM saat peminjaman inventaris </h1>
             </div>
 
         </div>
@@ -90,7 +91,7 @@
                     {{-- Debug information --}}
                     @if(isset($selectedInventories))
                         <div class="mb-4 text-sm text-gray-600">
-                            Selected items: {{ $selectedInventories->pluck('no_item')->implode(', ') }}
+                            Selected items: {{ $selectedInventories->pluck('item_name')->implode(', ') }}
                         </div>
                     @endif
                     
@@ -123,7 +124,7 @@
                                 <label for="no_wa" class="block mb-2 lg:text-xl text-md font-medium text-gray-900">No Whatsapp</label>
                                 <input type="text" id="no_wa" name="no_wa" class="bg-gray-50 border text-sm border-[#DADADA] text-gray-700 lg:text-lg rounded-lg block w-full p-2 lg:p-4" required>
                             </div>
-                            <div class="mb-5">
+                            <div class="mb-1">
                                 <label for="identity" class="block mb-2 lg:text-xl text-md font-medium text-gray-900">Foto Identitas (KTP/KTM)</label>
                                 <input type="file" id="identity" name="identity" accept="image/*"
                                     class="text-white bg-[#628F8E] hover:scale-105 focus:ring-4 focus:outline-none font-semibold text-lg rounded-lg mt-4 w-full sm:w-auto px-8 py-2.5 text-center"
@@ -132,6 +133,7 @@
                                     <img id="preview" src="#" alt="Preview" class="max-w-xs rounded-lg shadow-md">
                                 </div>
                             </div>
+                            <p>* Harap tunjukkan KTM saat mengambil inventaris</p>
                         </div>
                     </div>
 

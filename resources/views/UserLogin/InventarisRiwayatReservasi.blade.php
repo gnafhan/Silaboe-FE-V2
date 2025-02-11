@@ -97,6 +97,7 @@
                             <tr>
 
                                 <th class="py-6 px-4 text-sm md:text-md lg:text-xl font-semibold tracking-wide text-[#628F8E] text-center border-r border-gray-200">Penanggung Jawab</th>
+                                <th class="py-6 px-4 text-sm md:text-md lg:text-xl font-semibold tracking-wide text-[#628F8E] text-center border-r border-gray-200">Inventaris</th>
                                 <th class="py-6 px-4 text-sm md:text-md lg:text-xl font-semibold tracking-wide text-[#628F8E] text-center border-r border-gray-200">Tanggal Mulai</th>
                                 <th class="py-6 px-4 text-sm md:text-md lg:text-xl font-semibold tracking-wide text-[#628F8E] text-center border-r border-gray-200">Jam Mulai</th>
                                 <th class="py-6 px-4 text-sm md:text-md lg:text-xl font-semibold tracking-wide text-[#628F8E] text-center border-r border-gray-200">Jam Selesai</th>
@@ -163,6 +164,8 @@
                 formatTime(reservation.end_time).toLowerCase().includes(searchTerm) ||
                 formatDate(reservation.end_time).toLowerCase().includes(searchTerm) ||
                 reservation.needs.toLowerCase().includes(searchTerm) ||
+                reservation.name.toLowerCase().includes(searchTerm) ||
+                reservation.inventory.item_name.toLowerCase().includes(searchTerm) ||
                 getStatusText(reservation.is_approved).toLowerCase().includes(searchTerm)
             );
         });
@@ -187,9 +190,10 @@
         paginatedData.forEach(reservation => {
             const row = document.createElement('tr');
             row.className = 'bg-[#F8F7FC]';
-            
+            // console.log(reservation);
             row.innerHTML = `
                 <td class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">${reservation?.name ?? 'Null'}</td>
+                <td class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">${reservation?.inventory?.item_name ?? 'Null'}</td>
                 <td class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">${formatDate(reservation.start_time)}</td>
                 <td class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">${formatTime(reservation.start_time)}</td>
                 <td class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">${formatTime(reservation.end_time)}</td>

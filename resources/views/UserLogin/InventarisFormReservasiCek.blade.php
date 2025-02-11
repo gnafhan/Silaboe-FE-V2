@@ -39,7 +39,7 @@
         <div class="py-4">
             <div class=" lg:text-3xl text-xl font-bold text-[#628F8E] lg:mb-4 mb-4">Reservasi Inventaris</div>
         </div>
-        <div class="bg-[#F8E0E0] mt-8 relative">
+        {{-- <div class="bg-[#F8E0E0] mt-8 relative">
             <div class="absolute top-0 left-0 border-l-8 border-[#D46857] h-full"></div>
 
             <div class="flex flex-col">
@@ -48,7 +48,7 @@
                     yang ditambahkan.
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <div>
             <div class=" my-16 bg-white">

@@ -87,7 +87,7 @@
                             <div class=" grid lg:text-lg text-sm md:text-md text-justify ">{{ $lab['description'] }}
                             </div>
                             <div class="flex flex-wrap gap-8 my-8 lg:my-0 ">
-                                <img src="{{ asset('image/background.png') }}" class="h-[40%] rounded-lg grid" alt="foto lab" />
+                                <img src="{{ env('API') . '/storage' .'/'. $lab['foto_laboratorium'] }}" class="h-[40%] rounded-lg grid" alt="foto lab" />
                                 <div class="flex flex-col gap-2 ">
                                     <div class="font-bold text-[#628F8E] lg:text-2xl text-xl grid mb-4 ">Support</div>
                                     <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
