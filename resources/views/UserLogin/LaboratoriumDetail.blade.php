@@ -43,6 +43,14 @@
 
             <div class=" text-sm lg:text-lg font-semibold text-black">Oleh : trpl.sv</div>
         </div>
+        <div class="w-full md:w-1/3 lg:w-1/4">
+            <div class="mb-4">
+                <div id="calendar" class="overflow-auto max-h-96"></div>
+            </div>
+            <a
+                href="{{ route('riwayatreservasilab.login', $id) }}" class="bg-[#628F8E] text-white px-4 py-2 lg:text-lg md:text-md text-sm rounded hover:scale-105 shadow-md ">Riwayat
+                Reservasi</a>
+        </div>
         </div>
 
 

@@ -444,6 +444,30 @@ class AdminController extends Controller
         return view('Admin.PeminjamanLabArchive');
     }
     
+    public function approveLabReservation($id)
+    {
+        $token = session('api_token');
+        $response = Http::withToken($token)->put(env('API_URL') . '/laboratorium/reserve/' . $id . '/approve');
+
+        if ($response->successful()) {
+            return redirect()->route('peminjamanlabada.admin')->with('message', 'Peminjaman disetujui')->with('alert-type', 'success');
+        }
+
+        return redirect()->back()->with('error', 'Gagal menyetujui peminjaman')->with('alert-type', 'error');
+    }
+
+    public function rejectLabReservation($id)
+    {
+        $token = session('api_token');
+        $response = Http::withToken($token)->put(env('API_URL') . '/laboratorium/reserve/' . $id . '/reject');
+
+        if ($response->successful()) {
+            return redirect()->route('peminjamanlabada.admin')->with('message', 'Peminjaman ditolak')->with('alert-type', 'success');
+        }
+
+        return redirect()->back()->with('error', 'Gagal menolak peminjaman')->with('alert-type', 'error');
+    }
+
 //Inventaris
     public function inventaris(Request $request)
     {
@@ -603,6 +627,29 @@ class AdminController extends Controller
         return view('Admin.PeminjamanInventarisArchive');
     }
     
+    public function approveInventory($id)
+    {
+        $token = session('api_token');
+        $response = Http::withToken($token)->put(env('API_URL') . '/inventory/reserve/' . $id . '/approve');
+
+        if ($response->successful()) {
+            return redirect()->route('peminjamaninvenatrisada.admin')->with('message', 'Peminjaman disetujui')->with('alert-type', 'success');
+        }
+
+        return redirect()->back()->with('error', 'Gagal menyetujui peminjaman')->with('alert-type', 'error');
+    }
+
+    public function rejectInventory($id)
+    {
+        $token = session('api_token');
+        $response = Http::withToken($token)->put(env('API_URL') . '/inventory/reserve/' . $id . '/reject');
+
+        if ($response->successful()) {
+            return redirect()->route('peminjamaninvenatrisada.admin')->with('message', 'Peminjaman ditolak')->with('alert-type', 'success');
+        }
+
+        return redirect()->back()->with('error', 'Gagal menolak peminjaman')->with('alert-type', 'error');
+    }
 
         //Profil
         public function profil()

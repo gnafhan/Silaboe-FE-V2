@@ -126,7 +126,7 @@
                             @foreach ($jadwals as $jadwal)
                             <li class="flex justify-between items-center mb-2 p-2 text-md">
                                 <span>
-                                    {{ $jadwal['identity'] ? $jadwal['identity'] . ' mengajukan peminjaman' : '-' }}
+                                    {{ $jadwal['name'] ? $jadwal['name'] . ' mengajukan peminjaman' : '-' }}
                                 </span>
                                 <span
                                     class="bg-[{{ isset($jadwal['is_approved']) ? ($jadwal['is_approved'] ? '#499DBC' : '#F5CD51') : '#D46857' }}] text-white px-5 py-2 rounded-2xl">{{ isset($jadwal['is_approved']) ? ($jadwal['is_approved'] ? 'Approved' : 'Waiting') : 'Rejected' }}</span>
@@ -158,7 +158,7 @@
                                 @foreach ($inventarisreserves as $inventarisreserve )
                                 <li class="flex justify-between items-center mb-2 p-2 text-md">
                                     <span>
-                                        {{ $inventarisreserve['identity'] ? $inventarisreserve['identity'] . ' mengajukan peminjaman' : '-' }}
+                                        {{ $inventarisreserve['name'] ? $inventarisreserve['name'] . ' mengajukan peminjaman' : '-' }}
                                     </span>
                                     <span
                                     class="bg-[{{ isset($inventarisreserve['is_approved']) ? ($inventarisreserve['is_approved'] ? '#499DBC' : '#F5CD51') : 'rgba(98,143,142,0.1)' }}] text-white px-5 py-2 rounded-2xl">{{ isset($inventarisreserve['is_approved']) ? ($inventarisreserve['is_approved'] ? 'Approved' : 'Waiting') : '-' }}</span>

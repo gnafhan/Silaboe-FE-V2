@@ -166,6 +166,7 @@ class LandingpageController extends Controller
                 'needs' => $request->keterangan,
                 'start_time' => $start_datetime,
                 'end_time' => $end_datetime,
+                'name' => $request->name
             ];
 
             $response = Http::withHeaders([
@@ -181,7 +182,7 @@ class LandingpageController extends Controller
             }
         }
 
-        return redirect()->route('formreservasiinventarisberhasil.login');
+        return redirect()->route('riwayatreservasiinventaris.login');
     }
 
     public function inventarisformreservasiberhasil()
@@ -375,6 +376,7 @@ class LandingpageController extends Controller
             'needs' => $request->keterangan,
             'start_time' => $start_datetime,
             'end_time' => $end_datetime,
+            'name' => $request->name
         ];
 
         $response = Http::withHeaders([

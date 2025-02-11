@@ -12,6 +12,7 @@
                     <img src="{{ asset('image/Profile.png') }}" class=" h-10 w-10 " alt="Flowbite Logo" />
                 </button>
             </div>
+            
         </div>
     </header>
     <div class="bg-[rgba(237,245,245,1)]">

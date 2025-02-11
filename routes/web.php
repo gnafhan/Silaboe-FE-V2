@@ -39,7 +39,7 @@ Route::get('login/landingpage/laboratorium/{id}/formlab', [LandingpageController
 Route::post('login/landingpage/laboratorium/{id}/formlab', [LandingpageController::class, 'postFormLab'])->name('formlab.login.post');
 Route::get('login/landingpage/laboratorium/{id}/riwayatreservasi', [LandingpageController::class, 'riwayatreservasilab'])->name('riwayatreservasilab.login');
 Route::get('login/landingpage/laboratorium/{id}/riwayatreservasi/search', [LandingpageController::class, 'searchReservasiLab'])->name('riwayatreservasilab.search');
-
+ 
 
 //Reservasi Login
 Route::get('login/landingpage/inventaris', [LandingpageController::class, 'Inventaris'])->name('inventaris.login');
@@ -49,6 +49,7 @@ Route::get('login/landingpage/inventaris/reservasi', [LandingpageController::cla
 Route::get('login/landingpage/inventaris/formreservasi', [LandingpageController::class, 'FormReservasiInventaris'])->name('formreservasiinventaris.login');
 Route::post('login/landingpage/inventaris/formreservasi/submit', [LandingpageController::class, 'postFormReservasiInventaris'])->name('formreservasiinventaris.post');
 Route::get('login/landingpage/inventaris/formreservasi/cek', [LandingpageController::class, 'InventarisFormReservasiCek'])->name('formreservasiinventariscek.login');
+Route::get('login/landingpage/inventaris/riwayatreservasi/detail/{id}', [LandingpageController::class, 'InventarisRiwayatReservasiDetail'])->name('riwayatreservasiinventarisdetail.login');
 Route::get('login/landingpage/inventaris/formreservasi/berhasil', [LandingpageController::class, 'InventarisFormReservasiBerhasil'])->name('formreservasiinventarisberhasil.login');
 Route::get('login/landingpage/inventaris/riwayatreservasi', [LandingpageController::class, 'InventarisRiwayatReservasi'])->name('riwayatreservasiinventaris.login');
 Route::post('login/landingpage/inventaris/remove', [LandingpageController::class, 'removeSelectedItem'])->name('removeSelectedItem');
@@ -66,6 +67,8 @@ Route::post('admin/laboratorium/tambah', [AdminController::class, 'laboratoriumt
 Route::get('admin/laboratorium/{id}/edit', [AdminController::class, 'Laboratoriumedit'])->name('laboratoriumedit.admin');
 Route::put('admin/laboratorium/{id}/update', [AdminController::class, 'laboratoriumupdate'])->name('laboratoriumeupdate.admin');
 Route::delete('admin/laboratorium/{id}', [AdminController::class, 'Laboratoriumhapus'])->name('laboratoriumhapus.admin');
+Route::put('admin/laboratorium/reserve/{id}/approve', [AdminController::class, 'approveLabReservation'])->name('approve.labreservation');
+Route::put('admin/laboratorium/reserve/{id}/reject', [AdminController::class, 'rejectLabReservation'])->name('reject.labreservation');
 
 //JadwalLab
 Route::get('admin/jadwallab', [AdminController::class, 'JadwalLab'])->name('jadwallab.admin');
@@ -87,6 +90,8 @@ Route::post('admin/inventaris/tambah', [AdminController::class, 'InventarisTamba
 Route::get('admin/inventaris/{id}/edit', [AdminController::class, 'InventarisEdit'])->name('inventarisedit.admin');
 Route::put('admin/inventaris/{id}/update', [AdminController::class, 'Inventarisupdate'])->name('inventarisupdate.admin');
 Route::delete('admin/inventaris/{id}', [AdminController::class, 'Inventarishapus'])->name('inventarishapus.admin');
+Route::put('admin/inventaris/approve/{id}', [AdminController::class, 'approveInventory'])->name('approve.inventory');
+Route::put('admin/inventaris/reject/{id}', [AdminController::class, 'rejectInventory'])->name('reject.inventory');
 
 //Peminjaman Inventaris
 Route::get('admin/peminjamaninvenatris/tidakAda', [AdminController::class, 'PeminjamanInventarisTidakAda'])->name('peminjamaninvenatristidakada.admin');

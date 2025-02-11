@@ -67,20 +67,20 @@
                                 {{ \Carbon\Carbon::parse($reservation['end_time'])->format('H:i') }}
                             </td>
                             <td class="p-2 sm:p-3 text-xs sm:text-sm md:text-base lg:text-md text-gray-700 whitespace-nowrap border-r border-gray-200">
-                                {{ $reservation['identity'] }}
+                                {{ $reservation['name'] }}
                             </td>
                             <td class="p-2 sm:p-3 text-xs sm:text-sm lg:text-md text-gray-700 whitespace-nowrap border-gray-200 border-r">
-                                @if($reservation['is_approved'] === true)
+                                @if($reservation['is_approved'] === 1)
                                     <span class="px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm font-medium tracking-wider text-white bg-[#499DBC] rounded-xl">
                                         Approved
                                     </span>
-                                @elseif($reservation['is_approved'] === false)
-                                    <span class="px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm font-medium tracking-wider text-white bg-[#D46857] rounded-xl">
-                                        Rejected
-                                    </span>
-                                @else
+                                @elseif($reservation['is_approved'] === 0)
                                     <span class="px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm font-medium tracking-wider text-white bg-yellow-500 rounded-xl">
                                         Pending
+                                    </span>
+                                @else
+                                    <span class="px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm font-medium tracking-wider text-white bg-[#D46857] rounded-xl">
+                                        Rejected
                                     </span>
                                 @endif
                             </td>

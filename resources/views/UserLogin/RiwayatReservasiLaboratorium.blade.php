@@ -94,6 +94,8 @@
                                     class="py-6 px-4 text-sm md:text-md lg:text-lg font-semibold tracking-wide text-[#628F8E] text-center border-r border-gray-200">
                                     Email</th>
                                 <th
+                                    class="py-6 px-4 text-sm md:text-md lg:text-lg font-semibold tracking-wide text-[#628F8E] text-center border-r border-gray-200">
+                                    Name</th>
                                 <th
                                     class="py-6 px-4 text-sm md:text-md lg:text-lg font-semibold tracking-wide text-[#628F8E] text-center border-r border-gray-200">
                                     Laboratorium</th>
@@ -126,6 +128,9 @@
                                 <tr class="bg-[#F8F7FC]">
                                     <td class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
                                         {{ $reservation['email'] }}
+                                    </td>
+                                    <td class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
+                                        {{ $reservation['name'] }}
                                     </td>
                                     <td class="p-3 text-sm md:text-base lg:text-base text-gray-700 whitespace-nowrap border-r border-gray-200">
                                         {{ $lab['name'] }}

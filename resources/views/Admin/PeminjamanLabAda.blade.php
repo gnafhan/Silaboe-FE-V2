@@ -23,8 +23,9 @@
                     <select id="statusFilter"
                         class="bg-[rgba(98,143,142,0.2)] shadow appearance-none border rounded-xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-4">
                         <option value="">Cari per status</option>
-                        <option value="published">Published</option>
+                        <option value="approved">Approved</option>
                         <option value="pending">Pending</option>
+                        <option value="rejected">Rejected</option>
                     </select>
                     <span>entri per kategori</span>
                 </div>
@@ -77,12 +78,13 @@
                             {{ $reservation['room']['name'] ?? 'N/A' }}
                         </td>
                         <td class="p-3 text-sm md:text-base lg:text-md text-gray-700 whitespace-nowrap border-r border-gray-200">
-                            {{ $reservation['identity'] ?? 'N/A' }}
+                            {{ $reservation['name'] ?? 'N/A' }}
                         </td>
+                        {{-- @dd($reservation) --}}
                         <td class="p-3 text-sm lg:text-md text-gray-700 whitespace-nowrap border-gray-200 border-r">
                             <span class="px-4 py-2 text-sm font-medium tracking-wider text-white 
-                                {{ ($reservation['is_approved'] ?? false) ? 'bg-[#499DBC]' : 'bg-yellow-500' }} rounded-xl">
-                                {{ ($reservation['is_approved'] ?? false) ? 'Published' : 'Pending' }}
+                                {{ ($reservation['is_approved'] == 1) ? 'bg-[#499DBC]' : (($reservation['is_approved'] == -1) ? 'bg-red-500': 'bg-yellow-500') }} rounded-xl">
+                                {{ ($reservation['is_approved'] == 1) ? 'Approved' : (($reservation['is_approved'] == -1) ? 'Rejected' : 'Pending') }}
                             </span>
                         </td>
                         <td class="p-3 text-sm lg:text-md text-gray-700 whitespace-nowrap border-gray-200 border-r flex justify-center items-center">

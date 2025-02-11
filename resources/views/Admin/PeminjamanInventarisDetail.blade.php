@@ -29,7 +29,7 @@
             </div>
             <div class="bg-[rgba(98,143,142,0.1)] p-6 rounded-2xl shadow-lg">
                 <label class="block text-xl font-semibold text-black">Nama</label>
-                <p class="mt-2 text-lg text-black">{{ $inventoryreserfs['data']['identity'] }}</p>
+                <p class="mt-2 text-lg text-black">{{ $inventoryreserfs['data']['name'] ?? '-' }}</p>
             </div>
             <div class="bg-[rgba(98,143,142,0.1)] p-6 rounded-2xl shadow-lg">
                 <label class="block text-xl font-semibold text-black">Jam Peminjaman</label>
@@ -45,6 +45,10 @@
             <div class="bg-[rgba(98,143,142,0.1)] p-6 rounded-2xl shadow-lg">
                 <label class="block text-xl font-semibold text-black">Keperluan Peminjaman</label>
                 <p class="mt-2 text-lg text-black">{{ $inventoryreserfs['data']['needs'] }}</p>
+            </div>
+            <div class="bg-[rgba(98,143,142,0.1)] p-6 rounded-2xl shadow-lg">
+                <label class="block text-xl font-semibold text-black">Status Peminjaman</label>
+                <p class="mt-2 text-lg text-black">{{ ($inventoryreserfs['data']['is_approved'] == 1 ? 'Disetujui' :  ($inventoryreserfs['data']['is_approved'] == -1 ? 'Ditolak' : 'Pending'))}}</p>
             </div>
             <div class="bg-[rgba(98,143,142,0.1)] p-6 rounded-2xl shadow-lg">
                 <label class="block text-xl font-semibold text-black">Inventaris</label>
@@ -77,13 +81,24 @@
             </a>
             
             <div class="flex gap-4">
-                @if($inventoryreserfs['data']['is_approved'] === null)
-                    <button class="mt-6 bg-[#499DBC] text-white px-8 py-2 rounded-xl font-medium">
-                        Setuju
-                    </button>
-                    <button class="mt-6 bg-[#D46857] text-white px-8 py-2 rounded-xl font-medium">
-                        Tolak
-                    </button>
+                {{-- @dd($inventoryreserfs['data']['id']) --}}
+                @if($inventoryreserfs['data']['is_approved'] !== 1)
+                    <form action="{{ route('approve.inventory', $inventoryreserfs['data']['id']) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="mt-6 bg-[#499DBC] text-white px-8 py-2 rounded-xl font-medium">
+                            Setuju
+                        </button>
+                    </form>
+                @endif
+                @if($inventoryreserfs['data']['is_approved'] !== -1)
+                    <form action="{{ route('reject.inventory', $inventoryreserfs['data']['id']) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="mt-6 bg-[#D46857] text-white px-8 py-2 rounded-xl font-medium">
+                            Tolak
+                        </button>
+                    </form>
                 @endif
             </div>
         </div>

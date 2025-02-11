@@ -58,6 +58,13 @@
                                         class="bg-gray-50 border text-sm border-[#DADADA] text-gray-900 lg:text-lg  rounded-lg  block w-full p-2 lg:p-4  dark:border-[#DADADA] dark:placeholder-gray-400 dark:text-black"
                                         placeholder="Masukkan Nama Email Peminjam" required />
                                 </div>
+                                <div class="mb-5">
+                                    <label for="name"
+                                        class="block mb-2 lg:text-xl text-md font-medium text-gray-900">Nama</label>
+                                    <input type="text" id="name" name="name"
+                                        class="bg-gray-50 border text-sm border-[#DADADA] text-gray-900 lg:text-lg  rounded-lg  block w-full p-2 lg:p-4  dark:border-[#DADADA] dark:placeholder-gray-400 dark:text-black"
+                                        placeholder="Masukkan Nama Peminjam" required />
+                                </div>
                                 <div class="mb-8">
                                     <label for="email" class="block mb-2 lg:text-xl text-md font-medium text-gray-900">No
                                         Whatsap</label>
