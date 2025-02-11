@@ -104,7 +104,7 @@
                     </svg>
                     <span class="ml-4">Profil</span>
                 </a>
-                <a href="{{ Route('login') }}"
+                <a href="{{ Route('logout') }}"
                     class="flex items-center text-md text-[#CBCBCB] font-medium py-3 {{ Request::is('admin/peminjamanlab*') ? ' text-white' : 'text-[#CBCBCB]' }}  hover:text-white rounded transition duration-200">
                     <svg width="23" height="20" viewBox="0 0 33 30" fill="none"
                         xmlns="http://www.w3.org/2000/svg">

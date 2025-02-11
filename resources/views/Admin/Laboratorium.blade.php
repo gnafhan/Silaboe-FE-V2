@@ -51,7 +51,7 @@
                         <a href="{{ Route('laboratoriumdetail.admin', $laboratorium['id']) }}"
                             class="bg-[rgba(98,143,142,0.2)] lg:rounded-2xl rounded-3xl rounded-l-3xl shadow p-0 flex flex-col md:flex-row items-start md:items-stretch">
                             <div class="w-full md:w-1/3 ">
-                                <img src="{{ asset('image/laboratoriumimage.png') }}"
+                                <img src="{{ env('API') . '/storage' .'/'. $laboratorium['foto_laboratorium'] }}"
                                     class="rounded-3xl w-full h-full object-cover" alt="Flowbite Logo" />
                             </div>
                             <div class="ml-0 md:ml-4 mt-8 md:mt-0 flex-1 flex flex-col lg:flex-row justify-between">
@@ -70,9 +70,17 @@
                                 </div>
                             </div>
                             <div class="flex flex-col gap-2  md:mt-0 lg:ml-4 font-semibold lg:mt-8 lg:mr-8">
-                                <button class="bg-[#628F8E] px-4 py-2 rounded-md shadow text-white">Rendering</button>
-                                <button class="bg-[#628F8E] px-4 py-2 rounded-md shadow text-white">Rendering</button>
-                                <button class="bg-[#628F8E] px-4 py-2 rounded-md shadow text-white">Rendering</button>
+                                @foreach ($laboratoriumSupports as $support)
+                                @if ($support['room_id'] == $laboratorium['id'])
+                                    @foreach (['support_type_1', 'support_type_2', 'support_type_3', 'support_type_4'] as $supportType)
+                                        @if (!is_null($support[$supportType]))
+                                            <button class="bg-[#628F8E] px-4 py-2 rounded-md shadow text-white">
+                                                {{ $support[$supportType] }}
+                                            </button>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            @endforeach
                             </div>
                         </a>
                     @endforeach

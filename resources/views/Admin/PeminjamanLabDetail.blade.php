@@ -30,12 +30,12 @@
             </div>
             <div class="bg-[rgba(98,143,142,0.1)] px-8 py-6 rounded-lg">
                 <p class="text-xl font-bold text-gray-700 mb-2">Nama</p>
-                <p class="text-lg">{{ $reservation['identity'] ?? 'N/A' }}</p>
+                <p class="text-lg">{{ $reservation['name'] ?? 'N/A' }}</p>
             </div>
             <div class="bg-[rgba(98,143,142,0.1)] px-8 py-6 rounded-lg">
                 <p class="text-xl font-bold text-gray-700 mb-2">Status Persetujuan</p>
-                <p class="text-lg {{ $reservation['is_approved'] ? 'text-green-600' : 'text-red-600' }}">
-                    {{ $reservation['is_approved'] ? 'Disetujui' : 'Belum Disetujui' }}
+                <p class="text-lg {{ ($reservation['is_approved'] == 1) ? 'text-[#499DBC]' : (($reservation['is_approved'] == -1) ? 'text-red-500': 'text-yellow-500') }}">
+                    {{ ($reservation['is_approved'] == 1) ? 'Disetujui' : (($reservation['is_approved'] == -1) ? 'Tidak Disetujui': 'Menunggu Konfirmasi') }}
                 </p>
             </div>
             <div class="bg-[rgba(98,143,142,0.1)] px-8 py-6 rounded-lg">
@@ -51,7 +51,7 @@
                 <p class="text-lg">{{ $reservation['room']['name'] ?? 'N/A' }}</p>
             </div>
         </div>
-        <div class="flex justify-start">
+        <div class="flex justify-between mt-12">
             <a href="{{ route('peminjamanlabada.admin') }}"
                 class="mt-6 bg-[#4C8F8B] hover:scale-105 text-white px-8 py-2 rounded-md flex items-center">
                 <svg width="9" height="17" viewBox="0 0 9 17" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -62,6 +62,26 @@
                 </svg>
                 Kembali
             </a>
+            <div class="flex gap-4">
+                @if($reservation['is_approved'] !== 1)
+                    <form action="{{ route('approve.labreservation', $reservation['id']) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="mt-6 bg-[#499DBC] text-white px-8 py-2 rounded-xl font-medium">
+                            Setuju
+                        </button>
+                    </form>
+                @endif
+                @if($reservation['is_approved'] !== -1)
+                    <form action="{{ route('reject.labreservation', $reservation['id']) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="mt-6 bg-[#D46857] text-white px-8 py-2 rounded-xl font-medium">
+                            Tolak
+                        </button>
+                    </form>
+                @endif
+            </div>
         </div>
     </section>
 @endsection

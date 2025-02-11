@@ -40,7 +40,7 @@
         </div>
 
         <div class="bg-gray-20 border-2 border-[#DADADA] lg:px-8 lg:py-6 lg:mb-24 p-6 w-full ">
-            <form action="{{ route('formlab.login.post', $id) }}" method="POST">
+            <form action="{{ route('formlab.login.post', $id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('post')
                 <h1 class="text-black font-bold lg:text-2xl text-xl  mb-8 ">Form Peminjaman</h1>
@@ -58,6 +58,13 @@
                                         class="bg-gray-50 border text-sm border-[#DADADA] text-gray-900 lg:text-lg  rounded-lg  block w-full p-2 lg:p-4  dark:border-[#DADADA] dark:placeholder-gray-400 dark:text-black"
                                         placeholder="Masukkan Nama Email Peminjam" required />
                                 </div>
+                                <div class="mb-5">
+                                    <label for="name"
+                                        class="block mb-2 lg:text-xl text-md font-medium text-gray-900">Nama</label>
+                                    <input type="text" id="name" name="name"
+                                        class="bg-gray-50 border text-sm border-[#DADADA] text-gray-900 lg:text-lg  rounded-lg  block w-full p-2 lg:p-4  dark:border-[#DADADA] dark:placeholder-gray-400 dark:text-black"
+                                        placeholder="Masukkan Nama Peminjam" required />
+                                </div>
                                 <div class="mb-8">
                                     <label for="email" class="block mb-2 lg:text-xl text-md font-medium text-gray-900">No
                                         Whatsap</label>
@@ -66,11 +73,13 @@
                                         placeholder="Masukkan No Whatsapp Peminjam" required />
                                 </div>
                                 <div class="mb-5">
-                                    <label for="email"
-                                        class="block mb-2 lg:text-xl text-md font-medium text-gray-900">Foto
-                                        Identitas (KTP/KTM) </label>
-                                    <input type="file" name="identitas"
-                                        class="text-white bg-[#628F8E] hover:scale-105 focus:ring-4 focus:outline-none font-semibold text-lg rounded-lg mt-4 w-full sm:w-auto px-8 py-2.5 text-center  dark:hover:bg-blue-70">
+                                    <label for="identitas" class="block mb-2 lg:text-xl text-md font-medium text-gray-900">Foto Identitas (KTP/KTM)</label>
+                                    <input type="file" name="identitas" id="identitas" accept="image/*"
+                                        class="text-white bg-[#628F8E] hover:scale-105 focus:ring-4 focus:outline-none font-semibold text-lg rounded-lg mt-4 w-full sm:w-auto px-8 py-2.5 text-center dark:hover:bg-blue-70"
+                                        onchange="previewImage(this)">
+                                    <div id="imagePreview" class="mt-4 hidden">
+                                        <img id="preview" src="#" alt="Preview" class="max-w-xs rounded-lg shadow-md">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -173,4 +182,27 @@
     </section>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
     <script src="../path/to/flowbite/dist/datepicker.js"></script> --}}
+@endsection
+
+@section('scripts')
+<script>
+function previewImage(input) {
+    const preview = document.getElementById('preview');
+    const previewDiv = document.getElementById('imagePreview');
+    
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            previewDiv.classList.remove('hidden');
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        preview.src = '#';
+        previewDiv.classList.add('hidden');
+    }
+}
+</script>
 @endsection

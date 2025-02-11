@@ -51,185 +51,119 @@
 
         <body class="bg-gray-50">
             <div class="container mx-auto w-full my-12 p-4">
-                <<div
+                <div
                     class="flex flex-col lg:flex-row md:flex-row justify-between items-center mb-4 space-y-2 lg:space-y-2 lg:space-x-4 md:space-y-2">
                     <div class="flex items-center space-x-2">
-                        <select class="border border-gray-300 rounded px-4 py-2">
-                            <option>Meja PC Server</option>
-                        </select>
-                        <span>entri per kategori</span>
+                        <form id="entriesForm" method="GET" class="inline">
+                            <label for="entries" class="mr-2">Show</label>
+                            <select id="entries" name="entries" class="border rounded-md p-1" onchange="document.getElementById('entriesForm').submit();">
+                                <option value="10" {{ $perPage == 10 ? 'selected' : '' }}>10</option>
+                                <option value="25" {{ $perPage == 25 ? 'selected' : '' }}>25</option>
+                                <option value="50" {{ $perPage == 50 ? 'selected' : '' }}>50</option>
+                                <option value="100" {{ $perPage == 100 ? 'selected' : '' }}>100</option>
+                            </select>
+                            <span class="ml-2">entries per page</span>
+                        </form>
                     </div>
                     <div class="flex items-center ">
                         <label for="search" class="mr-2">Pencarian:</label>
                         <input id="search" type="text" placeholder="Cari inventaris disini..."
                             class="px-4 py-2 rounded border border-gray-300">
                     </div>
-            </div>
-
-            <div class="overflow-x-auto overflow-y-auto rounded-lg shadow">
-                <table class="min-w-full bg-[#F8F7FC]">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th rowspan="2"
-                                class="py-3 px-6 lg:text-lg md:text-md text-sm font-bold text-[#628F8E] uppercase tracking-wider">
-                                Jenis
-                                Inventaris</th>
-                            <th rowspan="2"
-                                class="py-3 px-6 lg:text-lg md:text-md text-sm font-bold text-[#628F8E]  uppercase tracking-wider">
-                                No Id
-                            </th>
-                            <th colspan="2"
-                                class="py-3 px-6 lg:text-lg md:text-md text-sm font-bold text-[#628F8E]  uppercase tracking-wider text-center">
-                                Kondisi</th>
-                            <th rowspan="2"
-                                class="py-3 px-6 lg:text-lg md:text-md text-sm font-bold text-[#628F8E]  uppercase tracking-wider">
-                                Informasi
-                            </th>
-                            <th rowspan="2"
-                                class="py-3 px-6 lg:text-lg md:text-md text-sm font-bold text-[#628F8E] uppercase tracking-wider">
-                                Aksi
-                            </th>
-                        </tr>
-                        <tr>
-                            <th
-                                class="py-3 px-6 lg:text-lg md:text-md text-sm font-bold text-[#628F8E]  uppercase tracking-wider text-center">
-                                Baik</th>
-                            <th
-                                class="py-3 px-6 lg:text-lg md:text-md text-sm font-bold text-[#628F8E]  uppercase tracking-wider text-center">
-                                Tidak Baik</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200">
-                        <tr>
-                            <td class="py-4 px-6 whitespace-nowrap text-sm font-medium text-gray-900">Meja PC Server
-                            </td>
-                            <td class="py-4 px-6 whitespace-nowrap  text-md text-gray-500">MPC009</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">✓ </td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center"></td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500">Laboratorium HU105</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">
-                                <input type="checkbox" class="form-checkbox">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="py-4 px-6 whitespace-nowrap text-sm font-medium text-gray-900">Kursi PC Server
-                            </td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500">MPC006</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">✓</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center"></td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500">Laboratorium HU105</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">
-                                <input type="checkbox" class="form-checkbox">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="py-4 px-6 whitespace-nowrap text-sm font-medium text-gray-900">Meja PC Server
-                            </td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500">MPC003</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center"></td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">✓</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500">Laboratorium HU105</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">
-                                <input type="checkbox" class="form-checkbox">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="py-4 px-6 whitespace-nowrap text-sm font-medium text-gray-900">Meja PC Server
-                            </td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500">MPC004</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">✓</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center"></td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500">Laboratorium HU105</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">
-                                <input type="checkbox" class="form-checkbox">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="py-4 px-6 whitespace-nowrap text-sm font-medium text-gray-900">Meja PC Server
-                            </td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500">MPC005</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">✓</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center"></td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500">Laboratorium HU105</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">
-                                <input type="checkbox" class="form-checkbox">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="py-4 px-6 whitespace-nowrap text-sm font-medium text-gray-900">Meja PC Server
-                            </td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500">MPC006</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center"></td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">✓</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500">Laboratorium HU105</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">
-                                <input type="checkbox" class="form-checkbox">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="py-4 px-6 whitespace-nowrap text-sm font-medium text-gray-900">Meja PC Server
-                            </td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500">MPC007</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">✓</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center"></td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500">Laboratorium HU105</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">
-                                <input type="checkbox" class="form-checkbox">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="py-4 px-6 whitespace-nowrap text-sm font-medium text-gray-900">Meja PC Server
-                            </td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500">MPC008</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">✓</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-sm text-gray-500 text-center"></td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500">Laboratorium HU105</td>
-                            <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">
-                                <input type="checkbox" class="form-checkbox">
-                            </td>
-                        </tr>
-
-
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="mt-4 flex justify-between items-center">
-
-
-                <div class="lg:flex-col space-y-6 items-center">
-                    <div class="lg:text-lg md:text-md text-sm text-gray-700 mb-8">
-                        Menampilkan 1 sampai 10 dari 50 entri
-                    </div>
-                    <a href="{{ Route('riwayatreservasiinventaris.login') }}"
-                        class="bg-[#499DBC]  text-white px-4 py-2 rounded-lg  lg:text-lg md:text-md text-sm  hover:scale-125">
-                        Riwayat Reservasi
-                    </a>
                 </div>
 
-
-
-
-                <div class="flex
-                        space-x-4 items-center flex-col space-y-4">
-
-                    <div class="flex items-center space-x-4">
-                        <button class="text-gray-600 hover:text-gray-800">«</button>
-                        <button class="bg-yellow-500 text-white px-2 py-1 rounded">1</button>
-                        <button class="text-gray-600 hover:text-gray-800">2</button>
-                        <button class="text-gray-600 hover:text-gray-800">3</button>
-                        <button class="text-gray-600 hover:text-gray-800">4</button>
-                        <button class="text-gray-600 hover:text-gray-800">5</button>
-                        <button class="text-gray-600 hover:text-gray-800">»</button>
-                    </div>
-                    <a href="{{ Route('reservasiinventaris.login') }}"
-                        class="bg-yellow-500 text-white px-4 py-2 rounded-lg lg:text-lg md:text-md text-sm hover:scale-[110%]">Reservasi
-                        Inventaris</a>
+            <form id="inventoryForm" action="{{ Route('reservasiinventaris.login') }}" method="GET">
+                <div class="overflow-x-auto overflow-y-auto rounded-lg shadow">
+                    <table class="min-w-full bg-[#F8F7FC]">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th rowspan="2"
+                                    class="py-3 px-6 lg:text-lg md:text-md text-sm font-bold text-[#628F8E] uppercase tracking-wider">
+                                    Jenis
+                                    Inventaris</th>
+                                <th rowspan="2"
+                                    class="py-3 px-6 lg:text-lg md:text-md text-sm font-bold text-[#628F8E]  uppercase tracking-wider">
+                                    No Id
+                                </th>
+                                <th colspan="2"
+                                    class="py-3 px-6 lg:text-lg md:text-md text-sm font-bold text-[#628F8E]  uppercase tracking-wider text-center">
+                                    Kondisi</th>
+                                <th rowspan="2"
+                                    class="py-3 px-6 lg:text-lg md:text-md text-sm font-bold text-[#628F8E]  uppercase tracking-wider">
+                                    Informasi
+                                </th>
+                                <th rowspan="2"
+                                    class="py-3 px-6 lg:text-lg md:text-md text-sm font-bold text-[#628F8E] uppercase tracking-wider">
+                                    Aksi
+                                </th>
+                            </tr>
+                            <tr>
+                                <th
+                                    class="py-3 px-6 lg:text-lg md:text-md text-sm font-bold text-[#628F8E]  uppercase tracking-wider text-center">
+                                    Baik</th>
+                                <th
+                                    class="py-3 px-6 lg:text-lg md:text-md text-sm font-bold text-[#628F8E]  uppercase tracking-wider text-center">
+                                    Tidak Baik</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            @foreach ($inventories as $inventory)
+                                <tr>
+                                    <td class="py-4 px-6 whitespace-nowrap text-sm font-medium text-gray-900">{{ $inventory['item_name'] }}</td>
+                                    <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500">{{ $inventory['no_item'] }}</td>
+                                    <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">{{ $inventory['condition'] == 'good' ? '✓' : '' }}</td>
+                                    <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">{{ $inventory['condition'] == 'bad' ? '✓' : '' }}</td>
+                                    <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500">{{ $inventory['information'] }}</td>
+                                    <td class="py-4 px-6 whitespace-nowrap text-md text-gray-500 text-center">
+                                        <input type="checkbox" name="selected_items[]" value="{{ $inventory['id'] }}" class="form-checkbox inventory-checkbox">
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-            </div>
+
+                <div class="mt-4 flex justify-between items-center">
+                    <div class="lg:flex-col space-y-6 items-center">
+                        <div class="lg:text-lg md:text-md text-sm text-gray-700 mb-8">
+                            Menampilkan {{ $startEntry }} sampai {{ $endEntry }} dari {{ $totalEntries }} entri
+                        </div>
+                        <a href="{{ Route('riwayatreservasiinventaris.login') }}"
+                            class="bg-[#499DBC]  text-white px-4 py-2 rounded-lg  lg:text-lg md:text-md text-sm  hover:scale-125">
+                            Riwayat Reservasi
+                        </a>
+                    </div>
+                    <div class="flex space-x-4 items-center flex-col space-y-4">
+                        <div class="flex items-center space-x-4">
+                            @if ($currentPage > 1)
+                                <a href="{{ request()->fullUrlWithQuery(['page' => $currentPage - 1]) }}" class="text-gray-600 hover:text-gray-800">«</a>
+                            @endif
+                            @for ($i = 1; $i <= $lastPage; $i++)
+                                <a href="{{ request()->fullUrlWithQuery(['page' => $i]) }}" class="{{ $i == $currentPage ? 'bg-yellow-500 text-white' : 'text-gray-600 hover:text-gray-800' }} px-2 py-1 rounded">{{ $i }}</a>
+                            @endfor
+                            @if ($currentPage < $lastPage)
+                                <a href="{{ request()->fullUrlWithQuery(['page' => $currentPage + 1]) }}" class="text-gray-600 hover:text-gray-800">»</a>
+                            @endif
+                        </div>
+                        <button type="submit" 
+                                class="bg-yellow-500 text-white px-4 py-2 rounded-lg lg:text-lg md:text-md text-sm hover:scale-[110%]"
+                                id="reserveButton" 
+                                disabled>
+                            Reservasi Inventaris
+                        </button>
+                    </div>
+                </div>
+            </form>
             </div>
         </body>
         <script>
+            function updateEntriesPerPage() {
+                const entries = document.getElementById('entries').value;
+                const url = new URL(window.location.href);
+                url.searchParams.set('entries', entries);
+                window.location.href = url.toString();
+            }
+
             document.addEventListener("DOMContentLoaded", function() {
                 const searchInput = document.getElementById("search");
                 const rows = document.querySelectorAll("tbody tr");
@@ -238,16 +172,35 @@
                     const searchQuery = this.value.trim().toLowerCase();
 
                     rows.forEach(row => {
-                        const textContent = row.textContent.trim().toLowerCase();
-                        if (textContent.includes(searchQuery)) {
+                        const cells = row.querySelectorAll("td");
+                        let rowContainsSearchTerm = false;
+
+                        cells.forEach(cell => {
+                            if (cell.textContent.trim().toLowerCase().includes(searchQuery) || 
+                                (searchQuery === 'baik' && cell.textContent.trim().toLowerCase() === '✓' && cell.cellIndex === 2) ||
+                                (searchQuery === 'tidak baik' && cell.textContent.trim().toLowerCase() === '✓' && cell.cellIndex === 3)) {
+                                rowContainsSearchTerm = true;
+                            }
+                        });
+
+                        if (rowContainsSearchTerm) {
                             row.style.display = "";
                         } else {
                             row.style.display = "none";
                         }
                     });
                 });
+
+                const checkboxes = document.querySelectorAll('.inventory-checkbox');
+                const reserveButton = document.getElementById('reserveButton');
+
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        const checkedBoxes = document.querySelectorAll('.inventory-checkbox:checked');
+                        reserveButton.disabled = checkedBoxes.length === 0;
+                    });
+                });
             });
-            "{{ route('profil.admin') }}"
         </script>
 
 

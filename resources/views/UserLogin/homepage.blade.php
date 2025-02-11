@@ -178,39 +178,38 @@
     </div>
 
 
-
-
     <section
         class="lg:py-4 md:py-4  bg-white flex flex-wrap items-center justify-evenly gap-2 lg:px-32 md:px-8 lg:justify-between lg:mx-32">
         <div class="px-8 py-4 lg:px-0 text-center">
-            <h1 class="text-slate-600 font-bold mb-2 lg:text-5xl md:text-4xl text-2xl">24+</h1>
+            <h1 class="text-slate-600 font-bold mb-2 lg:text-5xl md:text-4xl text-2xl">{{$jumlahLabs}}</h1>
             <p class="text-slate-600 font-semibold text-sm lg:text-xl">
                 Laboratorium
             </p>
         </div>
         <div class="px-8 py-4 lg:px-0 text-center">
-            <h1 class="text-slate-600 font-bold text-2xl mb-2 lg:text-5xl md:text-4xl sm:text-xl">24+</h1>
+            <h1 class="text-slate-600 font-bold text-2xl mb-2 lg:text-5xl md:text-4xl sm:text-xl">{{count($jumlahMahasiswa)}}</h1>
             <p class="text-slate-600 font-semibold text-sm lg:text-xl md:text-sm">
                 Mahasiswa
             </p>
         </div>
         <div class="px-8 py-4 lg:px-0 text-center">
-            <h1 class="text-slate-600 font-bold text-2xl mb-2 lg:text-5xl md:text-4xl">24+</h1>
+            <h1 class="text-slate-600 font-bold text-2xl mb-2 lg:text-5xl md:text-4xl">{{count($jumlahLaboran)}}</h1>
             <p class="text-slate-600 font-semibold text-sm lg:text-xl md:text-sm">
                 Laboran
             </p>
         </div>
         <div class="px-8 py-4 lg:px-0 text-center">
-            <h1 class="text-slate-600 font-bold text-2xl mb-2 lg:text-5xl md:text-4xl">24+</h1>
+            <h1 class="text-slate-600 font-bold text-2xl mb-2 lg:text-5xl md:text-4xl">{{count($jumlahDosen)}}</h1>
             <p class="text-slate-600 font-semibold text-sm lg:text-xl md:text-sm">
                 Dosen
             </p>
         </div>
         <div class="px-8 py-4 lg:px-0 text-center">
-            <h1 class="text-slate-600 font-bold text-2xl mb-2 lg:text-5xl md:text-4xl">24+</h1>
+            <h1 class="text-slate-600 font-bold text-2xl mb-2 lg:text-5xl md:text-4xl">{{count($jumlahResearch)}}</h1>
             <p class="text-slate-600 font-semibold text-sm lg:text-xl md:text-sm">
                 Research
             </p>
         </div>
     </section>
+
 @endsection

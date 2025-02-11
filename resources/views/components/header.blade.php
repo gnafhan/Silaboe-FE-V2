@@ -16,14 +16,14 @@
         </a>
 
         <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <div class="flex flex-row gap-4">
+            {{-- <div class="flex flex-row gap-4">
                 <a href={{ route('login') }} type="button"
                     class="text-gray-900 bg-white px-6 py-1.5 rounded-md items-center justify-center">
                     Login
                 </a>
 
 
-            </div>
+            </div> --}}
 
             <!-- Dropdown menu -->
             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"

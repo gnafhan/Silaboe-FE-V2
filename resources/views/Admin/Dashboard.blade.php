@@ -48,7 +48,11 @@
                                 alt="Flowbite Logo" />
                             <h2 class="text-xl text-semibold flex-wrap">Total Laboratorium Digunkan</h2>
                             <p class="text-4xl font-bold">
-                                <span class="text-red-600">{{count($jadwals)}}</span>
+                                {{-- <span class="text-red-600">{{count($jadwals)}}</span> --}}
+                                {{-- JIKA YANG DIHITUNG HANYA YANG APPROVED --}}
+                                <span class="text-red-600">
+                                    {{ count(array_filter($jadwals, fn($jadwal) => $jadwal['is_approved'] == 1)) }}
+                                </span>
                                 <span class="text-black">/ {{ $jumlahlabs }}</span>
                             </p>
 
@@ -84,8 +88,8 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
-
                             @foreach ($jadwals as $jadwal)
+                            @if ($jadwal['is_approved'] == 1)
                             <tr class="bg-[rgba(98,143,142,0.1)]">
                                 <td
                                         class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
@@ -104,6 +108,7 @@
                                         {{ $jadwal['end_time'] }}
                                     </td>
                                 </tr>
+                                @endif
                                 @endforeach
                         </tbody>
                     </table>
@@ -121,10 +126,10 @@
                             @foreach ($jadwals as $jadwal)
                             <li class="flex justify-between items-center mb-2 p-2 text-md">
                                 <span>
-                                    {{ $jadwal['identity'] ? $jadwal['identity'] . ' mengajukan peminjaman' : '-' }}
+                                    {{ $jadwal['name'] ? $jadwal['name'] . ' mengajukan peminjaman' : '-' }}
                                 </span>
                                 <span
-                                    class="bg-[{{ isset($jadwal['is_approved']) ? ($jadwal['is_approved'] ? '#499DBC' : '#F5CD51') : 'rgba(98,143,142,0.1)' }}] text-white px-5 py-2 rounded-2xl">{{ isset($jadwal['is_approved']) ? ($jadwal['is_approved'] ? 'Approved' : 'Waiting') : '-' }}</span>
+                                    class="bg-[{{ isset($jadwal['is_approved']) ? ($jadwal['is_approved'] ? '#499DBC' : '#F5CD51') : '#D46857' }}] text-white px-5 py-2 rounded-2xl">{{ isset($jadwal['is_approved']) ? ($jadwal['is_approved'] ? 'Approved' : 'Waiting') : 'Rejected' }}</span>
                             </li>
                             {{-- <li class="flex justify-between items-center mb-2 p-2 text-md">
                                 <span>{{ $jadwal['email'] ?? "-" }}</span>
@@ -152,7 +157,9 @@
                             <ul>
                                 @foreach ($inventarisreserves as $inventarisreserve )
                                 <li class="flex justify-between items-center mb-2 p-2 text-md">
-                                    <span>{{ $inventarisreserve['email'] ?? "-" }}</span>
+                                    <span>
+                                        {{ $inventarisreserve['name'] ? $inventarisreserve['name'] . ' mengajukan peminjaman' : '-' }}
+                                    </span>
                                     <span
                                     class="bg-[{{ isset($inventarisreserve['is_approved']) ? ($inventarisreserve['is_approved'] ? '#499DBC' : '#F5CD51') : 'rgba(98,143,142,0.1)' }}] text-white px-5 py-2 rounded-2xl">{{ isset($inventarisreserve['is_approved']) ? ($inventarisreserve['is_approved'] ? 'Approved' : 'Waiting') : '-' }}</span>
                                 </li>
