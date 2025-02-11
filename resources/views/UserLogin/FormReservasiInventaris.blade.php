@@ -85,7 +85,7 @@
                 <div class="bg-[#628F8E] w-full px-12   py-2 rounded-t-xl border-[#DADADA] border-b-2">
                     <div class="text-white font-medium text-xl ">Identitas</div>
                 </div>
-                <form action="{{ route('formreservasiinventariscek.login') }}" method="GET" class="lg:px-12 px-4 py-6">
+                <form action="{{ route('formreservasiinventariscek.login') }}" method="POST" enctype="multipart/form-data" class="lg:px-12 px-4 py-6">
                     @csrf
                     {{-- Debug information --}}
                     @if(isset($selectedInventories))
@@ -125,13 +125,12 @@
                             </div>
                             <div class="mb-5">
                                 <label for="identity" class="block mb-2 lg:text-xl text-md font-medium text-gray-900">Foto Identitas (KTP/KTM)</label>
-                                <input type="file" id="identity" name="identity_file" class="hidden" accept="image/*">
-                                <button type="button" onclick="document.getElementById('identity').click()" 
-                                        class="text-black bg-[#499DBC] hover:bg-[#628F8E] hover:text-white focus:ring-4 focus:outline-none font-semibold text-lg rounded-lg mt-4 w-full sm:w-auto px-8 py-2.5 text-center">
-                                    Pilih File
-                                </button>
-                                <span id="file-name" class="ml-3 text-sm text-gray-500"></span>
-                                <input type="hidden" name="identity" value="test">
+                                <input type="file" id="identity" name="identity" accept="image/*"
+                                    class="text-white bg-[#628F8E] hover:scale-105 focus:ring-4 focus:outline-none font-semibold text-lg rounded-lg mt-4 w-full sm:w-auto px-8 py-2.5 text-center"
+                                    onchange="previewImage(this)">
+                                <div id="imagePreview" class="mt-4 hidden">
+                                    <img id="preview" src="#" alt="Preview" class="max-w-xs rounded-lg shadow-md">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -207,4 +206,27 @@
     </section>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
     <script src="../path/to/flowbite/dist/datepicker.js"></script> --}}
+@endsection
+
+@section('scripts')
+<script>
+function previewImage(input) {
+    const preview = document.getElementById('preview');
+    const previewDiv = document.getElementById('imagePreview');
+    
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            previewDiv.classList.remove('hidden');
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        preview.src = '#';
+        previewDiv.classList.add('hidden');
+    }
+}
+</script>
 @endsection
