@@ -65,9 +65,11 @@ Route::delete('admin/laboratorium/{id}', [AdminController::class, 'Laboratoriumh
 
 //JadwalLab
 Route::get('admin/jadwallab', [AdminController::class, 'JadwalLab'])->name('jadwallab.admin');
-Route::get('admin/jadwallab/detail', [AdminController::class, 'JadwalLabDetail'])->name('jadwallabdetail.admin');
+Route::get('admin/jadwallab/detail/{id}', [AdminController::class, 'JadwalLabDetail'])->name('jadwallabdetail.admin');
 Route::get('admin/jadwallab/tambah', [AdminController::class, 'JadwalLabTambah'])->name('jadwallabtambah.admin');
-Route::get('admin/jadwallab/edit', [AdminController::class, 'JadwalLabEdit'])->name('jadwallabedit.admin');
+Route::post('admin/jadwallab/tambah', [AdminController::class, 'JadwalLabTambahPost'])->name('jadwallabtambah.admin.post');
+Route::get('admin/jadwallab/edit/{id}', [AdminController::class, 'JadwalLabEdit'])->name('jadwallabedit.admin');
+Route::post('admin/jadwallab/edit/{id}', [AdminController::class, 'JadwalLabEditPost'])->name('jadwallabedit.admin.Post');
 
 //PeminjamanLab
 Route::get('admin/peminjamanlab/tidakada', [AdminController::class, 'PeminjamanLabTidakAda'])->name('peminjamanlabtidakada.admin');
