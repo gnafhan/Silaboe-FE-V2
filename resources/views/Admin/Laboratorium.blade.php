@@ -18,10 +18,16 @@
         <!-- Main Content -->
         <div class="flex-1 lg:mx-8  mx-12  py-8 flex-col flex lg:gap-4 md:gap-4 gap-16">
             <!-- Navbar -->
-            <div
-                class="inline-flex flex-col md:flex-row lg:inline-flex space-y-2 md:space-y-0 md:space-x-4 items-center justify-between h-16 p-4 text-black">
-                <input type="text" placeholder="Cari laboratorium disini..."
-                    class="shadow-md px-6 py-3 rounded-xl bg-[rgba(98,143,142,0.2)] text-black border w-full md:w-auto lg:w-auto lg:text-xl">
+            <div class="inline-flex flex-col md:flex-row lg:inline-flex space-y-2 md:space-y-0 md:space-x-4 items-center justify-between h-16 p-4 text-black">
+                <form action="{{ route('laboratorium.admin') }}" method="GET" class="w-full md:w-auto lg:w-auto flex">
+                    <input type="text" name="search" placeholder="Cari laboratorium disini..."
+                        class="shadow-md px-6 py-3 rounded-xl bg-[rgba(98,143,142,0.2)] text-black border w-full lg:text-xl"
+                        value="{{ request('search') }}">
+                    <button type="submit"
+                        class="ml-2 bg-[#628F8E] text-white px-4 py-2 rounded-lg hover:bg-[#608B8A] shadow-md">
+                        Cari
+                    </button>
+                </form>
                 <div
                     class=" hover:scale-105 shadow-md flex flex-row gap-2 items-center w-full bg-[#628F8E] lg:px-8 lg:py-3 p-2 lg:rounded-xl  hover:bg-[#608B8A] md:w-auto lg:w-auto justify-center rounded-md">
                     <a href="{{ Route('laboratoriumtambah.admin') }}"
@@ -45,7 +51,7 @@
                         <a href="{{ Route('laboratoriumdetail.admin', $laboratorium['id']) }}"
                             class="bg-[rgba(98,143,142,0.2)] lg:rounded-2xl rounded-3xl rounded-l-3xl shadow p-0 flex flex-col md:flex-row items-start md:items-stretch">
                             <div class="w-full md:w-1/3 ">
-                                <img src="{{ asset('image/laboratoriumimage.png') }}"
+                                <img src="{{ env('API') . '/storage' .'/'. $laboratorium['foto_laboratorium'] }}"
                                     class="rounded-3xl w-full h-full object-cover" alt="Flowbite Logo" />
                             </div>
                             <div class="ml-0 md:ml-4 mt-8 md:mt-0 flex-1 flex flex-col lg:flex-row justify-between">
@@ -64,9 +70,17 @@
                                 </div>
                             </div>
                             <div class="flex flex-col gap-2  md:mt-0 lg:ml-4 font-semibold lg:mt-8 lg:mr-8">
-                                <button class="bg-[#628F8E] px-4 py-2 rounded-md shadow text-white">Rendering</button>
-                                <button class="bg-[#628F8E] px-4 py-2 rounded-md shadow text-white">Rendering</button>
-                                <button class="bg-[#628F8E] px-4 py-2 rounded-md shadow text-white">Rendering</button>
+                                @foreach ($laboratoriumSupports as $support)
+                                @if ($support['room_id'] == $laboratorium['id'])
+                                    @foreach (['support_type_1', 'support_type_2', 'support_type_3', 'support_type_4'] as $supportType)
+                                        @if (!is_null($support[$supportType]))
+                                            <button class="bg-[#628F8E] px-4 py-2 rounded-md shadow text-white">
+                                                {{ $support[$supportType] }}
+                                            </button>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            @endforeach
                             </div>
                         </a>
                     @endforeach
@@ -78,7 +92,7 @@
                             text: "{{ Session::get('message') }}",
                             icon: "{{ Session::get('alert-type') == 'success' ? 'success' : 'error' }}",
                             button: "Ok",
-                        }); 
+                        });
                     </script>
                     @endif
 

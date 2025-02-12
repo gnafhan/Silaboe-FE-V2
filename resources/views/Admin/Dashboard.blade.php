@@ -27,6 +27,7 @@
                         <div class="flex flex-col  gap-2">
                             <img src="{{ asset('image/overviewimage1.png') }}" class="  text-center h-16 w-16  "
                                 alt="Flowbite Logo" />
+                                {{-- INI YANG DIATAS--}}
                             <h2 class="text-xl text-semibold">Total Laboratorium</h2>
 
                             <p class="text-4xl font-bold">{{ $jumlahlabs }}</p>
@@ -47,8 +48,12 @@
                                 alt="Flowbite Logo" />
                             <h2 class="text-xl text-semibold flex-wrap">Total Laboratorium Digunkan</h2>
                             <p class="text-4xl font-bold">
-                                <span class="text-red-600">8</span>
-                                <span class="text-black">/10</span>
+                                {{-- <span class="text-red-600">{{count($jadwals)}}</span> --}}
+                                {{-- JIKA YANG DIHITUNG HANYA YANG APPROVED --}}
+                                <span class="text-red-600">
+                                    {{ count(array_filter($jadwals, fn($jadwal) => $jadwal['is_approved'] == 1)) }}
+                                </span>
+                                <span class="text-black">/ {{ $jumlahlabs }}</span>
                             </p>
 
                         </div>
@@ -84,8 +89,9 @@
                         </thead>
                         <tbody class="divide-y divide-gray-200">
                             @foreach ($jadwals as $jadwal)
-                                <tr class="bg-[rgba(98,143,142,0.1)]">
-                                    <td
+                            @if ($jadwal['is_approved'] == 1)
+                            <tr class="bg-[rgba(98,143,142,0.1)]">
+                                <td
                                         class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
                                         {{ $jadwal['room']['name'] }}
                                     </td>
@@ -102,7 +108,8 @@
                                         {{ $jadwal['end_time'] }}
                                     </td>
                                 </tr>
-                            @endforeach
+                                @endif
+                                @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -116,19 +123,28 @@
                     <div class="bg-[rgba(98,143,142,0.1)] rounded-xl px-6 md:px-12 shadow-lg py-6">
                         <h1 class="text-xl font-bold py-4 px-2 border-b-2">Semua </h1>
                         <ul>
+                            @foreach ($jadwals as $jadwal)
                             <li class="flex justify-between items-center mb-2 p-2 text-md">
+                                <span>
+                                    {{ $jadwal['name'] ? $jadwal['name'] . ' mengajukan peminjaman' : '-' }}
+                                </span>
+                                <span
+                                    class="bg-[{{ isset($jadwal['is_approved']) ? ($jadwal['is_approved'] ? '#499DBC' : '#F5CD51') : '#D46857' }}] text-white px-5 py-2 rounded-2xl">{{ isset($jadwal['is_approved']) ? ($jadwal['is_approved'] ? 'Approved' : 'Waiting') : 'Rejected' }}</span>
+                            </li>
+                            {{-- <li class="flex justify-between items-center mb-2 p-2 text-md">
                                 <span>{{ $jadwal['email'] ?? "-" }}</span>
                                 <span
                                     class="bg-[#499DBC] text-white px-5 py-2 rounded-2xl">{{ isset($jadwal['is_approved']) ? ($jadwal['is_approved'] ? 'Approved' : 'Waiting') : '-' }}</span>
-                            </li>
-                            <li class="flex justify-between items-center mb-2 p-2 text-md">
+                            </li> --}}
+                            {{-- <li class="flex justify-between items-center mb-2 p-2 text-md">
                                 <span>{{ $jadwal['email'] ?? "-" }}</span>
                                 <span class="bg-[#F5CD51] text-white px-5 py-1 rounded-2xl">Waiting</span>
-                            </li>
-                            <li class="flex justify-between items-center mb-2 p-2 text-md">
+                            </li> --}}
+                            {{-- <li class="flex justify-between items-center mb-2 p-2 text-md">
                                 <span>Tamara mengajukan peminjaman</span>
                                 <span class="bg-[#D46857] text-white px-4 py-1 rounded-2xl">Rejected</span>
-                            </li>
+                            </li> --}}
+                            @endforeach
 
                         </ul>
                     </div>
@@ -139,19 +155,23 @@
                         <h1 class="text-xl font-bold py-4 px-2 border-b-2">Semua </h1>
                         <ul>
                             <ul>
+                                @foreach ($inventarisreserves as $inventarisreserve )
                                 <li class="flex justify-between items-center mb-2 p-2 text-md">
-                                    <span>{{ $jadwal['email'] ?? "-" }}</span>
+                                    <span>
+                                        {{ $inventarisreserve['name'] ? $inventarisreserve['name'] . ' mengajukan peminjaman' : '-' }}
+                                    </span>
                                     <span
-                                        class="bg-[#499DBC] text-white px-3 py-1 rounded-2xl">{{ isset($jadwal['is_approved']) ? ($jadwal['is_approved'] ? 'Approved' : 'Waiting') : '-' }}</span>
+                                    class="bg-[{{ isset($inventarisreserve['is_approved']) ? ($inventarisreserve['is_approved'] ? '#499DBC' : '#F5CD51') : 'rgba(98,143,142,0.1)' }}] text-white px-5 py-2 rounded-2xl">{{ isset($inventarisreserve['is_approved']) ? ($inventarisreserve['is_approved'] ? 'Approved' : 'Waiting') : '-' }}</span>
                                 </li>
-                                <li class="flex justify-between items-center mb-2 p-2 text-md">
+                                {{-- <li class="flex justify-between items-center mb-2 p-2 text-md">
                                     <span>Tamara mengajukan peminjaman</span>
                                     <span class="bg-[#F5CD51] text-white px-5 py-1 rounded-2xl">Waiting</span>
                                 </li>
                                 <li class="flex justify-between items-center mb-2 p-2 text-md">
                                     <span>Tamara mengajukan peminjaman</span>
                                     <span class="bg-[#D46857] text-white px-4 py-1 rounded-2xl">Rejected</span>
-                                </li>
+                                </li> --}}
+                                @endforeach
 
                             </ul>
                             <!-- Tambahkan entri lain sesuai kebutuhan -->

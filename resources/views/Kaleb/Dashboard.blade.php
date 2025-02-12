@@ -26,7 +26,7 @@
                         <img src="{{ asset('image/overviewimage1.png') }}" class="  text-center h-16 w-16  "
                             alt="Flowbite Logo" />
                         <h2 class="text-xl text-semibold">Total Laboratorium</h2>
-                        <p class="text-4xl font-bold">10</p>
+                        <p class="text-4xl font-bold">{{ $jumlahlabs }}</p>
                     </div>
                 </div>
 
@@ -35,7 +35,7 @@
                         <img src="{{ asset('image/overviewimage2.png') }}" class="  text-center h-16 w-16  "
                             alt="Flowbite Logo" />
                         <h2 class="text-xl text-semibold flex-wrap">Total Inventaris</h2>
-                        <p class="text-4xl font-bold">320</p>
+                        <p class="text-4xl font-bold">{{ $jumlahinventariss }}</p>
                     </div>
                 </div>
                 <div class="bg-[rgba(98,143,142,0.1)]  rounded-3xl p-8 ">
@@ -44,8 +44,8 @@
                             alt="Flowbite Logo" />
                         <h2 class="text-xl text-semibold flex-wrap">Total Laboratorium Digunkan</h2>
                         <p class="text-4xl font-bold">
-                            <span class="text-red-600">8</span>
-                            <span class="text-black">/10</span>
+                            <span class="text-red-600">{{ count(array_filter($jadwals, fn($jadwal) => $jadwal['is_approved'] == 1)) }}</span>
+                            <span class="text-black">/ {{ $jumlahlabs }}</span>
                         </p>
 
                     </div>
@@ -79,28 +79,12 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
+                        @foreach ($jadwals as $jadwal)
+                        @if ($jadwal['is_approved'] == 1)
                         <tr class="bg-[rgba(98,143,142,0.1)] ">
                             <td
-                                class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
-                                Laboratorium 106
-                            </td>
-                            <td
-                                class="p-4 text-sm md:text-base lg:text-base text-black whitespace-nowrap border-r border-gray-200">
-                                5
-                            </td>
-                            <td
-                                class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
-                                20.00
-                            </td>
-                            <td
-                                class="p-4 text-sm md:text-base lg:text-base text-black whitespace-nowrap border-r border-gray-200">
-                                16.00
-                            </td>
-                        </tr>
-                        <tr class="bg-[rgba(98,143,142,0.1)]">
-                            <td
-                                class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
-                                Laboratorium 106
+                            class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
+                            {{ $jadwal['room']['name'] }}
                             </td>
                             <td
                                 class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
@@ -108,32 +92,15 @@
                             </td>
                             <td
                                 class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
-                                20.00
+                                {{ $jadwal['start_time'] }}
                             </td>
                             <td
                                 class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
-                                16.00
+                                {{ $jadwal['end_time'] }}
                             </td>
                         </tr>
-                        <tr class="bg-[rgba(98,143,142,0.1)]">
-                            <td
-                                class="p-4 text-sm md:text-base lg:text-base text-black whitespace-nowrap border-r border-gray-200">
-                                Laboratorium 106
-                            </td>
-                            <td
-                                class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
-                                5
-                            </td>
-                            <td
-                                class="p-4 text-sm md:text-base lg:text-base text-black whitespace-nowrap border-r border-gray-200">
-                                20.00
-                            </td>
-                            <td
-                                class="p-4 text-sm md:text-base lg:text-base text-black  whitespace-nowrap border-r border-gray-200">
-                                16.00
-                            </td>
-                        </tr>
-
+                        @endif
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -141,53 +108,70 @@
 
 
         <!-- Peminjaman Section -->
-        <section class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 lg:gap-20 gap-8">
-            <div>
-                <h2 class="text-2xl py-4 font-bold">Peminjaman Laboratorium</h2>
-                <div class="bg-[rgba(98,143,142,0.1)] rounded-xl px-6 md:px-12 shadow-lg">
-                    <h1 class="text-xl font-bold py-4 px-2 border-b-2">Semua </h1>
-                    <ul>
-                        <li class="flex justify-between items-center mb-2 p-2 text-md">
-                            <span>Tamara mengajukan peminjaman</span>
-                            <span class="bg-[#499DBC] text-white px-3 py-1 rounded-2xl">Published</span>
-                        </li>
-                        <li class="flex justify-between items-center mb-2 p-2 text-md">
-                            <span>Tamara mengajukan peminjaman</span>
-                            <span class="bg-[#F5CD51] text-white px-5 py-1 rounded-2xl">Waiting</span>
-                        </li>
-                        <li class="flex justify-between items-center mb-2 p-2 text-md">
-                            <span>Tamara mengajukan peminjaman</span>
-                            <span class="bg-[#D46857] text-white px-4 py-1 rounded-2xl">Rejected</span>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-            <div>
-                <h2 class="text-2xl py-4 font-bold">Peminjaman Inventaris</h2>
-                <div class="bg-[rgba(98,143,142,0.1)] rounded-xl px-6 md:px-12 shadow-lg  ">
-                    <h1 class="text-xl font-bold py-4 px-2 border-b-2">Semua </h1>
-                    <ul>
+            <!-- Peminjaman Section -->
+            <section class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 lg:gap-20 gap-8">
+                <div>
+                    <h2 class="text-2xl py-4 font-bold">Peminjaman Laboratorium</h2>
+                    <div class="bg-[rgba(98,143,142,0.1)] rounded-xl px-6 md:px-12 shadow-lg py-6">
+                        <h1 class="text-xl font-bold py-4 px-2 border-b-2">Semua </h1>
                         <ul>
+                            @foreach ($jadwals as $jadwal)
                             <li class="flex justify-between items-center mb-2 p-2 text-md">
-                                <span>Tamara mengajukan peminjaman</span>
-                                <span class="bg-[#499DBC] text-white px-3 py-1 rounded-2xl">Published</span>
+                                <span>
+                                    {{ $jadwal['name'] ? $jadwal['name'] . ' mengajukan peminjaman' : '-' }}
+                                </span>
+                                <span
+                                    class="bg-[{{ isset($jadwal['is_approved']) ? ($jadwal['is_approved'] ? '#499DBC' : '#F5CD51') : '#D46857' }}] text-white px-5 py-2 rounded-2xl">{{ isset($jadwal['is_approved']) ? ($jadwal['is_approved'] ? 'Approved' : 'Waiting') : 'Rejected' }}</span>
                             </li>
-                            <li class="flex justify-between items-center mb-2 p-2 text-md">
-                                <span>Tamara mengajukan peminjaman</span>
+                            {{-- <li class="flex justify-between items-center mb-2 p-2 text-md">
+                                <span>{{ $jadwal['email'] ?? "-" }}</span>
+                                <span
+                                    class="bg-[#499DBC] text-white px-5 py-2 rounded-2xl">{{ isset($jadwal['is_approved']) ? ($jadwal['is_approved'] ? 'Approved' : 'Waiting') : '-' }}</span>
+                            </li> --}}
+                            {{-- <li class="flex justify-between items-center mb-2 p-2 text-md">
+                                <span>{{ $jadwal['email'] ?? "-" }}</span>
                                 <span class="bg-[#F5CD51] text-white px-5 py-1 rounded-2xl">Waiting</span>
-                            </li>
-                            <li class="flex justify-between items-center mb-2 p-2 text-md">
+                            </li> --}}
+                            {{-- <li class="flex justify-between items-center mb-2 p-2 text-md">
                                 <span>Tamara mengajukan peminjaman</span>
                                 <span class="bg-[#D46857] text-white px-4 py-1 rounded-2xl">Rejected</span>
-                            </li>
+                            </li> --}}
+                            @endforeach
 
                         </ul>
-                        <!-- Tambahkan entri lain sesuai kebutuhan -->
-                    </ul>
+                    </div>
                 </div>
-            </div>
-        </section>
+                <div>
+                    <h2 class="text-2xl py-4 font-bold">Peminjaman Inventaris</h2>
+                    <div class="bg-[rgba(98,143,142,0.1)] rounded-xl px-6 md:px-12 shadow-lg py-6 ">
+                        <h1 class="text-xl font-bold py-4 px-2 border-b-2">Semua </h1>
+                        <ul>
+                            <ul>
+                                @foreach ($inventarisreserves as $inventarisreserve )
+                                <li class="flex justify-between items-center mb-2 p-2 text-md">
+                                    <span>
+                                        {{ $inventarisreserve['name'] ? $inventarisreserve['name'] . ' mengajukan peminjaman' : '-' }}
+                                    </span>
+                                    <span
+                                    class="bg-[{{ isset($inventarisreserve['is_approved']) ? ($inventarisreserve['is_approved'] ? '#499DBC' : '#F5CD51') : 'rgba(98,143,142,0.1)' }}] text-white px-5 py-2 rounded-2xl">{{ isset($inventarisreserve['is_approved']) ? ($inventarisreserve['is_approved'] ? 'Approved' : 'Waiting') : '-' }}</span>
+                                </li>
+                                {{-- <li class="flex justify-between items-center mb-2 p-2 text-md">
+                                    <span>Tamara mengajukan peminjaman</span>
+                                    <span class="bg-[#F5CD51] text-white px-5 py-1 rounded-2xl">Waiting</span>
+                                </li>
+                                <li class="flex justify-between items-center mb-2 p-2 text-md">
+                                    <span>Tamara mengajukan peminjaman</span>
+                                    <span class="bg-[#D46857] text-white px-4 py-1 rounded-2xl">Rejected</span>
+                                </li> --}}
+                                @endforeach
+
+                            </ul>
+                            <!-- Tambahkan entri lain sesuai kebutuhan -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+    </div>
 
 
     </main>

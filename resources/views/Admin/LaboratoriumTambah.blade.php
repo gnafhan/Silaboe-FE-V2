@@ -16,7 +16,7 @@
     </header>
     <main class="flex-1 lg:mx-12 mx-12  md:mx-16  my-8 ">
         <h2 class="text-2xl font-bold mb-6">Tambah Laboratorium</h2>
-        <form action="{{ route('laboratoriumtambah.admin.post') }}" method="POST">
+        <form action="{{ route('laboratoriumtambah.admin.post') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
             <div class="mb-4">
@@ -26,17 +26,34 @@
                     class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#628F8E] bg-[rgba(98,143,142,0.2)]">
             </div>
 
+            <div id="input-container">
+                <div class="mb-4">
+                    <label for="support_type_1" class="block text-black font-medium mb-2 text-lg">Support</label>
+                    <input id="support_type_1" name="support_type_1" type="text" placeholder="ex: Rendering, Editing etc"
+                        class="w-full mb-0 p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#628F8E] bg-[rgba(98,143,142,0.2)]" oninput="handleInput(this)">
+                </div>
+            </div>
+
             <div class="mb-4">
                 <label for="deskripsi" class="block text-black font-medium mb-2 text-lg">Deskripsi</label>
                 <textarea id="deskripsi" name="description" rows="4" placeholder="ex: Laboratorium HU 105"
                     class="w-full mb-2 p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#628F8E] bg-[rgba(98,143,142,0.2)]"></textarea>
             </div>
+
             <div class="mb-12">
                 <label for="foto-laboratorium" class="block text-black font-medium mb-2 text-lg">Tipe</label>
                 <select name="type" id="type" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#628F8E] bg-[rgba(98,143,142,0.2)]">
-                    <option value="gudang">Gudang</option>
                     <option value="laboratorium">Laboratorium</option>
-                </select>                
+                    <option value="gudang">Gudang</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="image" class="block text-black font-medium mb-2 text-lg">Foto Laboratorium</label>
+                <div class="relative">
+                    <input type="file" name="foto-laboratorium" id="foto-laboratorium"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#628F8E] bg-[rgba(98,143,142,0.2)] cursor-pointer file:cursor-pointer file:bg-[#4C8F8B] file:text-white file:border-none file:rounded-lg file:py-2 file:px-4 file:hover:bg-green-600 file:focus:ring-2 file:focus:ring-green-500" />
+                </div>
             </div>
 
             <div class="flex justify-start gap-4">
@@ -47,4 +64,32 @@
             </div>
         </form>
     </main>
+
+    <script>
+        let inputCount = 1;
+        const maxInputs = 4;
+
+        function handleInput(inputElement) {
+            // Cek jika input sudah terisi dan belum mencapai batas maksimum
+            if (inputCount < maxInputs && inputElement.value.trim() !== '') {
+                // Cek jika input terakhir sudah terisi
+                const lastInput = document.getElementById(`support_type_${inputCount}`);
+                if (lastInput && lastInput.value.trim() !== '') {
+                    const container = document.getElementById('input-container');
+                    inputCount++;
+                    if (inputCount <= maxInputs) {
+                        const newInput = document.createElement('div');
+                        newInput.className = 'mb-4';
+                        newInput.innerHTML = `
+                            <input id="support_type_${inputCount}" name="support_type_${inputCount}" type="text" placeholder="ex: Rendering, Editing etc"
+                                class="w-full mb-0 p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#628F8E] bg-[rgba(98,143,142,0.2)]"
+                                oninput="handleInput(this)">
+                        `;
+                        container.appendChild(newInput);
+                    }
+                }
+            }
+        }
+    </script>
+
 @endsection

@@ -61,71 +61,84 @@
             </div>
 
             <!-- Card Container Start -->
+            
+            @php
+                $softwareList = [
+                    [
+                        'name' => 'Visual Studio Code',
+                        'image' => 'Group.png',
+                        'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut saepe tempore ipsum. adipisicing elit. Aut saepe tempore ipsum.'
+                    ],
+                    [
+                        'name' => 'IntelliJ',
+                        'image' => 'Intellij.png',
+                        'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut saepe tempore ipsum. adipisicing elit. Aut saepe tempore ipsum.'
+                    ],
+                    [
+                        'name' => 'Android Studio',
+                        'image' => 'androidstudio.png',
+                        'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut saepe tempore ipsum. adipisicing elit. Aut saepe tempore ipsum.'
+                    ],
+                    [
+                        'name' => 'Blender',
+                        'image' => 'blender.png',
+                        'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut saepe tempore ipsum. adipisicing elit. Aut saepe tempore ipsum.'
+                    ],
+                    [
+                        'name' => 'Adobe Illustrator',
+                        'image' => 'adobe-illustrator.png',
+                        'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut saepe tempore ipsum. adipisicing elit. Aut saepe tempore ipsum.'
+                    ],
+                    [
+                        'name' => 'Adobe Premiere',
+                        'image' => 'adobe-premiere.png',
+                        'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut saepe tempore ipsum. adipisicing elit. Aut saepe tempore ipsum.'
+                    ],
+                    [
+                        'name' => 'Adobe After Effects',
+                        'image' => 'adobe-after-effects.png',
+                        'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut saepe tempore ipsum. adipisicing elit. Aut saepe tempore ipsum.'
+                    ],
+                    [
+                        'name' => 'Adobe Photoshop',
+                        'image' => 'adobe-photoshop.png',
+                        'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut saepe tempore ipsum. adipisicing elit. Aut saepe tempore ipsum.'
+                    ],
+                    [
+                        'name' => 'Microsoft Word',
+                        'image' => 'microsoft-word.png',
+                        'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut saepe tempore ipsum. adipisicing elit. Aut saepe tempore ipsum.'
+                    ],
+                    [
+                        'name' => 'Microsoft Excel',
+                        'image' => 'microsoft-excel.png',
+                        'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut saepe tempore ipsum. adipisicing elit. Aut saepe tempore ipsum.'
+                    ],
+                    [
+                        'name' => 'Microsoft Power Point',
+                        'image' => 'microsoft-powerpoint.png',
+                        'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut saepe tempore ipsum. adipisicing elit. Aut saepe tempore ipsum.'
+                    ],
+                    [
+                        'name' => 'Microsoft One Note',
+                        'image' => 'microsoft-onenote.png',
+                        'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut saepe tempore ipsum. adipisicing elit. Aut saepe tempore ipsum.'
+                    ],
+                ];
+            @endphp
 
-            <div class="flex flex-wrap my-12 lg:gap-2 md:gap-6 gap-8 justify-evenly
-            ">
-
-                <div
-                    class="flex flex-col bg-white rounded-lg shadow-md w-full overflow-hidden lg:w-80 lg:py-8 items-center">
-
-                    <h2 class="text-lg lg:text-2xl font-bold lg:py-4">Adobe Illustrator</h2>
-                    <div class="bg-[#9EDBE4] w-[150px] h-[150px] rounded-[100px] flex items-center justify-center lg:my-8">
-                        <img src="{{ asset('image/adobe-illustrator.png') }}" class="h-20 w-20" alt="Adobe Illustrator">
+            <div class="flex flex-wrap my-12 lg:gap-2 md:gap-6 gap-8 justify-evenly">
+                @foreach($softwareList as $software)
+                    <div class="flex flex-col bg-white rounded-lg shadow-md w-full overflow-hidden lg:w-80 lg:py-8 items-center justify-center">
+                        <h2 class="text-lg lg:text-2xl font-bold lg:py-2">{{ $software['name'] }}</h2>
+                        <div class="bg-[#9EDBE4] w-[150px] h-[150px] rounded-[100px] flex items-center justify-center lg:my-8">
+                            <img src="{{ asset('image/' . $software['image']) }}" class="h-20 w-20" alt="{{ $software['name'] }}">
+                        </div>
+                        <p class="px-6 py-4 text-md text-justify">
+                            {{ $software['description'] }}
+                        </p>
                     </div>
-                    <p class="px-6 py-4 text-md text-justify">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut saepe tempore ipsum. adipisicing
-                        elit. Aut saepe tempore ipsum.
-                    </p>
-
-                </div>
-
-
-                <div
-                    class="flex flex-col bg-white rounded-lg shadow-md w-full overflow-hidden lg:w-80 lg:py-8 items-center justify-center">
-
-                    <h2 class="text-lg lg:text-2xl font-bold lg:py-2">Adobe Photoshop</h2>
-                    <div class="bg-[#9EDBE4] w-[150px] h-[150px] rounded-[100px] flex items-center justify-center lg:my-8">
-                        <img src="{{ asset('image/adobe-photoshop.png') }}" class="h-20 w-20" alt="Adobe Photoshop">
-                    </div>
-                    <p class="px-6 py-4 text-md text-justify">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut saepe tempore ipsum. adipisicing
-                        elit. Aut saepe tempore ipsum.
-                    </p>
-
-                </div>
-
-
-
-                <div
-                    class="flex flex-col bg-white rounded-lg shadow-md w-full overflow-hidden lg:w-80 lg:py-8 items-center justify-center">
-
-                    <h2 class="text-lg lg:text-2xl font-bold lg:py-2">Adobe Premiere</h2>
-                    <div class="bg-[#9EDBE4] w-[150px] h-[150px] rounded-[100px] flex items-center justify-center lg:my-8">
-                        <img src="{{ asset('image/adobe-premiere.png') }}" class="h-20 w-20" alt="Adobe Premiere">
-                    </div>
-                    <p class="px-6 py-4 text-md text-justify">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut saepe tempore ipsum. adipisicing
-                        elit. Aut saepe tempore ipsum.
-                    </p>
-
-                </div>
-
-
-
-                <div
-                    class="flex flex-col bg-white rounded-lg shadow-md w-full overflow-hidden lg:w-80 lg:py-8 items-center justify-center">
-
-                    <h2 class="text-lg lg:text-2xl font-bold lg:py-2">Android Studio</h2>
-                    <div class="bg-[#9EDBE4] w-[150px] h-[150px] rounded-[100px] flex items-center justify-center lg:my-8">
-                        <img src="{{ asset('image/androidstudio.png') }}" alt="Android Studio">
-                    </div>
-                    <p class="px-6 py-4 text-md text-justify">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut saepe tempore ipsum. adipisicing
-                        elit. Aut saepe tempore ipsum.
-                    </p>
-
-                </div>
-
+                @endforeach
             </div>
 
             <div class="flex flex-wrap justify-center my-10 gap-14">

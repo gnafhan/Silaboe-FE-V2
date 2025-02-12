@@ -12,26 +12,29 @@
                     <img src="{{ asset('image/Profile.png') }}" class=" h-10 w-10 " alt="Flowbite Logo" />
                 </button>
             </div>
+            
         </div>
     </header>
     <div class="bg-[rgba(237,245,245,1)]">
         <section class="flex-1 lg:mx-12 mx-12 my-2 flex-col flex lg:gap-4 md:gap-4 gap-16">
             <div class="flex flex-col mt-12 ">
                 <div class="font-bold text-xl lg:text-2xl flex mb-4">{{ $laboratoriums ['name'] }}</div>
-                <img src="{{ asset('image/fotolab.png') }}" class="h-[50%] rounded-xl grid" alt="foto lab" />
+                <img src="{{ env('API') . '/storage' .'/'. $laboratoriums['foto_laboratorium'] }}" alt="foto lab" />
                     <div class="text-sm lg:text-xl text-black text-justify lg:py-12 py-6">{{ $laboratoriums ['description'] }}
                 </div>
                 <div class="lg:text-xl text-lg font-bold text-[#628F8E] mb-4">Support : </div>
                 <div class="flex flex-row gap-4 mb-8 ">
-                    <button
-                        class=" bg-[#628F8E] lg:text-lg  text-sm  text-white lg:px-8 lg:py-2 py-2 px-6 rounded-md">Rendering
-                    </button>
-                    <button
-                        class=" bg-[#628F8E] lg:text-lg  text-sm  text-white lg:px-8 lg:py-2 py-2 px-6 rounded-md">Rendering
-                    </button>
-                    <button
-                        class=" bg-[#628F8E] lg:text-lg  text-sm  text-white lg:px-8 lg:py-2 py-2 px-6 rounded-md">Rendering
-                    </button>
+                    @foreach ($laboratoriumSupports as $support)
+                        @if ($support['room_id'] == $laboratoriums['id'])
+                        @foreach (['support_type_1', 'support_type_2', 'support_type_3', 'support_type_4'] as $supportType)
+                        @if (!is_null($support[$supportType]))
+                            <button
+                                class=" bg-[#628F8E] lg:text-lg  text-sm  text-white lg:px-8 lg:py-2 py-2 px-6 rounded-md">{{ $support[$supportType] }}
+                            </button>
+                        @endif
+                        @endforeach
+                        @endif
+                    @endforeach
                 </div>
 
                 {{-- bagian Button bawah  --}}
@@ -63,7 +66,7 @@
                             </svg>
                         </a>
 
-                        <form action="{{ route('laboratoriumhapus.admin', $laboratoriums ['id']) }}" method="POST"
+                        <form action="{{ route('laboratoriumhapus.admin', $laboratoriums['id']) }}" method="POST"
                             class="shadow-md flex flex-row gap-2 items-center bg-[#D46857] px-4 py-2 rounded-md hover:bg-[#608B8A] justify-center w-full md:w-auto">
                             @csrf
                             @method('delete')
