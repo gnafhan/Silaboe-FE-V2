@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -342,24 +343,167 @@ class AdminController extends Controller
             }, $jadwallab);
         }
 
-        // Return the filtered data to the view
-        return view('Admin.JadwalLab', [
-            'jadwallab' => $jadwallab
-        ]);
+    // Return the filtered data to the view
+    return view('Admin.JadwalLab', [
+        'jadwallab' => $jadwallab,
+        'selectedDate' => $selectedDate
+    ]);
+}
+
+// a
+public function jadwallabDetail($id, Request $request)
+{
+    $token = session('api_token');
+
+    // Get the selected date from the query parameter, default to today
+    $selectedDate = $request->query('date', \Carbon\Carbon::today()->toDateString());
+
+    // Fetch the schedule from the API for the given ID
+    $response = Http::withToken($token)->get(env('API_URL') . "/schedules/{$id}");
+
+    if ($response->successful()) {
+        $roomData = $response->json()['data']; // Room data including all schedules
+
+        // Filter only the schedules that match the selected date
+        $roomData['schedules'] = array_filter($roomData['schedules'], function ($schedule) use ($selectedDate) {
+            return substr($schedule['start_time'], 0, 10) === $selectedDate;
+        });
+
+        // Sort schedules by start time (earliest first)
+        usort($roomData['schedules'], function ($a, $b) {
+            return strtotime($a['start_time']) - strtotime($b['start_time']);
+        });
+
+    } else {
+        $roomData = null;
     }
 
-    // a
-    public function jadwallabdetail()
-    {
-        return view('Admin.JadwalLabDetail');
-    }
+    return view('Admin.JadwalLabDetail', [
+        'room' => $roomData,
+        'selectedDate' => $selectedDate
+    ]);
+}
+
     public function jadwallabtambah()
     {
-        return view('Admin.JadwalLabTambah');
+        $token = session('api_token'); // Get API token from session
+
+        // Fetch subjects from API
+        $subjectsResponse = Http::withToken($token)->get(env('API_URL') . '/subjects');
+        
+        // Fetch rooms from API
+        $roomsResponse = Http::withToken($token)->get(env('API_URL') . '/rooms');
+
+        // Decode JSON response and ensure 'data' key exists
+        $subjects = $subjectsResponse->successful() ? $subjectsResponse->json()['data'] ?? [] : [];
+        $rooms = $roomsResponse->successful() ? $roomsResponse->json()['data'] ?? [] : [];
+
+        return view('Admin.JadwalLabTambah', compact('subjects', 'rooms'));
     }
-    public function jadwallabedit()
+
+    public function JadwalLabTambahPost(Request $request)
     {
-        return view('Admin.JadwalLabEdit');
+        $token = session('api_token'); // Retrieve API token from session
+
+        $request->merge([
+            'start_time' => str_replace('.', ':', $request->start_time),
+            'end_time' => str_replace('.', ':', $request->end_time),
+        ]);
+        
+        // Validate the request before sending to API
+        $validatedData = $request->validate([
+            'room_id' => 'required|integer',
+            'subject_id' => 'required|integer',
+            'date' => 'required|date_format:Y-m-d', // Ensure the date is valid
+            'start_time' => 'required|date_format:H:i', // Expect only time
+            'end_time' => 'required|date_format:H:i|after:start_time',
+            'dosen' => 'required|string|max:255',
+            'information' => 'nullable|string|max:255',
+        ]);
+
+        // Merge the date with the start and end times
+        $validatedData['start_time'] = Carbon::createFromFormat('Y-m-d H:i', "{$validatedData['date']} {$validatedData['start_time']}")->format('Y-m-d H:i:s');
+        $validatedData['end_time'] = Carbon::createFromFormat('Y-m-d H:i', "{$validatedData['date']} {$validatedData['end_time']}")->format('Y-m-d H:i:s');
+
+        // Remove the standalone 'date' field as it is no longer needed
+        unset($validatedData['date']);
+
+        // Send the data to the API
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $token
+        ])->post(env('API_URL') . '/schedules/reserve', $validatedData);
+
+        // Check if API request was successful
+        if ($response->successful()) {
+            return redirect()->route('jadwallab.admin')->with('message', 'Jadwal berhasil dibuat')->with('alert-type', 'success');
+        } else {
+            return redirect()->back()->with('error', 'Gagal menyimpan jadwal: ' . $response->body())->with('alert-type', 'error');
+        }
+    }
+
+    public function jadwallabedit($id)
+    {
+        $token = session('api_token'); // Retrieve the API token from session
+
+        // Fetch the specific schedule by ID
+        $scheduleResponse = Http::withToken($token)->get(env('API_URL') . "/schedule/{$id}");
+
+        // Fetch subjects from API
+        $subjectsResponse = Http::withToken($token)->get(env('API_URL') . '/subjects');
+
+        // Fetch rooms from API
+        $roomsResponse = Http::withToken($token)->get(env('API_URL') . '/rooms');
+
+        // Decode JSON response and ensure 'data' key exists
+        $jadwal = $scheduleResponse->successful() ? $scheduleResponse->json()['data'] ?? null : null;
+        $subjects = $subjectsResponse->successful() ? $subjectsResponse->json()['data'] ?? [] : [];
+        $rooms = $roomsResponse->successful() ? $roomsResponse->json()['data'] ?? [] : [];
+
+        return view('Admin.JadwalLabEdit', compact('jadwal', 'subjects', 'rooms', 'id'));
+    }
+
+    public function JadwalLabEditPost(Request $request, $id)
+    {
+        $token = session('api_token'); // Retrieve API token from session
+
+        $request->merge([
+            'start_time' => str_replace('.', ':', $request->start_time),
+            'end_time' => str_replace('.', ':', $request->end_time),
+        ]);
+        
+        // Validate the request before sending to API
+        $validatedData = $request->validate([
+            'room_id' => 'required|integer',
+            'subject_id' => 'required|integer',
+            'date' => 'required|date_format:Y-m-d', // Ensure the date is valid
+            'start_time' => 'required|date_format:H:i', // Expect only time
+            'end_time' => 'required|date_format:H:i|after:start_time',
+            'dosen' => 'required|string|max:255',
+            'information' => 'nullable|string|max:255',
+        ]);
+
+        // Merge the date with the start and end times
+        $validatedData['start_time'] = Carbon::createFromFormat('Y-m-d H:i', "{$validatedData['date']} {$validatedData['start_time']}")->format('Y-m-d H:i:s');
+        $validatedData['end_time'] = Carbon::createFromFormat('Y-m-d H:i', "{$validatedData['date']} {$validatedData['end_time']}")->format('Y-m-d H:i:s');
+
+        // Remove the standalone 'date' field as it is no longer needed
+        unset($validatedData['date']);
+
+        // Send the data to the API
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $token
+        ])->post(env('API_URL') . '/schedules/reserve/'+$id, $validatedData);
+
+        // Check if API request was successful
+        if ($response->successful()) {
+            return redirect()->route('jadwallab.admin')->with('message', 'Jadwal berhasil dibuat')->with('alert-type', 'success');
+        } else {
+            return redirect()->back()->with('error', 'Gagal menyimpan jadwal: ' . $response->body())->with('alert-type', 'error');
+        }
     }
 
     //Peminjaman Lab

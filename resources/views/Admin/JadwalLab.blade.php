@@ -64,10 +64,11 @@
                         @foreach($room['schedules'] as $i => $jadwal)
                         <tr class="border-t bg-[rgba(98,143,142,0.2)]">
                             <td class="py-3 px-4">{{($i==0) ? $room['name'] : ''}}</td>
-                            <td class="py-3 px-4">{{\Carbon\Carbon::parse($jadwal['start_time'])->format('H:i')}}</td>
-                            <td class="py-3 px-4">{{\Carbon\Carbon::parse($jadwal['end_time'])->format('H:i')}}</td>
+                            <td class="py-3 px-4">{{str_replace(':', '.', \Carbon\Carbon::parse($jadwal['start_time'])->setTimezone(config('app.timezone'))->format('H:i'))}}</td>
+                            <td class="py-3 px-4">{{str_replace(':', '.', \Carbon\Carbon::parse($jadwal['end_time'])->setTimezone(config('app.timezone'))->format('H:i'))}}</td>
                             <td class="py-3 px-4">
-                                <a href="{{ Route('jadwallabdetail.admin') }}"
+                            
+                                <a href="{{ Route('jadwallabdetail.admin', $room['id']) }}?date={{ $selectedDate }}"
                                     class="hover:bg-gray-700 bg-[#4C8F8B] text-white py-1 px-6 rounded-xl">Lihat</a>
                             </td>
                         </tr>
@@ -78,7 +79,6 @@
                             <td class="py-3 px-4">07.15</td>
                             <td class="py-3 px-4">09.15</td>
                             <td class="py-3 px-4">
-                                <a href="{{ Route('jadwallabdetail.admin') }}"
                                     class="hover:bg-gray-700 bg-[#4C8F8B] text-white py-1 px-6 rounded-xl">Lihat</a>
                             </td>
                         </tr>
