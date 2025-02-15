@@ -71,12 +71,12 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::put('admin/laboratorium/reserve/{id}/reject', [AdminController::class, 'rejectLabReservation'])->name('reject.labreservation');
 
 //JadwalLab
-Route::get('admin/jadwallab', [AdminController::class, 'JadwalLab'])->name('jadwallab.admin');
-Route::get('admin/jadwallab/detail/{id}', [AdminController::class, 'JadwalLabDetail'])->name('jadwallabdetail.admin');
-Route::get('admin/jadwallab/tambah', [AdminController::class, 'JadwalLabTambah'])->name('jadwallabtambah.admin');
-Route::post('admin/jadwallab/tambah', [AdminController::class, 'JadwalLabTambahPost'])->name('jadwallabtambah.admin.post');
-Route::get('admin/jadwallab/edit/{id}', [AdminController::class, 'JadwalLabEdit'])->name('jadwallabedit.admin');
-Route::post('admin/jadwallab/edit/{id}', [AdminController::class, 'JadwalLabEditPost'])->name('jadwallabedit.admin.Post');
+    Route::get('admin/jadwallab', [AdminController::class, 'JadwalLab'])->name('jadwallab.admin');
+    Route::get('admin/jadwallab/detail/{id}', [AdminController::class, 'JadwalLabDetail'])->name('jadwallabdetail.admin');
+    Route::get('admin/jadwallab/tambah', [AdminController::class, 'JadwalLabTambah'])->name('jadwallab.admin.post');
+    Route::post('admin/jadwallab/tambah', [AdminController::class, 'JadwalLabTambahPost'])->name('jadwallabtambah.admin.post');
+    Route::get('admin/jadwallab/edit/{id}', [AdminController::class, 'JadwalLabEdit'])->name('jadwallabedit.admin');
+    Route::post('admin/jadwallab/edit/{id}', [AdminController::class, 'JadwalLabEditPost'])->name('jadwallabedit.admin.Post');
 
     //PeminjamanLab
     Route::get('admin/peminjamanlab/tidakada', [AdminController::class, 'PeminjamanLabTidakAda'])->name('peminjamanlabtidakada.admin');

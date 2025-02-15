@@ -196,6 +196,7 @@ class LandingpageController extends Controller
 
             if (!$response->successful()) {
                 $errorBody = $response->body();
+                // abort($response->status(), 'Reservation failed: ' . $errorBody);
                 return redirect()->back()->with('error', 'Reservation failed: ' . $errorBody);
             }
         }
@@ -384,6 +385,8 @@ class LandingpageController extends Controller
 
     public function postFormLab(Request $request, $id)
     {
+        try {
+        
         $start_datetime = Carbon::parse($request->start . ' ' . $request->start_time)
             ->setTimezone('UTC')
             ->format('Y-m-d H:i:s');
@@ -418,13 +421,19 @@ class LandingpageController extends Controller
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
             'Authorization' => 'Bearer ' . $token
-        ])->post(env('API_URL').'/laboratorium/reserve', $request);
+        ])->post(env('API_URL').'/laboratorium/reserve', $requestData);
 
         if ($response->successful()) {
             return redirect()->route('statusreservasilab.login', $id);
         } else {
             $errorBody = $response->body();
+            Log::error('Error while reserving lab', ['error' => $errorBody]);
             return redirect()->back()->with('error', 'Reservation failed: ' . $errorBody);
+        }
+
+        } catch (\Exception $e) {
+            Log::error('Error while reserving lab', ['error' => $e]);
+            return redirect()->back()->with('error', 'Reservation failed: ' . $e->getMessage());
         }
     }
 

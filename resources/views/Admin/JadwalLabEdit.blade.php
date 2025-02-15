@@ -19,7 +19,7 @@
 
             <h1 class="text-2xl font-bold mb-2">Edit Jadwal</h1>
 
-            <form action="{{ route('jadwallabtambah.admin.post') }}" method="POST">
+            <form action="{{ route('jadwallabedit.admin.Post', $jadwal['id']) }}" method="POST">
                 @csrf
                 @method('POST')
                 <div class="mb-4">
@@ -39,13 +39,13 @@
                         <label class="block text-gray-700 text-lg font-bold mb-2" for="jam-mulai">Jam Mulai</label>
                         <input
                             class="shadow appearance-none border rounded-xl  lg:py-4 py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-[rgba(98,143,142,0.2)]"
-                            id="jam-mulai" name="start_time" type="text" placeholder="ex: 07.15" value="{{str_replace(':', '.', \Carbon\Carbon::parse($jadwal['start_time'])->setTimezone(config('app.timezone'))->format('H:i'))}}">
+                            id="jam-mulai" name="start_time" type="time" placeholder="ex: 07.15" value="{{ \Carbon\Carbon::parse($jadwal['start_time'])->setTimezone(config('app.timezone'))->format('H:i') }}">
                     </div>
                     <div class="w-full md:w-2/5  lg:w-1/5 px-2">
                         <label class="block text-gray-700 text-lg font-bold mb-2" for="jam-selesai">Jam Selesai</label>
                         <input
                             class="shadow appearance-none border rounded-xl  lg:py-4 py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-[rgba(98,143,142,0.2)]"
-                            id="jam-selesai" name="end_time" type="text" placeholder="ex: 12.15" value="{{str_replace(':', '.', \Carbon\Carbon::parse($jadwal['end_time'])->setTimezone(config('app.timezone'))->format('H:i'))}}">
+                            id="jam-selesai" name="end_time" type="time" placeholder="ex: 12.15" value="{{ \Carbon\Carbon::parse($jadwal['end_time'])->setTimezone(config('app.timezone'))->format('H:i') }}">
                     </div>
                     <div class="w-full md:w-2/5  lg:w-1/5 px-2">
                         <label class="block text-gray-700 text-lg font-bold mb-2" for="date-picker">Tanggal</label>
@@ -81,7 +81,7 @@
                 </div>
 
                 <div class="flex justify-start gap-4">
-                    <a href="{{ Route('jadwallabedit.admin.Post', $id) }}" type="button"
+                    <a href="javascript:history.back()" type="button"
                         class="bg-[#D46857] text-white py-2 px-4 rounded-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500">Cancel</a>
                     <button type="submit"
                         class="bg-[#4C8F8B] text-white py-2 px-4 rounded-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500">Submit</button>

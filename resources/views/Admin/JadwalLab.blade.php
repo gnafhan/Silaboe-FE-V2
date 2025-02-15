@@ -37,7 +37,7 @@
 
 
             <div class="flex justify-end mb-4  ">
-                <a href="{{ Route('jadwallabtambah.admin') }}"
+                <a href="{{ Route('jadwallab.admin.post') }}"
                     class="bg-[#4C8F8B] text-white py-2 px-4 rounded-xl flex items-center lg:text-lg text-md font-medium ">
                     Tambah Jadwal
                     <svg class="h-7 w-7 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

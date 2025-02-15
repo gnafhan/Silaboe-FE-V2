@@ -411,15 +411,22 @@ public function jadwallabDetail($id, Request $request)
         ]);
         
         // Validate the request before sending to API
-        $validatedData = $request->validate([
-            'room_id' => 'required|integer',
-            'subject_id' => 'required|integer',
-            'date' => 'required|date_format:Y-m-d', // Ensure the date is valid
-            'start_time' => 'required|date_format:H:i', // Expect only time
-            'end_time' => 'required|date_format:H:i|after:start_time',
-            'dosen' => 'required|string|max:255',
-            'information' => 'nullable|string|max:255',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'room_id' => 'required|integer',
+                'subject_id' => 'required|integer',
+                'date' => 'required|date_format:Y-m-d', // Ensure the date is valid
+                'start_time' => 'required|date_format:H:i', // Expect only time
+                'end_time' => 'required|date_format:H:i|after:start_time',
+                'dosen' => 'required|string|max:255',
+                'information' => 'nullable|string|max:255',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()
+                ->with('message', implode(', ', $e->validator->errors()->all()))
+                ->with('alert-type', 'error')
+                ->withInput();
+        }
 
         // Merge the date with the start and end times
         $validatedData['start_time'] = Carbon::createFromFormat('Y-m-d H:i', "{$validatedData['date']} {$validatedData['start_time']}")->format('Y-m-d H:i:s');
@@ -474,15 +481,22 @@ public function jadwallabDetail($id, Request $request)
         ]);
         
         // Validate the request before sending to API
-        $validatedData = $request->validate([
-            'room_id' => 'required|integer',
-            'subject_id' => 'required|integer',
-            'date' => 'required|date_format:Y-m-d', // Ensure the date is valid
-            'start_time' => 'required|date_format:H:i', // Expect only time
-            'end_time' => 'required|date_format:H:i|after:start_time',
-            'dosen' => 'required|string|max:255',
-            'information' => 'nullable|string|max:255',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'room_id' => 'required|integer',
+                'subject_id' => 'required|integer',
+                'date' => 'required|date_format:Y-m-d', // Ensure the date is valid
+                'start_time' => 'required|date_format:H:i', // Expect only time
+                'end_time' => 'required|date_format:H:i|after:start_time',
+                'dosen' => 'required|string|max:255',
+                'information' => 'nullable|string|max:255',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()
+                ->with('message', implode(', ', $e->validator->errors()->all()))
+                ->with('alert-type', 'error')
+                ->withInput();
+        }
 
         // Merge the date with the start and end times
         $validatedData['start_time'] = Carbon::createFromFormat('Y-m-d H:i', "{$validatedData['date']} {$validatedData['start_time']}")->format('Y-m-d H:i:s');
@@ -496,7 +510,7 @@ public function jadwallabDetail($id, Request $request)
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
             'Authorization' => 'Bearer ' . $token
-        ])->post(env('API_URL') . '/schedules/reserve/'+$id, $validatedData);
+        ])->post(env('API_URL') . '/schedules/reserve/'.$id, $validatedData);
 
         // Check if API request was successful
         if ($response->successful()) {

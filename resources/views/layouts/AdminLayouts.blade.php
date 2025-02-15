@@ -35,8 +35,16 @@
 
     @include('components.sidebar')
 
-
-
+    @if (Session::has('message'))
+        <script>
+            swal({
+                title: "{{ Session::get('alert-type') == 'success' ? 'Success' : 'Error' }}",
+                text: "{{ Session::get('message') }}",
+                icon: "{{ Session::get('alert-type') == 'success' ? 'success' : 'error' }}",
+                button: "Ok",
+            });
+        </script>
+    @endif
 
 </body>
 
