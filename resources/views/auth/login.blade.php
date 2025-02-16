@@ -66,9 +66,9 @@
                 <button type="button" id="loginButton"
                     class="bg-[#628F8E] mt-8 rounded-md font-semibold text-white py-2 mx-24 hover:scale-105 duration-300">Masuk</button>
 
-                <div class="text-center text-gray-400 mt-4">
+                {{-- <div class="text-center text-gray-400 mt-4">
                     Belum Punya Akun? <a href="/register" class="font-bold text-[#F5CD51]">Daftar</a>
-                </div>
+                </div> --}}
             </form>
 
             {{-- {{ dd(Session::get('user')) }} --}}
