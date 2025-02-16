@@ -90,9 +90,7 @@
                                     window.location.href = "{{ route('dashboard.admin') }}";
                                 } else if ("{{ $user['role'] }}" == 'umum') {
                                     window.location.href = "{{ route('homepage.login') }}";
-                                } else if ("{{ $user['role'] }}" == 'kaleb') {
-                                    window.location.href = "{{ route('dashboard.kaleb') }}";
-                                }
+                                } 
                             @endif
                         }
                     });

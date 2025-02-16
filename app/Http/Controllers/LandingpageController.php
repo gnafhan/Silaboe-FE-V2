@@ -302,9 +302,19 @@ class LandingpageController extends Controller
     //Laboratorium
     public function laboratorium()
     {
+         //SUPPORT
+         $response = Http::get(env('API_URL') . '/laboratorium-support');
+         if ($response->successful()) {
+             $laboratoriumSupports = $response->json();
+             $laboratoriumSupports = $laboratoriumSupports['data'];
+         } else {
+             // dd('API Error: ' . $response->status(), $response->body());
+             $laboratoriumSupports = [];
+         }
         $response = Http::get(env('API_URL') . '/laboratorium/');
         return view('UserLogin.Laboratorium', [
-            'labs' => $response->json()['data']
+            'labs' => $response->json()['data'],
+            'laboratoriumSupports' => $laboratoriumSupports
         ]);
     }
     public function laboratoriumdetail($id)

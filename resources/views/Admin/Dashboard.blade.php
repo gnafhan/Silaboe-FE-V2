@@ -63,7 +63,7 @@
             </div>
 
             <!-- Jadwal Laboratorium Section -->
-            <section class="mb-16">
+            {{-- <section class="mb-16">
                 <h2 class="text-2xl py-4 font-bold">Jadwal Laboratorium</h2>
                 <div class="overflow-x-auto rounded-2xl shadow-lg ">
                     <table class="w-full rounded-2xl  ">
@@ -113,7 +113,7 @@
                         </tbody>
                     </table>
                 </div>
-            </section>
+            </section> --}}
 
 
             <!-- Peminjaman Section -->

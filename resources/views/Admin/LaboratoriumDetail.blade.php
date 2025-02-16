@@ -19,7 +19,7 @@
         <section class="flex-1 lg:mx-12 mx-12 my-2 flex-col flex lg:gap-4 md:gap-4 gap-16">
             <div class="flex flex-col mt-12 ">
                 <div class="font-bold text-xl lg:text-2xl flex mb-4">{{ $laboratoriums ['name'] }}</div>
-                <img src="{{ env('API') . '/storage' .'/'. $laboratoriums['foto_laboratorium'] }}" alt="foto lab" />
+                <img src="{{ env('API') . '/storage' .'/'. $laboratoriums['foto_laboratorium'] }}" class="max-w-md h-auto place-self-center" alt="foto lab" />
                     <div class="text-sm lg:text-xl text-black text-justify lg:py-12 py-6">{{ $laboratoriums ['description'] }}
                 </div>
                 <div class="lg:text-xl text-lg font-bold text-[#628F8E] mb-4">Support : </div>

@@ -14,47 +14,43 @@ Route::post('/do-login', [AuthController::class, 'doLogin'])->name('do-login');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 
 
-//Landing Page
-//
-//POV User Non Login
-Route::get('/', [LandingpageumumController::class, 'index'])->name('homepage.nonlogin');
-Route::get('landingpage/about', [LandingpageumumController::class, 'about'])->name('about.nonlogin');
-Route::get('landingpage/datasoftware', [LandingpageumumController::class, 'datasoftware'])->name('datasoftware.nonlogin');
-Route::get('landingpage/laboratorium', [LandingpageumumController::class, 'laboratorium'])->name('laboratorium.nonlogin');
-Route::get('landingpage/laboratorium/detail', [LandingpageumumController::class, 'laboratoriumdetail'])->name('laboratoriumdetail.nonlogin');
-Route::get('landingpage/inventaris', [LandingpageumumController::class, 'Inventarisumum'])->name('inventaris.nonlogin');
-
-//POV User Login
-Route::get('landingpage/login', [LandingpageController::class, 'index'])->name('homepage.login');
+Route::get('/', [LandingpageController::class, 'index'])->name('homepage.login');
 Route::get('about', [LandingpageController::class, 'about'])->name('about.login');
 Route::get('software', [LandingpageController::class, 'datasoftware'])->name('datasoftware.login');
 
 
-//Laboretorium
 Route::get('laboratorium', [LandingpageController::class, 'laboratorium'])->name('laboratorium.login');
 Route::get('laboratorium/{id}/detail', [LandingpageController::class, 'laboratoriumdetail'])->name('laboratoriumdetail.login');
-// Route::get('laboratorium/reservasi', [LandingpageController::class, 'reservasilaboratorium'])->name('reservasilab.login');
-Route::get('laboratorium/reservasi/{id}/status', [LandingpageController::class, 'reservasilaboratoriumstatus'])->name('statusreservasilab.login');
+Route::get('laboratorium/{id}/riwayatreservasi', [LandingpageController::class, 'riwayatreservasilab'])->name('riwayatreservasilab.login');
 Route::get('laboratorium/{id}/formlab', [LandingpageController::class, 'laboratoriumformlab'])->name('formlab.login');
 Route::post('laboratorium/{id}/formlab', [LandingpageController::class, 'postFormLab'])->name('formlab.login.post');
-Route::get('laboratorium/{id}/riwayatreservasi', [LandingpageController::class, 'riwayatreservasilab'])->name('riwayatreservasilab.login');
+Route::get('laboratorium/reservasi/{id}/status', [LandingpageController::class, 'reservasilaboratoriumstatus'])->name('statusreservasilab.login');
 Route::get('laboratorium/{id}/riwayatreservasi/search', [LandingpageController::class, 'searchReservasiLab'])->name('riwayatreservasilab.search');
- 
 
-//Reservasi Login
+
+// TODO: Benerin reservasi ketika validasi gagal
 Route::get('inventaris', [LandingpageController::class, 'Inventaris'])->name('inventaris.login');
-Route::get('inventaris/reservasiNull', [LandingpageController::class, 'InventarisReservasiNull'])->name('reservasiinventarisnull.login');
-Route::get('login/landinggpage/inventaris/riwayatreservasi/detail', [LandingpageController::class, 'InventarisRiwayatReservasiDetail'])->name('riwayatreservasiinventarisdetail.login');
+Route::get('inventaris/riwayatreservasi', [LandingpageController::class, 'InventarisRiwayatReservasi'])->name('riwayatreservasiinventaris.login');
+Route::get('inventaris/riwayatreservasi/detail/{id}', [LandingpageController::class, 'InventarisRiwayatReservasiDetail'])->name('riwayatreservasiinventarisdetail.login');
 Route::get('inventaris/reservasi', [LandingpageController::class, 'inventarisreservasi'])->name('reservasiinventaris.login');
 Route::get('inventaris/formreservasi', [LandingpageController::class, 'FormReservasiInventaris'])->name('formreservasiinventaris.login');
+Route::post('/formreservasiinventariscek', [LandingpageController::class, 'inventarisformreservasicek'])->name('formreservasiinventariscek.login');
 Route::post('inventaris/formreservasi/submit', [LandingpageController::class, 'postFormReservasiInventaris'])->name('formreservasiinventaris.post');
 Route::get('inventaris/formreservasi/cek', [LandingpageController::class, 'InventarisFormReservasiCek'])->name('formreservasiinventariscek.login');
-Route::get('inventaris/riwayatreservasi/detail/{id}', [LandingpageController::class, 'InventarisRiwayatReservasiDetail'])->name('riwayatreservasiinventarisdetail.login');
-Route::post('/formreservasiinventariscek', [LandingpageController::class, 'inventarisformreservasicek'])->name('formreservasiinventariscek.login');
-Route::get('inventaris/formreservasi/berhasil', [LandingpageController::class, 'InventarisFormReservasiBerhasil'])->name('formreservasiinventarisberhasil.login');
-Route::get('inventaris/riwayatreservasi', [LandingpageController::class, 'InventarisRiwayatReservasi'])->name('riwayatreservasiinventaris.login');
+Route::post('inventaris/formreservasi/cek', [LandingpageController::class, 'InventarisFormReservasiCek'])->name('formreservasiinventariscek.login');
 Route::post('inventaris/remove', [LandingpageController::class, 'removeSelectedItem'])->name('removeSelectedItem');
+Route::get('inventaris/formreservasi/berhasil', [LandingpageController::class, 'InventarisFormReservasiBerhasil'])->name('formreservasiinventarisberhasil.login');
 
+
+//Landing Page
+//
+//POV User Non Login
+// Route::get('/', [LandingpageumumController::class, 'index'])->name('homepage.nonlogin');
+// Route::get('landingpage/about', [LandingpageumumController::class, 'about'])->name('about.nonlogin');
+// Route::get('landingpage/datasoftware', [LandingpageumumController::class, 'datasoftware'])->name('datasoftware.nonlogin');
+// Route::get('landingpage/laboratorium', [LandingpageumumController::class, 'laboratorium'])->name('laboratorium.nonlogin');
+// Route::get('landingpage/laboratorium/detail', [LandingpageumumController::class, 'laboratoriumdetail'])->name('laboratoriumdetail.nonlogin');
+// Route::get('landingpage/inventaris', [LandingpageumumController::class, 'Inventarisumum'])->name('inventaris.nonlogin');
 
 
 //POV ADMIN SI
@@ -111,37 +107,37 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 
-//POV KALEB
-//Dashboard
-Route::get('/kaleb', [KalebController::class, 'Dashboard'])->name('dashboard.kaleb');
+// //POV KALEB
+// //Dashboard
+// Route::get('/kaleb', [KalebController::class, 'Dashboard'])->name('dashboard.kaleb');
 
-//Laboratoium
-Route::get('/kaleb/laboratorium', [KalebController::class, 'Laboratorium'])->name('laboratorium.kaleb');
-Route::get('/kaleb/laboratorium/detail', [KalebController::class, 'LaboratoriumDetail'])->name('laboratoriumdetail.kaleb');
-
-
-
-//JadwalLab
-Route::get('/kaleb/jadwalLab', [KalebController::class, 'JadwalLab'])->name('jadwallab.kaleb');
-Route::get('/Kaleb/jadwalLab/detail', [KalebController::class, 'JadwalLabDetail'])->name('jadwallabdetail.kaleb');
+// //Laboratoium
+// Route::get('/kaleb/laboratorium', [KalebController::class, 'Laboratorium'])->name('laboratorium.kaleb');
+// Route::get('/kaleb/laboratorium/detail', [KalebController::class, 'LaboratoriumDetail'])->name('laboratoriumdetail.kaleb');
 
 
-//PeminjamanLab
-Route::get('/kaleb/peminjamanlab/tidakada', [KalebController::class, 'PeminjamanLabTidakAda'])->name('peminjamanlabtidakada.kaleb');
-Route::get('/kaleb/peminjamanlab/ada', [KalebController::class, 'PeminjamanLabAda'])->name('peminjamanlabada.kaleb');
-Route::get('/kaleb/peminjamanlab/detail', [KalebController::class, 'PeminjamanLabDetail'])->name('peminjamanlabdetail.kaleb');
-Route::get('/kaleb/peminjamanlab/archive', [KalebController::class, 'PeminjamanLabArchive'])->name('peminjamanlabarchive.kaleb');
+
+// //JadwalLab
+// Route::get('/kaleb/jadwalLab', [KalebController::class, 'JadwalLab'])->name('jadwallab.kaleb');
+// Route::get('/Kaleb/jadwalLab/detail', [KalebController::class, 'JadwalLabDetail'])->name('jadwallabdetail.kaleb');
 
 
-//Inventaris
-Route::get('/kaleb/inventaris', [KalebController::class, 'Inventaris'])->name('inventaris.kaleb');
+// //PeminjamanLab
+// Route::get('/kaleb/peminjamanlab/tidakada', [KalebController::class, 'PeminjamanLabTidakAda'])->name('peminjamanlabtidakada.kaleb');
+// Route::get('/kaleb/peminjamanlab/ada', [KalebController::class, 'PeminjamanLabAda'])->name('peminjamanlabada.kaleb');
+// Route::get('/kaleb/peminjamanlab/detail', [KalebController::class, 'PeminjamanLabDetail'])->name('peminjamanlabdetail.kaleb');
+// Route::get('/kaleb/peminjamanlab/archive', [KalebController::class, 'PeminjamanLabArchive'])->name('peminjamanlabarchive.kaleb');
 
-//Pemijaman Inventaris
-Route::get('/kaleb/peminjamaninventaris/tidakada', [KalebController::class, 'PeminjamanInventarisTidakAda'])->name('peminjamaninvenatristidakada.kaleb');
-Route::get('/kaleb/peminjamaninventaris/ada', [KalebController::class, 'PeminjamanInventarisAda'])->name('peminjamaninvenatrisada.kaleb');
-Route::get('/kaleb/peminjamaninventaris/detail', [KalebController::class, 'PeminjamanInventarisDetail'])->name('peminjamaninvenatrisdetail.kaleb ');
-Route::get('/kaleb/peminjamaninventaris/archive', [KalebController::class, 'PeminjamanInventarisArchive'])->name('peminjamaninvenatrisarchive.kaleb');
 
-//Profile
-Route::get('/kaleb/profil', [KalebController::class, 'Profil'])->name('profil.kaleb');
-Route::get('/kaleb/profil/edit', [KalebController::class, 'ProfilEdit'])->name('profiledit.edit');
+// //Inventaris
+// Route::get('/kaleb/inventaris', [KalebController::class, 'Inventaris'])->name('inventaris.kaleb');
+
+// //Pemijaman Inventaris
+// Route::get('/kaleb/peminjamaninventaris/tidakada', [KalebController::class, 'PeminjamanInventarisTidakAda'])->name('peminjamaninvenatristidakada.kaleb');
+// Route::get('/kaleb/peminjamaninventaris/ada', [KalebController::class, 'PeminjamanInventarisAda'])->name('peminjamaninvenatrisada.kaleb');
+// Route::get('/kaleb/peminjamaninventaris/detail', [KalebController::class, 'PeminjamanInventarisDetail'])->name('peminjamaninvenatrisdetail.kaleb ');
+// Route::get('/kaleb/peminjamaninventaris/archive', [KalebController::class, 'PeminjamanInventarisArchive'])->name('peminjamaninvenatrisarchive.kaleb');
+
+// //Profile
+// Route::get('/kaleb/profil', [KalebController::class, 'Profil'])->name('profil.kaleb');
+// Route::get('/kaleb/profil/edit', [KalebController::class, 'ProfilEdit'])->name('profiledit.edit');

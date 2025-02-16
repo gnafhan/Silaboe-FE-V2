@@ -83,18 +83,40 @@
                             <div class="border-b-4 border-yellow-500 w-full mt-2"></div>
                         </a>
 
-                        <div class="grid lg:grid-cols-2 lg:grid-flow-row  max-h-xl lg:gap-8">
+                        <div class="flex w-full justify-between max-h-lg lg:gap-8">
                             <div class=" grid lg:text-lg text-sm md:text-md text-justify ">{{ $lab['description'] }}
                             </div>
                             <div class="flex flex-wrap gap-8 my-8 lg:my-0 ">
                                 <img src="{{ env('API') . '/storage' .'/'. $lab['foto_laboratorium'] }}" class="h-[40%] rounded-lg grid" alt="foto lab" />
-                                <div class="flex flex-col gap-2 ">
+                                @if (count($laboratoriumSupports) > 0)
+                                   @foreach ($laboratoriumSupports as $support)
+                                       @if ($support['room_id'] == $lab['id'])
+                                           <div class="flex flex-col gap-2 ">
+                                               <div class="font-bold text-[#628F8E] lg:text-2xl text-xl grid mb-4 ">Support</div>
+                                               @if (!is_null($support['support_type_1']))
+                                                   <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">{{ $support['support_type_1'] }}</button>
+                                               @endif
+                                                  @if (!is_null($support['support_type_2']))
+                                                    <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">{{ $support['support_type_2'] }}</button>
+                                                @endif
+                                               @if (!is_null($support['support_type_3']))
+                                                   <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">{{ $support['support_type_3'] }}</button>
+                                               @endif
+                                                  @if (!is_null($support['support_type_4']))
+                                                    <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">{{ $support['support_type_4'] }}</button>
+                                                @endif
+                                               
+                                           </div>
+                                       @endif
+                                      @endforeach
+                                @endif
+                                {{-- <div class="flex flex-col gap-2 ">
                                     <div class="font-bold text-[#628F8E] lg:text-2xl text-xl grid mb-4 ">Support</div>
                                     <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
                                     <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
                                     <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
                                     <button class="bg-[#628F8E] py-2 px-6 rounded-lg text-white">Rendering</button>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>

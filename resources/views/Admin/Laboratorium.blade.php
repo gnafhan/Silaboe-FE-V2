@@ -50,11 +50,11 @@
                     @foreach ($laboratoriums as $laboratorium)
                         <a href="{{ Route('laboratoriumdetail.admin', $laboratorium['id']) }}"
                             class="bg-[rgba(98,143,142,0.2)] lg:rounded-2xl rounded-3xl rounded-l-3xl shadow p-0 flex flex-col md:flex-row items-start md:items-stretch">
-                            <div class="w-full md:w-1/3 ">
+                            <div class="w-full md:w-fit">
                                 <img src="{{ env('API') . '/storage' .'/'. $laboratorium['foto_laboratorium'] }}"
-                                    class="rounded-3xl w-full h-full object-cover" alt="Flowbite Logo" />
+                                    class="rounded-3xl max-w-sm h-auto object-cover" alt="Flowbite Logo" />
                             </div>
-                            <div class="ml-0 md:ml-4 mt-8 md:mt-0 flex-1 flex flex-col lg:flex-row justify-between">
+                            <div class="ml-0 mt-8 md:mt-0 flex-1 flex flex-col lg:flex-row justify-between">
                                 <div class="flex flex-col lg:m-8 ">
                                     <div class=" w-fit lg:mb-4 md:mb-4 mb-1 mx-4 md:mt-4">
                                         <h3 class="text-xl lg:text-2xl font-bold mb-2">{{ $laboratorium['name'] }}</h3>

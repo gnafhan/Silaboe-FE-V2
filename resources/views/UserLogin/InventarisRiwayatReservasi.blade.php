@@ -203,7 +203,7 @@
                     ${getStatusBadge(reservation.is_approved)}
                 </td>
                 <td class="p-3 text-sm md:text-base lg:text-base text-center whitespace-nowrap">
-                    <a href="/login/landingpage/inventaris/riwayatreservasi/detail/${reservation.id}" 
+                    <a href="riwayatreservasi/detail/${reservation.id}" 
                         class="px-6 py-1 text-sm font-medium tracking-wider text-green-800 bg-green-50 border border-[#628F8E] rounded-xl bg-opacity-50">
                         Lihat
                     </a>
