@@ -43,7 +43,7 @@
                     <!-- Card 1 -->
                     @foreach ($laboratoriums as $laboratorium)
                         <a href="{{ Route('laboratoriumdetail.admin', $laboratorium['id']) }}"
-                            class="bg-[rgba(98,143,142,0.2)] lg:rounded-2xl rounded-3xl rounded-l-3xl shadow p-0 flex flex-col md:flex-row items-start md:items-stretch">
+                            class="bg-[rgba(98,143,142,0.2)] lg:rounded-2xl rounded-3xl rounded-l-3xl shadow p-0 flex flex-col md:flex-row items-start md:items-stretch md:max-h-[250px]">
                             <div class="w-full md:w-1/3 ">
                                 <img src="{{ asset('image/laboratoriumimage.png') }}"
                                     class="rounded-3xl w-full h-full object-cover" alt="Flowbite Logo" />
